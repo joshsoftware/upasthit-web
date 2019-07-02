@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class StaffDatatable
   delegate :params, :current_staff, to: :@view
 
@@ -7,7 +9,7 @@ class StaffDatatable
     @total_count = @staffs.count
   end
 
-  def as_json(options = {})
+  def as_json(_options={})
     {
       sEcho:                params[:sEcho].to_i,
       aaData:               data,
@@ -21,7 +23,7 @@ class StaffDatatable
   def data
     arr = []
     @staffs.map do |staff|
-      arr <<  [
+      arr << [
         staff.name,
         staff.mobile_number,
         staff.designation

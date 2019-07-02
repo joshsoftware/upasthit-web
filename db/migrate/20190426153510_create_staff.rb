@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateStaff < ActiveRecord::Migration[5.2]
   def change
     create_table :staffs do |t|
@@ -5,7 +7,7 @@ class CreateStaff < ActiveRecord::Migration[5.2]
       t.string :mobile_number
       t.string :designation
       t.string :staff_id
- 
+
       t.timestamps
     end
   end

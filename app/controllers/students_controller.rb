@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class StudentsController < ApplicationController
   skip_before_action :verify_authenticity_token, only: [:destroy]
   def index
@@ -16,17 +18,16 @@ class StudentsController < ApplicationController
     else
       @standards = Standard.all
       @pagy, @records = pagy(Student.all)
-      @errors = service.errors.full_messages.collect(&:values).flatten
-      render 'errors'
+      @errors = service.errors.full_messages.map(&:values).flatten
+      render "errors"
     end
   end
 
   def destroy
-    student  = Student.where(id: params[:id]).first
-    if student.present? 
-      student.attendances.delete_all
-      student.delete
-    end
-    
+    student = Student.where(id: params[:id]).first
+    return unless student.present?
+
+    student.attendances.delete_all
+    student.delete
   end
 end

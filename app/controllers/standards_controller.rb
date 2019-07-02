@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class StandardsController < ApplicationController
   def index
     @pagy, @records = pagy(Standard.all)
@@ -9,8 +11,8 @@ class StandardsController < ApplicationController
       redirect_to standards_path
     else
       @pagy, @records = pagy(Standard.all)
-      @errors = service.errors.full_messages.collect(&:values).flatten
-      render 'errors'
+      @errors = service.errors.full_messages.map(&:values).flatten
+      render "errors"
     end
   end
 end

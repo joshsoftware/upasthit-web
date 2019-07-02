@@ -4,7 +4,7 @@ class DeviseCreateStaffs < ActiveRecord::Migration[5.2]
   def change
     create_table :staffs do |t|
       ## Database authenticatable
-      t.string :mobile_number,              null: false, default: ""
+      t.string :mobile_number, null: false, default: ""
       t.string :encrypted_password, null: false, default: ""
       t.string :staff_id, null: false, unique: true
       t.string :name
@@ -34,7 +34,6 @@ class DeviseCreateStaffs < ActiveRecord::Migration[5.2]
       # t.integer  :failed_attempts, default: 0, null: false # Only if lock strategy is :failed_attempts
       # t.string   :unlock_token # Only if unlock strategy is :email or :both
       # t.datetime :locked_at
-
 
       t.timestamps null: false
     end

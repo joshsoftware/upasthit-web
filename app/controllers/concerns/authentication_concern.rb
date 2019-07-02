@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module AuthenticationConcern
   extend ActiveSupport::Concern
 
@@ -15,12 +17,12 @@ module AuthenticationConcern
     return unless @jwt_token && @auth_token
 
     @payload  = JWT.decode(@jwt_token, @auth_token).first
-    @resource = payload['resource_type'].constantize_with_care(['Staff']).where(
-      id: payload['resource_id']
+    @resource = payload["resource_type"].constantize_with_care(["Staff"]).where(
+      id: payload["resource_id"]
     ).first
     authenticate_and_login
-  rescue
-    @error = I18n.t('user.invalid_login') and render_unauthorized
+  rescue StandardError
+    (@error = I18n.t("user.invalid_login")) && render_unauthorized
   end
 
   def set_auth_header
@@ -32,19 +34,17 @@ module AuthenticationConcern
     jwt_token = request.headers[Figaro.env.X_USER_JWT_TOKEN]
     auth_token = request.headers[Figaro.env.X_USER_AUTH_TOKEN]
 
-    unless jwt_token && auth_token
-      @error = I18n.t('user.access_denied') and render_unauthorized
-    end
+    (@error = I18n.t("user.access_denied")) && render_unauthorized unless jwt_token && auth_token
     [jwt_token, auth_token]
   end
 
   def authenticate_and_login
     if resource && Devise.secure_compare(resource.auth_token, @auth_token)
-      request.env['devise.skip_trackable'] = true
+      request.env["devise.skip_trackable"] = true
       sign_in resource, store: false
-      current_staff.remember_me = true if payload['remember']
+      current_staff.remember_me = true if payload["remember"]
     else
-      @error = I18n.t('staff.invalid_credentials') and render_unauthorized
+      (@error = I18n.t("staff.invalid_credentials")) && render_unauthorized
     end
   end
 

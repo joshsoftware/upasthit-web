@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: students
@@ -19,18 +21,18 @@
 
 class Student < ApplicationRecord
   translates :name
-  globalize_accessors :locales => [:en, :'mr-IN'], :attributes => [:name]
+  globalize_accessors locales: %i[en mr-IN], attributes: [:name]
   has_many :attendances, class_name: "Attendance"
   belongs_to :standard, class_name: "Standard", foreign_key: "standard_id"
   belongs_to :school, class_name: "School", foreign_key: "school_id"
 
   validates :registration_no, :roll_no, :gender, :dob, :guardian_name,
-    :guardian_mobile_no, presence: true
+            :guardian_mobile_no, presence: true
 
   validates :registration_no, uniqueness: true
 end
 
 def attendance_status
   attendance = attendances.where("'date' > ?", Date.today.beginning_of_day)
-  attendance.count > 0 ? attendance.first.present : ""
+  attendance.count.positive? ? attendance.first.present : ""
 end

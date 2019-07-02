@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: schools
@@ -18,5 +20,5 @@ class School < ApplicationRecord
   has_many :students, class_name: "Student"
   has_many :standards, class_name: "Standard"
   has_many :standard_attendances, class_name: "StandardAttendance"
-  has_many :staffs, class_name: 'Staff'
+  has_many :staffs, class_name: "Staff"
 end

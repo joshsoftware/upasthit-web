@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: attendances
@@ -13,7 +15,7 @@
 #  sms_sent    :boolean
 #
 
-require 'test_helper'
+require "test_helper"
 
 class AttendanceTest < ActiveSupport::TestCase
   # test "the truth" do

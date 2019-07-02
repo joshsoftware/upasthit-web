@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ApplicationController < ActionController::Base
   include Pagy::Backend
 
@@ -5,7 +7,7 @@ class ApplicationController < ActionController::Base
 
   private
 
-  def after_sign_out_path_for(resource_or_scope)
+  def after_sign_out_path_for(_resource_or_scope)
     staff_session_path
   end
 
@@ -13,8 +15,8 @@ class ApplicationController < ActionController::Base
     I18n.locale = extract_locale || I18n.default_locale
   end
 
-  def default_url_options(options = {})
-    { locale: I18n.locale }.merge options
+  def default_url_options(options={})
+    {locale: I18n.locale}.merge options
   end
 
   def extract_locale

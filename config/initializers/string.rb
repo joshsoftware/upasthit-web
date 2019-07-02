@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class String
   def constantize_with_care(klasses = [])
     klasses.each do |klass|

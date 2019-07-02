@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Responsible for importing item master vessel tags
 class Import::Standards
   include ActiveModel::Validations
@@ -26,36 +28,36 @@ class Import::Standards
   end
 
   def prepare_data
-    @standard_data = @data.collect do |data|
-      data[:sections].split(',').collect do |section|
-        Standard.new({standard: data[:standard], section: section,
-                    school_id: school_id, start_time: data[:start_time]})
+    @standard_data = @data.map do |data|
+      data[:sections].split(",").map do |section|
+        Standard.new(standard: data[:standard], section: section,
+                    school_id: school_id, start_time: data[:start_time])
       end
     end.flatten
   end
 
   def import_records
     result = Standard.bulk_import!(@standard_data, recursive: true, validate_uniqueness: true)
-    @result = { records_added: result.ids.count }
+    @result = {records_added: result.ids.count}
   rescue ActiveRecord::RecordInvalid, ActiveRecord::RecordNotUnique
-    errors.add(:base, {"1": "Duplicate Standard record found"})
+    errors.add(:base, "1": "Duplicate Standard record found")
     false
   end
 
   def options
     {
       header_transformations: [key_mapping: key_mapping],
-      header_validations: [required_headers: required_headers],
-      hash_validations: [required_fields: required_fields]
+      header_validations:     [required_headers: required_headers],
+      hash_validations:       [required_fields: required_fields]
     }
   end
 
   def required_headers
-    [:standard, :sections]
+    %i[standard sections]
   end
 
   def required_fields
-    [:standard, :sections, :start_time]
+    %i[standard sections start_time]
   end
 
   def key_mapping
@@ -63,5 +65,4 @@ class Import::Standards
       "start_time_(24_hour_format)": :start_time
     }
   end
-
 end

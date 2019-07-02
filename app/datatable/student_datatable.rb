@@ -1,17 +1,19 @@
+# frozen_string_literal: true
+
 class StudentDatatable
   delegate :params, :current_user, to: :@view
 
   def initialize(view)
     @view = view
-    if @view.params['standard_id'].present?
-      @students =Student.where(standard_id: @view.params['standard_id'])
-    else
-      @students = Student.all
-    end
+    @students = if @view.params["standard_id"].present?
+                  Student.where(standard_id: @view.params["standard_id"])
+                else
+                  Student.all
+                end
     @total_count = @students.count
   end
 
-  def as_json(options = {})
+  def as_json(_options={})
     {
       sEcho:                params[:sEcho].to_i,
       aaData:               data,
@@ -25,7 +27,7 @@ class StudentDatatable
   def data
     arr = []
     @students.map do |student|
-      arr <<  [
+      arr << [
         student.registration_no,
         student.roll_no,
         student.name,

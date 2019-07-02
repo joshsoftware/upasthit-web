@@ -1,18 +1,19 @@
-class Attendance::SendSms
+# frozen_string_literal: true
 
+class Attendance::SendSms
   def self.call(attendance_ids)
     new(attendance_ids)
   end
 
   def initialize(attendance_ids)
     @attendance_ids = attendance_ids
-    data = Attendance.includes(:student).where(id: attendance_ids).collect do |a|
-     {
-        mobile_number: a.student.guardian_mobile_no,
+    data = Attendance.includes(:student).where(id: attendance_ids).map do |a|
+      {
+        mobile_number:           a.student.guardian_mobile_no,
         alternate_mobile_number: a.student.guardian_alternate_mobile_no,
-        name_en: a.student.name_en,
-        name_mr_in: a.student.name_mr_in,
-        attendance_id: a.id
+        name_en:                 a.student.name_en,
+        name_mr_in:              a.student.name_mr_in,
+        attendance_id:           a.id
       }
     end
 
@@ -26,9 +27,9 @@ class Attendance::SendSms
   private
 
   def message
-    I18n.locale= :'mr-IN'
+    I18n.locale = :'mr-IN'
     str = "#{@student_data[:name_mr_in]}#{I18n.translate('sms.absent')}\n"
-    I18n.locale= :en
+    I18n.locale = :en
     str = "#{@student_data[:name_en]}#{I18n.translate('sms.absent')}"
   end
 
@@ -50,14 +51,13 @@ class Attendance::SendSms
 
   def send_sms(mobile_number)
     response = Net::HTTP.post_form(
-                URI.parse(Figaro.env.TEXT_LOCAL_URL),
-                apiKey: Figaro.env.MSG_API_KEY,
-                sender: 'TXTLCL',
-                message: message.squish,
-                numbers: [mobile_number],
-                receipt_url: ''
-              )
-    JSON.parse(response.body)['status']
+      URI.parse(Figaro.env.TEXT_LOCAL_URL),
+      apiKey:      Figaro.env.MSG_API_KEY,
+      sender:      "TXTLCL",
+      message:     message.squish,
+      numbers:     [mobile_number],
+      receipt_url: ""
+    )
+    JSON.parse(response.body)["status"]
   end
-
 end

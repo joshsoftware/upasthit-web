@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 class StaffsController < ApplicationController
   def index
     respond_to do |format|
-      format.html {  }
-      format.json { render json: StaffDatatable.new(view_context)}
+      format.html {}
+      format.json { render json: StaffDatatable.new(view_context) }
     end
     @pagy, @records = pagy(Staff.all)
   end
@@ -13,8 +15,8 @@ class StaffsController < ApplicationController
       redirect_to staffs_path
     else
       @pagy, @records = pagy(Staff.all)
-      @errors = service.errors.full_messages.collect(&:values).flatten
-      render 'errors'
+      @errors = service.errors.full_messages.map(&:values).flatten
+      render "errors"
     end
   end
 end
