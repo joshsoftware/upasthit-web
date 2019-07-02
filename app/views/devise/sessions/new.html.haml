@@ -1,0 +1,27 @@
+.container-fluid
+  .content-wrapper.full-page-wrapper.d-flex.align-items-center
+    .card.col-lg-4.offset-lg-4
+      .card-block
+        %h3.card-title.text-primary.text-left.mb-5.mt-4 Login
+        = render 'shared/flash_messages'
+
+        = bootstrap_form_for resource, as: resource_name, url: session_path(resource_name) do |f|
+          = f.form_group do
+            %div.input-group
+              %span.input-group-addon
+                = fa_icon "user"
+              = f.text_field :mobile_number, label: '', autofocus: true, placeholder: 'Mobile Number', hide_label: true, wrapper: false, control_class: 'form-control p_input'
+
+          = f.form_group do
+            %div.input-group
+              %span.input-group-addon
+                = fa_icon "lock"
+              = f.password_field :password, label: '', placeholder: 'Password', hide_label: true, wrapper: false, control_class: 'form-control p_input'
+
+          - if devise_mapping.rememberable?
+            = f.form_group do
+              = f.check_box :remember_me, custom: :switch
+
+          = f.form_group do
+            = f.submit "Log in", class: 'btn btn-success'
+        = render "devise/shared/links"

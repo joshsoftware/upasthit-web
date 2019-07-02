@@ -1,0 +1,31 @@
+mr-IN:
+  staff:
+    invalid_login: 'अवैध लॉगिन'
+    signed_in: 'यशस्वीरित्या साइन इन केले'
+    signed_out: 'यशस्वीरित्या साइन आउट केले'
+  error:
+    unauthorized: 'आपण हे पृष्ठ प्रवेश करण्यास अधिकृत नाही आहेत'
+  attendance:
+    created: 'उपस्थित यशस्वीरित्या तयार केले'
+  sms:
+    absent: ' आज अनुपस्थित आहे'
+    admin_alert: "%{date} वर्ग #{standard} साठी उपस्थित नाही."
+  global:
+    standard: 'वर्ग'
+    attendance: 'उपस्थिती'
+    students: 'विद्यार्थी'
+    staff: 'कर्मचारी'
+    logout: 'साइनआउट'
+    login: 'लॉगिन'
+    upload: 'अपलोड'
+    class: 'वर्ग'
+  students:
+    reg_no: 'नोंदणी क्रमांक'
+    roll_no: 'हजेरी क्रमांक'
+    name: 'नाव'
+    guardian_name: 'पालक नाव'
+    guardian_mobile: 'पालक मोबाइल नंबर'
+  staff:
+    name: 'नाव'
+    mobile: 'मोबाइल नंबर'
+    designation: 'पद'

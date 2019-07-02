@@ -1,0 +1,28 @@
+%ul.nav.nav-tabs
+  %li.nav-item
+    %a.nav-link.active{"data-toggle" => "tab", :href => "#home"}= t 'global.staff'
+  %li.nav-item
+    %a.nav-link{"data-toggle" => "tab", :href => "#menu1"}= t 'global.upload'
+
+.tab-content
+  #home.tab-pane.container.active
+    .card
+      .card-body
+        %h4.card-title=t 'global.staff'
+        .card-description
+        %table.table.bordered#staffdt
+          %thead
+            %th=t 'staff.name'
+            %th=t 'staff.mobile'
+            %th=t 'staff.designation'
+          %tbody
+        = pagy_bootstrap_responsive_nav(@pagy).html_safe
+  #menu1.tab-pane.container.fade
+    .card
+      .card-body
+        %h4 Upload staff information
+        .row
+          = form_for 'staff', url: staffs_path do |f|
+            = f.file_field "file", {onchange: 'this.form.submit();'}
+        .row
+          = link_to 'Download Sample', '/staff-inventory.csv', action: 'download'

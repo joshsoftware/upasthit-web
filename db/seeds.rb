@@ -5,3 +5,8 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+school = School.find_or_create_by(name: 'Josh', school_code: '12345')
+staff = Staff.new(mobile_number: '9876543210', designation: 'Admin', school_id: school.id,
+                        password: '12345678', password_confirmation: '12345678', registration_no: 1)
+staff.save

@@ -10,6 +10,27 @@
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
  *
- *= require_tree .
- *= require_self
  */
+@import "bootstrap";
+@import "datatables";
+@import "rails_bootstrap_forms";
+@import "font-awesome";
+@import "style";
+@import "select2";
+
+.bg-dark-gradient {
+  background: #686a6b;
+  background: linear-gradient(90deg, #3d3f42, #758188);
+}
+
+.white{
+  color: #ffff;
+}
+
+.align-body{
+  color: black;
+  padding: auto;
+}
+.tab-pane.container{
+  margin-top: 30px;
+}

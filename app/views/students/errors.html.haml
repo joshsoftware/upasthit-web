@@ -1,0 +1,48 @@
+%ul.nav.nav-tabs
+  %li.nav-item
+    %a.nav-link{"data-toggle" => "tab", :href => "#home"} Students
+  %li.nav-item
+    %a.nav-link.active{"data-toggle" => "tab", :href => "#menu1"} Upload
+
+/ Tab panes
+.tab-content
+  #home.tab-pane.container
+    .card
+      .card-body
+        .row
+          .col-md-4
+            %h4.card-title Students
+          .col-md-2
+            %h5 Standard
+          .col-md-6
+            = select_tag 'standard', options_for_select(@standards.collect{ |s| [s.name, s.id] }), class: 'standard-select'
+        .card-description
+
+        %table.table.table-striped
+          %thead
+            %th Reg No.
+            %th Roll No.
+            %th Name
+            %th Gaurdian Name
+            %th Guardian Mobile
+          %tbody
+            - @records.each do |record|
+              %tr
+                %td= record.registration_no
+                %td= record.roll_no
+                %td= record.name
+                %td= record.guardian_name
+                %td= record.guardian_mobile_no.to_s + ' / ' + record.guardian_alternate_mobile_no
+          = pagy_bootstrap_responsive_nav(@pagy).html_safe
+  #menu1.tab-pane.container.active
+    .card
+      .card-body
+        %h4 Upload student information
+        .row
+          = form_for 'student', url: students_path do |f|
+            = f.file_field "file", {onchange: 'this.form.submit();'}
+        %table.table.table-striped
+          %tbody
+            - @errors.each do |error|
+              %tr
+                %td=error

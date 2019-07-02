@@ -1,0 +1,29 @@
+%ul.nav.nav-tabs
+  %li.nav-item
+    %a.nav-link.active{"data-toggle" => "tab", :href => "#home"}= t 'global.class'
+  %li.nav-item
+    %a.nav-link{"data-toggle" => "tab", :href => "#menu1"}= t 'global.upload'
+
+.tab-content
+  #home.tab-pane.container.active
+    .card
+      .card-body
+        %h4.card-title= t 'global.class'
+        .card-description
+        %table.table.bordered
+          %thead
+            %th= t 'global.class'
+          %tbody
+            - @records.each do |record|
+              %tr
+                %td= record.standard.to_s + ' ' + record.section.to_s
+        = pagy_bootstrap_responsive_nav(@pagy).html_safe
+  #menu1.tab-pane.container.fade
+    .card
+      .card-body
+        %h4 Upload class information
+        .row
+          = form_for 'standard', url: standards_path do |f|
+            = f.file_field "file", {onchange: 'this.form.submit();'}
+        .row
+          = link_to 'Download Sample', '/standard-inventory.csv', action: 'download'

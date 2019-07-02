@@ -30,4 +30,35 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  staff:
+    invalid_login: 'Invalid Login'
+    signed_in: 'Signed in successfully.'
+    signed_out: 'Signed out successfully.'
+    name: 'Name'
+    mobile: 'Mobile'
+    designation: 'Designation'
+  error:
+    unauthorized: 'You are not authorized to access this page.'
+    not_trusted_sender: 'SMS Sender is not authorized'
+  attendance:
+    created: 'Attendance Created Successfully.'
+    failed: 'Unable to create attendance.'
+  sms:
+    absent: " is absent today."
+    admin_alert: "Attendance for class %{standard} is not taken for %{date}"
+  global:
+    standard: 'Standard'
+    attendance: 'Attendance'
+    students: 'Students'
+    staff: 'Staff'
+    logout: 'Logout'
+    login: 'Login'
+    upload: 'Upload'
+    class: 'Class'
+  students:
+    reg_no: "Reg No."
+    roll_no: "Roll No."
+    name: "Name"
+    guardian_name: "Gaurdian Name"
+    guardian_mobile: "Guardian Mobile"
+   
