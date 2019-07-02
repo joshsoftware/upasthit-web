@@ -13,7 +13,7 @@ module AuthenticationConcern
   private
 
   def authenticate_resource_from_token!
-    @jwt_token, @auth_token = get_jwt_and_auth_token_from_header
+    @jwt_token, @auth_token = jwt_and_auth_token_from_header
     return unless @jwt_token && @auth_token
 
     @payload  = JWT.decode(@jwt_token, @auth_token).first
@@ -30,7 +30,7 @@ module AuthenticationConcern
     response.headers[Figaro.env.X_USER_JWT_TOKEN]   = current_staff.jwt_token
   end
 
-  def get_jwt_and_auth_token_from_header
+  def jwt_and_auth_token_from_header
     jwt_token = request.headers[Figaro.env.X_USER_JWT_TOKEN]
     auth_token = request.headers[Figaro.env.X_USER_AUTH_TOKEN]
 
