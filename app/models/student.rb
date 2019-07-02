@@ -27,9 +27,10 @@ class Student < ApplicationRecord
   belongs_to :school, class_name: "School", foreign_key: "school_id"
 
   validates :registration_no, :roll_no, :gender, :dob, :guardian_name,
-            :guardian_mobile_no, presence: true
+            :guardian_mobile_no, :message_language, presence: true
 
   validates :registration_no, uniqueness: true
+  validates :message_language, inclusion: {in: %w[hindi english marathi]}
 end
 
 def attendance_status
