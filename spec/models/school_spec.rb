@@ -17,7 +17,7 @@ RSpec.describe School, type: :model do
     end
 
     it "Name is not present" do
-      invalid_school = School.create(school_code: '1')
+      invalid_school = School.create(school_code: "1")
       expect(invalid_school).to_not be_valid
       expect(invalid_school.errors["name"]).to eq ["can't be blank"]
     end
