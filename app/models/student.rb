@@ -27,7 +27,7 @@ class Student < ApplicationRecord
   belongs_to :school, class_name: "School", foreign_key: "school_id"
 
   validates :registration_no, :roll_no, :gender, :dob, :guardian_name,
-            :guardian_mobile_no, :message_language, presence: true
+            :guardian_mobile_no, :preferred_language, presence: true
 
   validates :registration_no, uniqueness: true
   validates :preferred_language, inclusion: {in: %w[en mr-IN hi-IN]}
