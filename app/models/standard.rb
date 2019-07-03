@@ -25,4 +25,11 @@ class Standard < ApplicationRecord
   def name
     standard.to_s + " " + section.to_s
   end
+
+  def in_json
+    as_json(
+      except:  %i[created_at updated_at school_id],
+      include: [students: {only: %i[roll_no name registration_no]}]
+    )
+  end
 end

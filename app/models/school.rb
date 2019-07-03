@@ -21,4 +21,10 @@ class School < ApplicationRecord
   has_many :standards, class_name: "Standard"
   has_many :standard_attendances, class_name: "StandardAttendance"
   has_many :staffs, class_name: "Staff"
+
+  def in_json
+    as_json(
+      except: %i[created_at updated_at address close_time]
+    )
+  end
 end

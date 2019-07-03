@@ -44,4 +44,11 @@ class Staff < ApplicationRecord
   def designation_enquiry
     designation.to_s.underscore.inquiry
   end
+
+  def in_json
+    as_json(
+      except:  %i[created_at updated_at auth_token school_id],
+      include: [:standard_ids]
+    )
+  end
 end
