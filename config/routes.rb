@@ -24,6 +24,7 @@ Rails.application.routes.draw do
     namespace :staffs do
       post   "sign_in"  => "sessions#create"
       delete "sign_out" => "sessions#destroy"
+      get    "sync"     => "sessions#sync"
     end
   end
 end
