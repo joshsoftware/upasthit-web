@@ -25,10 +25,23 @@ class Staff < ApplicationRecord
   include Authenticable
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+
+  def self.designations
+    %w[Admin ClassTeacher]
+  end
+
   devise :database_authenticatable, :recoverable, :rememberable
   belongs_to :school, class_name: "School", foreign_key: "school_id"
   has_many :standards, through: :st
   has_and_belongs_to_many :standards, join_table: :staffs_standards
 
+  validates :pin, length: {is: 4}
   validates :mobile_number, :registration_no, uniqueness: true
+  validates :designation, inclusion: {in: Staff.designations}
+
+  delegate :admin?, :class_teacher?, to: :designation_enquiry
+
+  def designation_enquiry
+    designation.to_s.underscore.inquiry
+  end
 end
