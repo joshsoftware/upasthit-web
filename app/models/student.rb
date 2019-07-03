@@ -30,7 +30,7 @@ class Student < ApplicationRecord
             :guardian_mobile_no, :message_language, presence: true
 
   validates :registration_no, uniqueness: true
-  validates :message_language, inclusion: {in: %w[hindi english marathi]}
+  validates :message_language, inclusion: {in: %w[en mr-IN hi-IN]}
 end
 
 def attendance_status
