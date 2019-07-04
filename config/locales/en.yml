@@ -38,6 +38,8 @@ en:
     mobile: 'Mobile'
     designation: 'Designation'
   error:
+    absent_mobile_no: 'Please enter a mobile number'
+    invalid_mobile_no: 'This mobile number is not registered, Please contact your School Admin.'
     unauthorized: 'You are not authorized to access this page.'
     not_trusted_sender: 'SMS Sender is not authorized'
   attendance:
