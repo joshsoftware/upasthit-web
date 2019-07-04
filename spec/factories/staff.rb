@@ -2,10 +2,17 @@
 
 FactoryBot.define do
   factory :staff do
-    mobile_number { "9999999999" }
+    sequence(:mobile_number) {|n| "77988#{n}5221" }
     password { FFaker::Internet.password }
-    registration_no { "1234" }
+    sequence(:registration_no) {|n| n }
     designation { "ClassTeacher" }
     pin { "1212" }
+    name { FFaker::Name.name }
+    association :school
+    factory :staff_with_standards do
+      after(:create) do |staff|
+        create_list(:standard_with_students, 1, school_id: staff.school_id, staffs: [staff])
+      end
+    end
   end
 end

@@ -1,0 +1,17 @@
+{
+  "resources": [
+    {
+      "name": "Sessions",
+      "explanation": null,
+      "examples": [
+        {
+          "description": "Sync API",
+          "link": "sessions/sync_api.json",
+          "groups": "all",
+          "route": "api/staffs/sync",
+          "method": "get"
+        }
+      ]
+    }
+  ]
+}
