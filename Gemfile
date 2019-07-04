@@ -68,6 +68,7 @@ group :development, :test do
   gem "ffaker"
   gem "pry"
   gem "rubocop", "~> 0.72.0", require: false
+  gem "simplecov", require: false
 end
 
 group :development do
