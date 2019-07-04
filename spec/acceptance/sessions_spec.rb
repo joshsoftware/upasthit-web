@@ -13,7 +13,7 @@ resource "Sessions" do
     parameter :mobile_number, "Mobile number of staff", required: true
     parameter :pin, "4 digit PIN"
     let!(:mobile_number) { staff_1.mobile_number }
-    let!(:pin) { "1234" }
+    let!(:pin) { staff_1.pin }
     let(:raw_post) { params.to_json }
     example "Sync API" do
       do_request

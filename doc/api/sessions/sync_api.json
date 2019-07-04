@@ -22,7 +22,7 @@
   "requests": [
     {
       "request_method": "GET",
-      "request_path": "api/staffs/sync?mobile_number=7798815221&pin=1234",
+      "request_path": "api/staffs/sync?mobile_number=7798815221&pin=1212",
       "request_body": null,
       "request_headers": {
         "Content-Type": "application/json",
@@ -31,20 +31,20 @@
       },
       "request_query_parameters": {
         "mobile_number": "7798815221",
-        "pin": "1234"
+        "pin": "1212"
       },
       "request_content_type": "application/json",
       "response_status": 200,
       "response_status_text": "OK",
-      "response_body": "{\n  \"school\": {\n    \"id\": 1,\n    \"name\": \"Greenfield Academy\",\n    \"school_code\": \"1001\",\n    \"start_time\": \"2000-01-02T00:00:00.000+05:30\"\n  },\n  \"staff\": [\n    {\n      \"id\": 2,\n      \"mobile_number\": \"7798825221\",\n      \"registration_no\": \"2\",\n      \"name\": \"Siobhan Hermann\",\n      \"designation\": \"ClassTeacher\",\n      \"pin\": \"1212\",\n      \"standards\": [\n        {\n          \"id\": 2\n        }\n      ]\n    },\n    {\n      \"id\": 1,\n      \"mobile_number\": \"7798815221\",\n      \"registration_no\": \"1\",\n      \"name\": \"Ollie Ernser\",\n      \"designation\": \"ClassTeacher\",\n      \"pin\": \"1212\",\n      \"standards\": [\n        {\n          \"id\": 1\n        }\n      ]\n    }\n  ],\n  \"standard\": [\n    {\n      \"id\": 1,\n      \"standard\": \"10\",\n      \"section\": \"A\",\n      \"start_time\": \"2000-01-02T00:00:00.000+05:30\",\n      \"students\": [\n        {\n          \"registration_no\": \"1\",\n          \"roll_no\": 1,\n          \"name\": \"Daphne Corwin\"\n        },\n        {\n          \"registration_no\": \"2\",\n          \"roll_no\": 2,\n          \"name\": \"Mariella Christiansen\"\n        },\n        {\n          \"registration_no\": \"3\",\n          \"roll_no\": 3,\n          \"name\": \"Brande Runolfsson\"\n        }\n      ]\n    },\n    {\n      \"id\": 2,\n      \"standard\": \"11\",\n      \"section\": \"A\",\n      \"start_time\": \"2000-01-02T00:00:00.000+05:30\",\n      \"students\": [\n        {\n          \"registration_no\": \"4\",\n          \"roll_no\": 4,\n          \"name\": \"Rosario Crist\"\n        },\n        {\n          \"registration_no\": \"5\",\n          \"roll_no\": 5,\n          \"name\": \"Kenton Spinka\"\n        },\n        {\n          \"registration_no\": \"6\",\n          \"roll_no\": 6,\n          \"name\": \"Nakesha Mitchell\"\n        }\n      ]\n    }\n  ]\n}",
+      "response_body": "{\n  \"school\": {\n    \"id\": 1,\n    \"name\": \"Hillshore University\",\n    \"school_code\": \"1001\",\n    \"start_time\": \"2000-01-02T00:00:00.000+05:30\"\n  },\n  \"staff\": [\n    {\n      \"id\": 2,\n      \"mobile_number\": \"7798825221\",\n      \"registration_no\": \"2\",\n      \"name\": \"Eura Huel\",\n      \"designation\": \"ClassTeacher\",\n      \"pin\": \"1212\",\n      \"standards\": [\n        {\n          \"id\": 2\n        }\n      ]\n    },\n    {\n      \"id\": 1,\n      \"mobile_number\": \"7798815221\",\n      \"registration_no\": \"1\",\n      \"name\": \"Julie Bins\",\n      \"designation\": \"ClassTeacher\",\n      \"pin\": \"1212\",\n      \"standards\": [\n        {\n          \"id\": 1\n        }\n      ]\n    }\n  ],\n  \"standard\": [\n    {\n      \"id\": 1,\n      \"standard\": \"10\",\n      \"section\": \"A\",\n      \"start_time\": \"2000-01-02T00:00:00.000+05:30\",\n      \"students\": [\n        {\n          \"registration_no\": \"1\",\n          \"roll_no\": 1,\n          \"name\": \"Rudy Strosin\"\n        },\n        {\n          \"registration_no\": \"2\",\n          \"roll_no\": 2,\n          \"name\": \"Shavon Bahringer\"\n        },\n        {\n          \"registration_no\": \"3\",\n          \"roll_no\": 3,\n          \"name\": \"Jessie Casper\"\n        }\n      ]\n    },\n    {\n      \"id\": 2,\n      \"standard\": \"11\",\n      \"section\": \"A\",\n      \"start_time\": \"2000-01-02T00:00:00.000+05:30\",\n      \"students\": [\n        {\n          \"registration_no\": \"4\",\n          \"roll_no\": 4,\n          \"name\": \"Eleni Haley\"\n        },\n        {\n          \"registration_no\": \"5\",\n          \"roll_no\": 5,\n          \"name\": \"Marquitta Schaden\"\n        },\n        {\n          \"registration_no\": \"6\",\n          \"roll_no\": 6,\n          \"name\": \"Lavera Kihn\"\n        }\n      ]\n    }\n  ]\n}",
       "response_headers": {
         "Content-Type": "application/json; charset=utf-8",
-        "ETag": "W/\"dcf8c407a42766c12225b9baace806d8\"",
+        "ETag": "W/\"59e4383f622aa98c7d9e0e5d1957f59e\"",
         "Cache-Control": "max-age=0, private, must-revalidate",
-        "X-Request-Id": "4cbd1286-5a1b-41ec-b6e5-e33c475ec657",
-        "X-Runtime": "0.054993",
+        "X-Request-Id": "b6091a3c-76d2-47a8-8a88-3cb1e9f7e442",
+        "X-Runtime": "0.043155",
         "Vary": "Origin",
-        "Content-Length": "996"
+        "Content-Length": "977"
       },
       "response_content_type": "application/json; charset=utf-8",
       "curl": null
