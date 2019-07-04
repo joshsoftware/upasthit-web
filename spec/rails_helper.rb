@@ -33,6 +33,10 @@ rescue ActiveRecord::PendingMigrationError => e
   exit 1
 end
 
+RspecApiDocumentation.configure do |config|
+  config.format = :json
+end
+
 RSpec.configure do |config|
   config.include Devise::Test::ControllerHelpers, type: :controller
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures

@@ -19,10 +19,6 @@ require "factory_bot_rails"
 require "simplecov"
 SimpleCov.start
 
-RspecApiDocumentation.configure do |config|
-  config.format = :json
-end
-
 RSpec.configure do |config|
   config.include FactoryBot::Syntax::Methods
   # rspec-expectations config goes here. You can use an alternate
