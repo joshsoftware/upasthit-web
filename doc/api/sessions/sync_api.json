@@ -1,0 +1,53 @@
+{
+  "resource": "Sessions",
+  "resource_explanation": null,
+  "http_method": "GET",
+  "route": "api/staffs/sync",
+  "description": "Sync API",
+  "explanation": null,
+  "parameters": [
+    {
+      "required": true,
+      "name": "mobile_number",
+      "description": "Mobile number of staff"
+    },
+    {
+      "name": "pin",
+      "description": "4 digit PIN"
+    }
+  ],
+  "response_fields": [
+
+  ],
+  "requests": [
+    {
+      "request_method": "GET",
+      "request_path": "api/staffs/sync?mobile_number=7798815221&pin=1212",
+      "request_body": null,
+      "request_headers": {
+        "Content-Type": "application/json",
+        "Host": "example.org",
+        "Cookie": ""
+      },
+      "request_query_parameters": {
+        "mobile_number": "7798815221",
+        "pin": "1212"
+      },
+      "request_content_type": "application/json",
+      "response_status": 200,
+      "response_status_text": "OK",
+      "response_body": "{\n  \"school\": {\n    \"id\": 1,\n    \"name\": \"Hillshore University\",\n    \"school_code\": \"1001\",\n    \"start_time\": \"2000-01-02T00:00:00.000+05:30\"\n  },\n  \"staff\": [\n    {\n      \"id\": 2,\n      \"mobile_number\": \"7798825221\",\n      \"registration_no\": \"2\",\n      \"name\": \"Eura Huel\",\n      \"designation\": \"ClassTeacher\",\n      \"pin\": \"1212\",\n      \"standards\": [\n        {\n          \"id\": 2\n        }\n      ]\n    },\n    {\n      \"id\": 1,\n      \"mobile_number\": \"7798815221\",\n      \"registration_no\": \"1\",\n      \"name\": \"Julie Bins\",\n      \"designation\": \"ClassTeacher\",\n      \"pin\": \"1212\",\n      \"standards\": [\n        {\n          \"id\": 1\n        }\n      ]\n    }\n  ],\n  \"standard\": [\n    {\n      \"id\": 1,\n      \"standard\": \"10\",\n      \"section\": \"A\",\n      \"start_time\": \"2000-01-02T00:00:00.000+05:30\",\n      \"students\": [\n        {\n          \"registration_no\": \"1\",\n          \"roll_no\": 1,\n          \"name\": \"Rudy Strosin\"\n        },\n        {\n          \"registration_no\": \"2\",\n          \"roll_no\": 2,\n          \"name\": \"Shavon Bahringer\"\n        },\n        {\n          \"registration_no\": \"3\",\n          \"roll_no\": 3,\n          \"name\": \"Jessie Casper\"\n        }\n      ]\n    },\n    {\n      \"id\": 2,\n      \"standard\": \"11\",\n      \"section\": \"A\",\n      \"start_time\": \"2000-01-02T00:00:00.000+05:30\",\n      \"students\": [\n        {\n          \"registration_no\": \"4\",\n          \"roll_no\": 4,\n          \"name\": \"Eleni Haley\"\n        },\n        {\n          \"registration_no\": \"5\",\n          \"roll_no\": 5,\n          \"name\": \"Marquitta Schaden\"\n        },\n        {\n          \"registration_no\": \"6\",\n          \"roll_no\": 6,\n          \"name\": \"Lavera Kihn\"\n        }\n      ]\n    }\n  ]\n}",
+      "response_headers": {
+        "Content-Type": "application/json; charset=utf-8",
+        "ETag": "W/\"59e4383f622aa98c7d9e0e5d1957f59e\"",
+        "Cache-Control": "max-age=0, private, must-revalidate",
+        "X-Request-Id": "b6091a3c-76d2-47a8-8a88-3cb1e9f7e442",
+        "X-Runtime": "0.043155",
+        "Vary": "Origin",
+        "Content-Length": "977"
+      },
+      "response_content_type": "application/json; charset=utf-8",
+      "curl": null
+    }
+  ]
+}

@@ -56,17 +56,18 @@ gem "redis"
 gem "sidekiq"
 # Reduces boot times through caching; required in config/boot.rb
 gem "activerecord-import"
+gem "apitome"
 gem "bootsnap", ">= 1.1.0", require: false
 gem "pagy"
 gem "select2-rails"
 gem "smarter_csv", github: "tilo/smarter_csv"
-
 gem "whenever"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem "ffaker"
   gem "pry"
+  gem "rspec_api_documentation"
   gem "rubocop", "~> 0.72.0", require: false
   gem "simplecov", require: false
 end

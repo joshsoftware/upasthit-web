@@ -48,7 +48,7 @@ class Staff < ApplicationRecord
   def in_json
     as_json(
       except:  %i[created_at updated_at auth_token school_id],
-      include: [:standard_ids]
+      include: [standards: {only: [:id]}]
     )
   end
 end
