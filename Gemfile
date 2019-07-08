@@ -62,6 +62,7 @@ gem "pagy"
 gem "select2-rails"
 gem "smarter_csv", github: "tilo/smarter_csv"
 gem "whenever"
+gem "mina"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
