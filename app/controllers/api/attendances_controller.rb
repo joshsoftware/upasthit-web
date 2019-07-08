@@ -3,11 +3,11 @@
 module Api
   class AttendancesController < BaseController
     def create
-      if params[:roll_nos] && params[:standard_id] && params[:date]
-        create_attendance(params[:roll_nos], params[:standard_id], params[:date])
-        render_success(data: {}, message: I18n.t("attendance.created"), status: :created)
+      service = Attendance::CreateService.new(attendance_params)
+      if service.create
+        render json: service.result
       else
-        render_error(message: I18n.t("attendance.failed"), status: :unprocessable_entity)
+        render json: {errors: service.errors.messages}, status: 400
       end
     end
 
@@ -27,6 +27,10 @@ module Api
     end
 
     private
+
+    def attendance_params
+      params.permit(:standard_id, :school_code, :date, :section, absent_roll_nos: [])
+    end
 
     def create_attendance(roll_nos, standard_id, date)
       Attendance::Create.new(roll_nos, standard_id, date).call
