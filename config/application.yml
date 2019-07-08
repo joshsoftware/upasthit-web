@@ -17,4 +17,4 @@ test:
   DATABASE: 'absentee_test'
 
 production:
-  DATABASE: 'absentee_production'
+  DATABASE: 'upasthit_staging'
