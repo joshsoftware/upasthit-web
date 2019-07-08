@@ -1,0 +1,20 @@
+DB_HOST:                    "localhost"
+DB_USER:                    "postgres"
+DB_PASSWORD:                "123456"
+DB_POOL:                    "5"
+
+#staff authentication
+X_USER_AUTH_TOKEN: X-User-Auth-Token
+X_USER_JWT_TOKEN:  X-User-Jwt-Token
+
+TEXT_LOCAL_URL: 'http://api.textlocal.in/send/'
+AUTHORISED_SENDER: "919923671649"
+
+development:
+  DATABASE: 'absentee_development'
+
+test:
+  DATABASE: 'absentee_test'
+
+production:
+  DATABASE: 'absentee_production'

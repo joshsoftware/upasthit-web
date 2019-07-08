@@ -53,7 +53,7 @@ module Attendance
     def send_sms(mobile_number)
       response = Net::HTTP.post_form(
         URI.parse(Figaro.env.TEXT_LOCAL_URL),
-        apiKey:      Figaro.env.MSG_API_KEY,
+        apiKey:      Rails.application.credentials.msg_api_key,
         sender:      "TXTLCL",
         message:     message.squish,
         numbers:     [mobile_number],

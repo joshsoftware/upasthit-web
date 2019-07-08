@@ -9,16 +9,19 @@ require 'mina/git'
 #   repository   - Git repo to clone from. (needed by mina/git)
 #   branch       - Branch name to deploy. (needed by mina/git)
 
+
 set :application_name, 'Upasthit'
-#set :domain, 'foobar.com'
-set :deploy_to, '/var/www/foobar.com'
+set :domain, 'stage.upasthit.joshsoftware.com'
+set :deploy_to, '/home/ubuntu/upasthit'
 set :repository, 'git@github.com:joshsoftware/upasthit-web.git'
 set :branch, 'master'
+set :user, 'ubuntu'
+set :forward_agent, true
 
 # Optional settings:
 #   set :user, 'foobar'          # Username in the server to SSH to.
 #   set :port, '30000'           # SSH port number.
-#   set :forward_agent, true     # SSH forward_agent.
+     # SSH forward_agent.
 
 # Shared dirs and files will be symlinked into the app-folder by the 'deploy:link_shared_paths' step.
 # Some plugins already add folders to shared_dirs like `mina/rails` add `public/assets`, `vendor/bundle` and many more
