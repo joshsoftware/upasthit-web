@@ -3,7 +3,6 @@
 module Api
   module V1
     class BaseController < ApplicationController
-      include AuthenticationConcern
       rescue_from ActiveRecord::RecordNotFound, ActionController::RoutingError, with: :handle_api_exceptions
 
       def render_error(errors: {}, message: nil, status: :internal_server_error)
