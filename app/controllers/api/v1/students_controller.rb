@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Api
-  class StudentsController < BaseController
+  class V1::StudentsController < V1::BaseController
     def index
       school_id = Standard.find(params[:standard_id]).school_id
       students = Student.where(standard_id: params[:standard_id], school_id: school_id)

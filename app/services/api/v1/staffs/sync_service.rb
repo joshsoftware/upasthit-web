@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Api
-  module Staffs
+  module V1::Staffs
     class SyncService
       include ActiveModel::Validations
       validates :mobile, format: {with: /\A[346789][0-9]{9}\z/}

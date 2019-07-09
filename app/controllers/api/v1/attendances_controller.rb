@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Api
-  class AttendancesController < BaseController
+  class V1::AttendancesController < V1::BaseController
     def create
       if params[:roll_nos] && params[:standard_id] && params[:date]
         create_attendance(params[:roll_nos], params[:standard_id], params[:date])
