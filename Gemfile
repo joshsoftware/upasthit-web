@@ -58,12 +58,12 @@ gem "sidekiq"
 gem "activerecord-import"
 gem "apitome"
 gem "bootsnap", ">= 1.1.0", require: false
+gem "mina"
 gem "pagy"
 gem "select2-rails"
 gem "smarter_csv", github: "tilo/smarter_csv"
+gem "versionist"
 gem "whenever"
-gem "mina"
-gem 'versionist'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
