@@ -15,37 +15,37 @@ staff1 = Staff.find_or_create_by(mobile_number: "9876543210", designation: "Admi
   staff.password = "12345678"
   staff.password_confirmation = "12345678"
 end
-staff2 = Staff.create(mobile_number: "999882311", designation: "ClassTeacher", school_id: school1.id,
+staff2 = Staff.find_or_create_by(mobile_number: "999882311", designation: "ClassTeacher", school_id: school1.id,
                 registration_no: 2, pin: "1441") do |staff|
   staff.password = "12345678"
   staff.password_confirmation = "12345678"
 end
-staff3 = Staff.create(mobile_number: "999882312", designation: "ClassTeacher", school_id: school2.id,
+staff3 = Staff.find_or_create_by(mobile_number: "999882312", designation: "ClassTeacher", school_id: school2.id,
                 registration_no: 3, pin: "1551") do |staff|
   staff.password = "12345678"
   staff.password_confirmation = "12345678"
 end
-standard1 = Standard.find_or_create_by(standard: "2", section: "A", school_id: school1.id)
-standard2 = Standard.find_or_create_by(standard: "2", section: "B", school_id: school1.id)
-standard3 = Standard.find_or_create_by(standard: "3", section: "A", school_id: school1.id)
+standard1 = Standard.find_or_create_by!(standard: "2", section: "A", school_id: school1.id)
+standard2 = Standard.find_or_create_by!(standard: "2", section: "B", school_id: school1.id)
+standard3 = Standard.find_or_create_by!(standard: "3", section: "A", school_id: school1.id)
 
 standard1.staffs << staff1
 standard2.staffs << staff2
 standard3.staffs << staff1
 
-standard4 = Standard.find_or_create_by(standard: "2", section: "A", school_id: school2.id)
+standard4 = Standard.find_or_create_by!(standard: "4", section: "A", school_id: school2.id)
 
 standard4.staffs << staff3
 standard4.staffs << staff3
 
-Student.find_or_create_by(name: "Amit Kumar", registration_no: "100", roll_no: "1", dob: "01-11-1996",
+Student.find_by(name: "Amit Kumar", registration_no: "100", roll_no: "1", dob: Time.zone.parse("01-11-1996"),
                          guardian_name: "Ashok Kumar", preferred_language: "en", guardian_mobile_no: "7798845221",
-                         school_id: school1.id, standard_id: standard1.id)
-Student.find_or_create_by(name: "Preethi Reddy", registration_no: "101", roll_no: "2", dob: "02-11-1996",
+                         school_id: school1.id, standard_id: standard1.id, gender: "male")
+Student.find_or_create_by!(name: "Preethi Reddy", registration_no: "101", roll_no: "2", dob: Time.zone.parse("02-11-1996"),
                          guardian_name: "Ashok Reddy", preferred_language: "en", guardian_mobile_no: "7798845221",
-                         school_id: school1.id, standard_id: standard1.id)
-Student.find_or_create_by(name: "Kabir Singh", registration_no: "102", roll_no: "3", dob: "21-11-1996",
+                         school_id: school1.id, standard_id: standard1.id, gender: "female")
+Student.find_or_create_by!(name: "Kabir Singh", registration_no: "108", roll_no: "3", dob: Time.zone.parse("21-11-1996"),
                          guardian_name: "Ashok Singh", preferred_language: "en", guardian_mobile_no: "7798845221",
-                         school_id: school2.id, standard_id: standard4.id)
+                         school_id: school2.id, standard_id: standard4.id, gender: "male")
 
 p "Seed completed sucessfully"
