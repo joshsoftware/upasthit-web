@@ -22,7 +22,7 @@
       %li.nav-item
         %a.nav-link.profile-pic
           #{current_staff.name}
-          = image_tag 'face', class: 'rounded-circle'
+          = image_tag 'face.jpg', class: 'rounded-circle'
       %li.nav-item
         %a.nav-link{ :href => destroy_staff_session_path, method: :delete }
           %h5= t 'global.logout'
