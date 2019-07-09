@@ -43,9 +43,9 @@ module Api
         send_sms(absent_student_attendance_ids)
         StandardAttendance.where(date: date, school_id: school_id,
                                  standard_id: standard_id).first_or_create do |standard_attendance|
-          standard_attendance.update(attendance_marked:     true,
-                                     no_of_student_present: present_student_count,
-                                     no_of_absent_student:  present_student_count(false))
+          standard_attendance.update_attributes(attendance_marked:     true,
+                                                no_of_student_present: present_student_count,
+                                                no_of_absent_student:  present_student_count(false))
         end
       end
 

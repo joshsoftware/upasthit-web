@@ -46,7 +46,7 @@ module Api
       end
 
       def sms_sent_success
-        ::Attendance.find(student_data[:attendance_id]).update(sms_sent: true)
+        ::Attendance.find(student_data[:attendance_id]).update_column(:sms_sent, true)
       end
 
       def sms_sent_to_alternate_number
@@ -55,7 +55,7 @@ module Api
       end
 
       def notify_admin
-        ::Attendance.find(student_data[:attendance_id]).update(sms_sent: false)
+        ::Attendance.find(student_data[:attendance_id]).update_column(:sms_sent, false)
         "********Notify to Admin*********"
       end
 
