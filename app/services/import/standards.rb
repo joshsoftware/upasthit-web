@@ -34,7 +34,8 @@ module Import
           Standard.new(standard: data[:standard], section: section,
                       school_id: school_id, start_time: data[:start_time])
         end
-      end.flatten
+      end
+      @standard_data.flatten
     end
 
     def import_records

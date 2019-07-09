@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe Api::Staffs::SessionsController, type: :controller do
+RSpec.describe Api::V1::Staffs::SessionsController, type: :controller do
   let(:school) { create(:school) }
   let(:staff) { create(:staff, school_id: school.id) }
 

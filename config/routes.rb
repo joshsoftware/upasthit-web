@@ -12,7 +12,7 @@ Rails.application.routes.draw do
     resources :staffs, only: %i[index create]
   end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-  namespace :api, defaults: {format: :json} do
+  api_version(module: "Api::V1", path: {value: "v1"}, default: true) do
     resources :standards, only: [:index]
     resources :attendances, only: [:create] do
       collection do
@@ -27,4 +27,14 @@ Rails.application.routes.draw do
       get    "sync"     => "sessions#sync"
     end
   end
+
+  API_VERSIONS.each do |version|
+    mount Apitome::Engine => "/api/docs/#{version}",
+          :as             => "apitome-#{version}",
+          :constraints    => ApitomeVersion.new(version)
+  end
+
+  # Optionally default to the last API version
+  # mount Apitome::Engine => "/api/docs",
+  #       :constraints    => ApitomeVersion.new(API_LAST_VERSION)
 end
