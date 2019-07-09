@@ -27,4 +27,14 @@ Rails.application.routes.draw do
       get    "sync"     => "sessions#sync"
     end
   end
+
+  API_VERSIONS.each do |version|
+    mount Apitome::Engine => "/api/docs/#{version}",
+          :as             => "apitome-#{version}",
+          :constraints    => ApitomeVersion.new(version)
+  end
+
+  # Optionally default to the last API version
+  # mount Apitome::Engine => "/api/docs",
+  #       :constraints    => ApitomeVersion.new(API_LAST_VERSION)
 end

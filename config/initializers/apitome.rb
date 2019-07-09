@@ -4,7 +4,7 @@ Apitome.configure do |config|
   # This determines where the Apitome routes will be mounted. Changing this to "/api/documentation" for instance would
   # allow you to browse to http://localhost:3000/api/documentation to see your api documentation. Set to nil and mount
   # it yourself if you need to.
-  config.mount_at = "/api/docs"
+  # config.mount_at = "/api/docs"
 
   # This defaults to Rails.root if left nil. If you're providing documentation for an engine using a dummy application
   # it can be useful to set this to your engines root.. E.g. `Application::Engine.root`
@@ -12,7 +12,7 @@ Apitome.configure do |config|
 
   # This is where rspec_api_documentation outputs the JSON files. This is configurable within RAD, and so is
   # configurable here.
-  config.doc_path = "doc/api"
+  # config.doc_path = "doc/api"
 
   # Set the parent controller that Apitome::DocsController will inherit from. Useful if you want to use a custom
   # `before_action` for instance.
