@@ -35,6 +35,13 @@ end
 
 RspecApiDocumentation.configure do |config|
   config.format = :json
+
+  API_VERSIONS.each do |version|
+    config.define_group(version) do |c|
+      c.filter = version
+      c.docs_dir = Rails.root.join("doc", "api", version.to_s)
+    end
+  end
 end
 
 RSpec.configure do |config|
