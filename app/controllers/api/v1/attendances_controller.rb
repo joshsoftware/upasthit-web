@@ -3,38 +3,55 @@
 module Api
   module V1
     class AttendancesController < V1::BaseController
+      before_action :validate_message, only: :sms_callback
+
       def create
-        service = Attendance::CreateService.new(attendance_params)
-        if service.create
-          render json: service.result
+        if create_service(attendance_params).create
+          render json: create_service.result
         else
-          render json: {errors: service.errors.messages}, status: 400
+          render json: {errors: create_service.errors.messages}, status: 400
         end
       end
 
       def sms_callback
-        if params[:sender] == Figaro.env.AUTHORISED_SENDER
-          # ["Date:", "27.04.2019", "Std:", "5", "Section:", "C", "Roll_no:", "1", "2", "3"]
-          data = params[:comments].split(/[',', ' ']/).map {|k| k.gsub("\n", "") }
-          date = Date.parse(data[1])
-          standard = data[3].to_i
-          section = data[5]
-          absent_roll_nos = data.split("Roll_no:")[1]
-          standard_id = Standard.find_by(standard: standard, section: section).id
-          create_attendance(absent_roll_nos, standard_id, date)
+        # if params[:sender] == Figaro.env.AUTHORISED_SENDER
+        sms_callback_params = parse_message
+        if create_service(sms_callback_params).create
+          render json: create_service.result
         else
-          render_error(message: I18n.t("error.not_trusted_sender"), status: :unprocessable_entity)
+          render json: {errors: create_service.errors.messages}, status: 400
         end
+        # else
+        # render_error(message: I18n.t("error.not_trusted_sender"), status: :unprocessable_entity)
+        # end
       end
 
       private
 
-      def attendance_params
-        params.permit(:standard_id, :school_code, :date, :section, absent_roll_nos: [])
+      def create_service(sms_callback_params={})
+        @create_service ||= Attendance::CreateService.new(sms_callback_params)
       end
 
-      def create_attendance(roll_nos, standard_id, date)
-        Attendance::Create.new(roll_nos, standard_id, date).call
+      def attendance_params
+        params.permit(:standard, :school_code, :date, :section, absent_roll_nos: [])
+      end
+
+      def validate_message
+        message = params[:comments]
+        return true if message.match?(%r{^\d{1,2}/\d{1,2}/\d{4}\s\d*\s\d{1,2}(-\w)*(\s[\d\s\d])*\z})
+
+        render json: {message: I18n.t("sms.invalid_message")}, status: 422
+      end
+
+      def parse_message
+        data = params[:comments].split(/[',', ' ']/).map {|k| k.gsub("\n", "") }
+        {
+          date:            data[0],
+          school_code:     data[1],
+          standard:        data[2].split("-").first,
+          section:         data[2].split("-").second,
+          absent_roll_nos: data[3..]
+        }
       end
     end
   end

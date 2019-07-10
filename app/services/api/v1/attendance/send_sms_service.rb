@@ -10,9 +10,10 @@ module Api
 
         def initialize(absentee_attendance_ids)
           @absentee_attendance_ids = absentee_attendance_ids
-
+          @defaulters = []
           data = attendances.where(sms_sent: [false, nil]).map do |attendance|
             {
+              roll_no:                 attendance.student.roll_no,
               guardian_mobile_number:  attendance.student.guardian_mobile_no,
               alternate_mobile_number: attendance.student.guardian_alternate_mobile_no,
               name_en:                 attendance.student.name_en,
@@ -23,9 +24,10 @@ module Api
           end
           data.each do |student_data|
             @student_data = student_data
-            response = send_sms(student_data[:guardian_mobile_number])
+            response = send_sms(student_data[:guardian_mobile_number], message_to_parents)
             response == "success" ? sms_sent_success : sms_sent_to_alternate_number
           end
+          notify_admin
         end
 
         attr_reader :student_data
@@ -36,31 +38,46 @@ module Api
           @attendances ||= ::Attendance.includes(:student).where(id: @absentee_attendance_ids)
         end
 
-        def message
+        def message_to_parents
           I18n.locale = preferred_language.to_sym
           name = ("name_" + preferred_language.underscore).to_sym
           "#{student_data[name]}#{I18n.translate('sms.absent')}\n"
+        end
+
+        def message_to_admin
+          roll_nos = @defaulters.pluck(:roll_no).sort.join(", ")
+          standard_with_section = attendance.standard.standard + "-" + attendance.standard.section
+          I18n.translate("sms.notify_admin", roll_nos: roll_nos.to_s, standard: standard_with_section.to_s)
         end
 
         def preferred_language
           student_data[:preferred_language]
         end
 
+        def attendance
+          @attendance ||= ::Attendance.includes(:standard).find(student_data[:attendance_id])
+        end
+
         def sms_sent_success
-          ::Attendance.find(student_data[:attendance_id]).update_column(:sms_sent, true)
+          attendance.update_column(:sms_sent, true)
         end
 
         def sms_sent_to_alternate_number
-          response = send_sms(student_data[:alternate_mobile_number])
-          response == "success" ? sms_sent_success : notify_admin
+          response = send_sms(student_data[:alternate_mobile_number], message_to_parents)
+          response == "success" ? sms_sent_success : store_failed_message_data
+        end
+
+        def store_failed_message_data
+          @defaulters.push(student_data)
         end
 
         def notify_admin
-          ::Attendance.find(student_data[:attendance_id]).update_column(:sms_sent, false)
-          "********Notify to Admin*********"
+          attendance.update_column(:sms_sent, false)
+          @admin ||= attendance.school.staffs.select(&:admin?).first
+          send_sms(@admin[:mobile_number], message_to_admin)
         end
 
-        def send_sms(mobile_number)
+        def send_sms(mobile_number, message)
           response = Net::HTTP.post_form(
             URI.parse(Figaro.env.TEXT_LOCAL_URL),
             apiKey:      Figaro.env.MSG_API_KEY,

@@ -6,7 +6,7 @@ module Api
     module Attendance
       class CreateService
         include ActiveModel::Validations
-        validates :school_code, :date, :standard_id, presence: true
+        validates :school_code, :date, :standard, presence: true
         validate :validate_school_code
         validate :validate_standard_with_section
         validate :validate_date
@@ -27,7 +27,7 @@ module Api
         private
 
         def mark_attendance
-          student_ids ||= standard.students.pluck(:id)
+          student_ids ||= @standard.students.pluck(:id)
           attendances = student_ids.map do |student_id|
             ::Attendance.find_or_create_by(
               present:     !absent_student_ids.include?(student_id),
@@ -41,7 +41,12 @@ module Api
           absent_student_attendance_ids = attendances.map do |attendance|
             attendance.id if absent_student_ids.include?(attendance.student_id) && attendance.date == date
           end
+          absent_student_attendance_ids.compact!
           send_sms(absent_student_attendance_ids)
+          mark_standard_attendance
+        end
+
+        def mark_standard_attendance
           StandardAttendance.where(date: date, school_id: school_id,
                                    standard_id: standard_id).first_or_create do |standard_attendance|
             standard_attendance.update_attributes(attendance_marked:     true,
@@ -69,8 +74,8 @@ module Api
           Time.zone.parse(params[:date])
         end
 
-        def standard_id
-          params[:standard_id]
+        def standard
+          params[:standard]
         end
 
         def section
@@ -89,7 +94,8 @@ module Api
         end
 
         def validate_standard_with_section
-          return true if standard
+          @standard ||= Standard.includes(:students).find_by(standard: standard, school_id: school_id, section: section)
+          return true if @standard
 
           errors.add(:base, "Invalid Standard Id")
           false
@@ -101,8 +107,8 @@ module Api
           nil
         end
 
-        def standard
-          @standard ||= Standard.includes(:students).find_by(id: standard_id, school_id: school_id, section: section)
+        def standard_id
+          @standard_id ||= @standard.id
         end
 
         def school_id
@@ -117,7 +123,7 @@ module Api
 
         def set_result
           @result = {
-            message: "SMS has been sent successfully"
+            message: "Done."
           }
         end
       end

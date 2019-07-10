@@ -48,6 +48,8 @@ en:
   sms:
     absent: " is absent today."
     admin_alert: "Attendance for class %{standard} is not taken for %{date}"
+    invalid_message: 'Message format is invalid'
+    notify_admin: "Message to following student roll numbers : %{roll_nos} of standard : %{standard} were failed to deliver."
   global:
     standard: 'Standard'
     attendance: 'Attendance'
