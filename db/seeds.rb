@@ -15,12 +15,12 @@ staff1 = Staff.find_or_create_by(mobile_number: "9876543210", designation: "Admi
   staff.password = "12345678"
   staff.password_confirmation = "12345678"
 end
-staff2 = Staff.find_or_create_by(mobile_number: "999882311", designation: "ClassTeacher", school_id: school1.id,
+staff2 = Staff.find_or_create_by(mobile_number: "9998823112", designation: "ClassTeacher", school_id: school1.id,
                 registration_no: 2, pin: "1441", name: "Aman Singh") do |staff|
   staff.password = "12345678"
   staff.password_confirmation = "12345678"
 end
-staff3 = Staff.find_or_create_by(mobile_number: "999882312", designation: "ClassTeacher", school_id: school2.id,
+staff3 = Staff.find_or_create_by(mobile_number: "9998823122", designation: "ClassTeacher", school_id: school2.id,
                 registration_no: 3, pin: "1551", name: "Priya Chopra") do |staff|
   staff.password = "12345678"
   staff.password_confirmation = "12345678"
