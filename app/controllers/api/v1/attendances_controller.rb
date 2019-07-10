@@ -14,16 +14,16 @@ module Api
       end
 
       def sms_callback
-        # if params[:sender] == Figaro.env.AUTHORISED_SENDER
-        sms_callback_params = parse_message
-        if create_service(sms_callback_params).create
-          render json: create_service.result
+        if params[:sender] == Figaro.env.AUTHORISED_SENDER
+          sms_callback_params = parse_message
+          if create_service(sms_callback_params).create
+            render json: create_service.result
+          else
+            render json: {errors: create_service.errors.messages}, status: 400
+          end
         else
-          render json: {errors: create_service.errors.messages}, status: 400
+          render_error(message: I18n.t("error.not_trusted_sender"), status: :unprocessable_entity)
         end
-        # else
-        # render_error(message: I18n.t("error.not_trusted_sender"), status: :unprocessable_entity)
-        # end
       end
 
       private
