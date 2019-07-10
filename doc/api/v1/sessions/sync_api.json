@@ -10,10 +10,6 @@
       "required": true,
       "name": "mobile_number",
       "description": "Mobile number of staff"
-    },
-    {
-      "name": "pin",
-      "description": "4 digit PIN"
     }
   ],
   "response_fields": [
@@ -22,7 +18,7 @@
   "requests": [
     {
       "request_method": "GET",
-      "request_path": "v1/staffs/sync?mobile_number=7798815221&pin=1212",
+      "request_path": "v1/staffs/sync?mobile_number=7798815221",
       "request_body": null,
       "request_headers": {
         "Content-Type": "application/json",
@@ -30,13 +26,12 @@
         "Cookie": ""
       },
       "request_query_parameters": {
-        "mobile_number": "7798815221",
-        "pin": "1212"
+        "mobile_number": "7798815221"
       },
       "request_content_type": "application/json",
       "response_status": 200,
       "response_status_text": "OK",
-      "response_body": "{\n  \"school\": {\n    \"id\": 1,\n    \"name\": \"College of Larkville\",\n    \"school_code\": \"1001\",\n    \"start_time\": \"2000-01-02T00:00:00.000+05:30\"\n  },\n  \"staff\": [\n    {\n      \"id\": 2,\n      \"mobile_number\": \"7798825221\",\n      \"registration_no\": \"2\",\n      \"name\": \"Val Streich\",\n      \"designation\": \"ClassTeacher\",\n      \"pin\": \"1212\",\n      \"standard_ids\": [\n        \"3\",\n        \"4\"\n      ]\n    },\n    {\n      \"id\": 1,\n      \"mobile_number\": \"7798815221\",\n      \"registration_no\": \"1\",\n      \"name\": \"Jimmie Wiegand\",\n      \"designation\": \"ClassTeacher\",\n      \"pin\": \"1212\",\n      \"standard_ids\": [\n        \"1\",\n        \"2\"\n      ]\n    }\n  ],\n  \"standard\": [\n    {\n      \"id\": 1,\n      \"standard\": \"10\",\n      \"section\": \"A\",\n      \"start_time\": \"2000-01-02T00:00:00.000+05:30\",\n      \"students\": [\n        {\n          \"registration_no\": \"1\",\n          \"roll_no\": 1,\n          \"name\": \"Saul O'Connell\"\n        },\n        {\n          \"registration_no\": \"2\",\n          \"roll_no\": 2,\n          \"name\": \"Renato Rowe\"\n        },\n        {\n          \"registration_no\": \"3\",\n          \"roll_no\": 3,\n          \"name\": \"Silvana Conn\"\n        }\n      ]\n    },\n    {\n      \"id\": 2,\n      \"standard\": \"11\",\n      \"section\": \"A\",\n      \"start_time\": \"2000-01-02T00:00:00.000+05:30\",\n      \"students\": [\n        {\n          \"registration_no\": \"4\",\n          \"roll_no\": 4,\n          \"name\": \"Sherrell Mann\"\n        },\n        {\n          \"registration_no\": \"5\",\n          \"roll_no\": 5,\n          \"name\": \"Mireya Klein\"\n        },\n        {\n          \"registration_no\": \"6\",\n          \"roll_no\": 6,\n          \"name\": \"Liz Batz\"\n        }\n      ]\n    },\n    {\n      \"id\": 3,\n      \"standard\": \"12\",\n      \"section\": \"A\",\n      \"start_time\": \"2000-01-02T00:00:00.000+05:30\",\n      \"students\": [\n        {\n          \"registration_no\": \"7\",\n          \"roll_no\": 7,\n          \"name\": \"Willodean Walsh\"\n        },\n        {\n          \"registration_no\": \"8\",\n          \"roll_no\": 8,\n          \"name\": \"Lovie Koepp\"\n        },\n        {\n          \"registration_no\": \"9\",\n          \"roll_no\": 9,\n          \"name\": \"Carey Smitham\"\n        }\n      ]\n    },\n    {\n      \"id\": 4,\n      \"standard\": \"13\",\n      \"section\": \"A\",\n      \"start_time\": \"2000-01-02T00:00:00.000+05:30\",\n      \"students\": [\n        {\n          \"registration_no\": \"10\",\n          \"roll_no\": 10,\n          \"name\": \"Berry Kohler\"\n        },\n        {\n          \"registration_no\": \"11\",\n          \"roll_no\": 11,\n          \"name\": \"Aide Weimann\"\n        },\n        {\n          \"registration_no\": \"12\",\n          \"roll_no\": 12,\n          \"name\": \"Thomasena Romaguera\"\n        }\n      ]\n    }\n  ]\n}",
+      "response_body": "{\n  \"school\": {\n    \"id\": 1,\n    \"name\": \"Northwood School of Arts\",\n    \"school_code\": \"1001\",\n    \"start_time\": \"2000-01-02T00:00:00.000+05:30\"\n  },\n  \"staff\": [\n    {\n      \"id\": 2,\n      \"mobile_number\": \"7798825221\",\n      \"registration_no\": \"2\",\n      \"name\": \"Renato Weber\",\n      \"designation\": \"ClassTeacher\",\n      \"pin\": \"1212\",\n      \"standard_ids\": [\n        \"3\",\n        \"4\"\n      ]\n    },\n    {\n      \"id\": 1,\n      \"mobile_number\": \"7798815221\",\n      \"registration_no\": \"1\",\n      \"name\": \"Britany Watsica\",\n      \"designation\": \"ClassTeacher\",\n      \"pin\": \"1212\",\n      \"standard_ids\": [\n        \"1\",\n        \"2\"\n      ]\n    }\n  ],\n  \"standard\": [\n    {\n      \"id\": 1,\n      \"standard\": \"10\",\n      \"section\": \"A\",\n      \"start_time\": \"2000-01-02T00:00:00.000+05:30\",\n      \"students\": [\n        {\n          \"registration_no\": \"1\",\n          \"roll_no\": 1,\n          \"name\": \"Sue Barrows\"\n        },\n        {\n          \"registration_no\": \"2\",\n          \"roll_no\": 2,\n          \"name\": \"Carmine Douglas\"\n        },\n        {\n          \"registration_no\": \"3\",\n          \"roll_no\": 3,\n          \"name\": \"Holley Goldner\"\n        }\n      ]\n    },\n    {\n      \"id\": 2,\n      \"standard\": \"11\",\n      \"section\": \"A\",\n      \"start_time\": \"2000-01-02T00:00:00.000+05:30\",\n      \"students\": [\n        {\n          \"registration_no\": \"4\",\n          \"roll_no\": 4,\n          \"name\": \"Ernestine Roob\"\n        },\n        {\n          \"registration_no\": \"5\",\n          \"roll_no\": 5,\n          \"name\": \"Irene Schaden\"\n        },\n        {\n          \"registration_no\": \"6\",\n          \"roll_no\": 6,\n          \"name\": \"Marc Dare\"\n        }\n      ]\n    },\n    {\n      \"id\": 3,\n      \"standard\": \"12\",\n      \"section\": \"A\",\n      \"start_time\": \"2000-01-02T00:00:00.000+05:30\",\n      \"students\": [\n        {\n          \"registration_no\": \"7\",\n          \"roll_no\": 7,\n          \"name\": \"Trenton Haley\"\n        },\n        {\n          \"registration_no\": \"8\",\n          \"roll_no\": 8,\n          \"name\": \"Elton Champlin\"\n        },\n        {\n          \"registration_no\": \"9\",\n          \"roll_no\": 9,\n          \"name\": \"Gaye Schulist\"\n        }\n      ]\n    },\n    {\n      \"id\": 4,\n      \"standard\": \"13\",\n      \"section\": \"A\",\n      \"start_time\": \"2000-01-02T00:00:00.000+05:30\",\n      \"students\": [\n        {\n          \"registration_no\": \"10\",\n          \"roll_no\": 10,\n          \"name\": \"Marquitta Herzog\"\n        },\n        {\n          \"registration_no\": \"11\",\n          \"roll_no\": 11,\n          \"name\": \"Jonelle Larkin\"\n        },\n        {\n          \"registration_no\": \"12\",\n          \"roll_no\": 12,\n          \"name\": \"Levi Cartwright\"\n        }\n      ]\n    }\n  ]\n}",
       "response_headers": {
         "X-Frame-Options": "SAMEORIGIN",
         "X-XSS-Protection": "1; mode=block",
@@ -45,12 +40,12 @@
         "X-Permitted-Cross-Domain-Policies": "none",
         "Referrer-Policy": "strict-origin-when-cross-origin",
         "Content-Type": "application/json; charset=utf-8",
-        "ETag": "W/\"3455b8f48502381bb94419e4d2ca3786\"",
+        "ETag": "W/\"26ffed4affa01ad64f694aad510a0e37\"",
         "Cache-Control": "max-age=0, private, must-revalidate",
-        "X-Request-Id": "17c38031-176f-4f25-b6ec-1c753ecf639f",
-        "X-Runtime": "0.047797",
+        "X-Request-Id": "f350e9a8-8ca5-45e7-a115-8d0c5067db0a",
+        "X-Runtime": "0.050483",
         "Vary": "Origin",
-        "Content-Length": "1535"
+        "Content-Length": "1550"
       },
       "response_content_type": "application/json; charset=utf-8",
       "curl": null

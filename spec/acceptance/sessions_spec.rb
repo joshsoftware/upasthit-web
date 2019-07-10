@@ -11,7 +11,6 @@ resource "Sessions" do
 
   get "v1/staffs/sync", document: :v1 do
     parameter :mobile_number, "Mobile number of staff", required: true
-    parameter :pin, "4 digit PIN"
     let!(:mobile_number) { staff_1.mobile_number }
     let!(:pin) { staff_1.pin }
     let(:raw_post) { params.to_json }
