@@ -22,7 +22,7 @@ module Api
         end
 
         def staff_params
-          params.permit(:id, :mobile_number, :pin)
+          params.permit(:id, :mobile_number)
         end
       end
     end
