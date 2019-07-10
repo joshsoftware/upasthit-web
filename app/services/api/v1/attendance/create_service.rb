@@ -58,7 +58,7 @@ module Api
         def send_sms(absent_student_attendance_ids)
           return true unless absent_student_attendance_ids.present?
 
-          SendSmsService.call(absent_student_attendance_ids)
+          SendSmsJob.perform_later(absent_student_attendance_ids)
         end
 
         def present_student_count(present=true)
