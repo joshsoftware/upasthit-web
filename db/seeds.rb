@@ -11,17 +11,17 @@
 school1 = School.find_or_create_by(name: "Delhi Public School", school_code: "1000")
 school2 = School.find_or_create_by(name: "Agra Public School", school_code: "1001")
 staff1 = Staff.find_or_create_by(mobile_number: "9876543210", designation: "Admin", school_id: school1.id,
-                registration_no: 1, pin: "1221") do |staff|
+                registration_no: 1, pin: "1221", name: "Suhana Sharma") do |staff|
   staff.password = "12345678"
   staff.password_confirmation = "12345678"
 end
-staff2 = Staff.find_or_create_by(mobile_number: "999882311", designation: "ClassTeacher", school_id: school1.id,
-                registration_no: 2, pin: "1441") do |staff|
+staff2 = Staff.find_or_create_by(mobile_number: "9998823112", designation: "ClassTeacher", school_id: school1.id,
+                registration_no: 2, pin: "1441", name: "Aman Singh") do |staff|
   staff.password = "12345678"
   staff.password_confirmation = "12345678"
 end
-staff3 = Staff.find_or_create_by(mobile_number: "999882312", designation: "ClassTeacher", school_id: school2.id,
-                registration_no: 3, pin: "1551") do |staff|
+staff3 = Staff.find_or_create_by(mobile_number: "9998823122", designation: "ClassTeacher", school_id: school2.id,
+                registration_no: 3, pin: "1551", name: "Priya Chopra") do |staff|
   staff.password = "12345678"
   staff.password_confirmation = "12345678"
 end
@@ -38,7 +38,7 @@ standard4 = Standard.find_or_create_by!(standard: "4", section: "A", school_id: 
 standard4.staffs << staff3
 standard4.staffs << staff3
 
-Student.find_by(name: "Amit Kumar", registration_no: "100", roll_no: "1", dob: Time.zone.parse("01-11-1996"),
+Student.find_or_create_by(name: "Amit Kumar", registration_no: "100", roll_no: "1", dob: Time.zone.parse("01-11-1996"),
                          guardian_name: "Ashok Kumar", preferred_language: "en", guardian_mobile_no: "7798845221",
                          school_id: school1.id, standard_id: standard1.id, gender: "male")
 Student.find_or_create_by!(name: "Preethi Reddy", registration_no: "101", roll_no: "2", dob: Time.zone.parse("02-11-1996"),
