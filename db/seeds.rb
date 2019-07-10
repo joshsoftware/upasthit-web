@@ -38,7 +38,7 @@ standard4 = Standard.find_or_create_by!(standard: "4", section: "A", school_id: 
 standard4.staffs << staff3
 standard4.staffs << staff3
 
-Student.find_by(name: "Amit Kumar", registration_no: "100", roll_no: "1", dob: Time.zone.parse("01-11-1996"),
+Student.find_or_create_by(name: "Amit Kumar", registration_no: "100", roll_no: "1", dob: Time.zone.parse("01-11-1996"),
                          guardian_name: "Ashok Kumar", preferred_language: "en", guardian_mobile_no: "7798845221",
                          school_id: school1.id, standard_id: standard1.id, gender: "male")
 Student.find_or_create_by!(name: "Preethi Reddy", registration_no: "101", roll_no: "2", dob: Time.zone.parse("02-11-1996"),
