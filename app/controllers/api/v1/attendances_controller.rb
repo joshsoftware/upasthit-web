@@ -3,8 +3,7 @@
 module Api
   module V1
     class AttendancesController < V1::BaseController
-      before_action :validate_message, only: :sms_callback
-      before_action :validate_authorized_sender, only: :sms_callback
+      before_action :validate_message, :validate_authorized_sender, only: :sms_callback
 
       def create
         if create_service(attendance_params).create
