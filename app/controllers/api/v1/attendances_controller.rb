@@ -4,6 +4,7 @@ module Api
   module V1
     class AttendancesController < V1::BaseController
       before_action :validate_message, only: :sms_callback
+      before_action :validate_authorized_sender, only: :sms_callback
 
       def create
         if create_service(attendance_params).create
@@ -14,15 +15,11 @@ module Api
       end
 
       def sms_callback
-        if params[:sender] == Figaro.env.AUTHORISED_SENDER
-          sms_callback_params = parse_message
-          if create_service(sms_callback_params).create
-            render json: create_service.result
-          else
-            render json: {errors: create_service.errors.messages}, status: 400
-          end
+        sms_callback_params = parse_message
+        if create_service(sms_callback_params).create
+          render json: create_service.result
         else
-          render_error(message: I18n.t("error.not_trusted_sender"), status: :unprocessable_entity)
+          render json: {errors: create_service.errors.messages}, status: 400
         end
       end
 
@@ -34,6 +31,12 @@ module Api
 
       def attendance_params
         params.permit(:standard, :school_code, :date, :section, absent_roll_nos: [])
+      end
+
+      def validate_authorized_sender
+        return true if params[:sender] == Figaro.env.AUTHORISED_SENDER
+
+        render json: {message: I18n.t("error.not_trusted_sender")}, status: 422
       end
 
       def validate_message
