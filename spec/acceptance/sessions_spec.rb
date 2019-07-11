@@ -6,8 +6,8 @@ require "rspec_api_documentation/dsl"
 resource "Sessions" do
   header "Content-Type", "application/json"
   let(:school) { create(:school) }
-  let!(:staff_1) { create(:staff_with_standards, school_id: school.id) }
-  let!(:staff_2) { create(:staff_with_standards, school_id: school.id) }
+  let(:staff_1) { create(:staff_with_standards, school_id: school.id) }
+  let(:staff_2) { create(:staff_with_standards, school_id: school.id) }
 
   get "v1/staffs/sync", document: :v1 do
     parameter :mobile_number, "Mobile number of staff", required: true
