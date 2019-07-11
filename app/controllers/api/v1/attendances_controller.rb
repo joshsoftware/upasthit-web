@@ -3,7 +3,7 @@
 module Api
   module V1
     class AttendancesController < V1::BaseController
-      before_action :validate_message, :validate_authorized_sender, only: :sms_callback
+      before_action :validate_authorized_sender, :validate_message, only: :sms_callback
 
       def create
         if create_service(attendance_params).create
@@ -40,7 +40,7 @@ module Api
 
       def validate_message
         message = params[:comments]
-        return true if message.match?(%r{^\d{1,2}/\d{1,2}/\d{4}\s\d*\s\d{1,2}(-\w)*(\s[\d\s\d])*\z})
+        return true if message.match?(%r{^\d{1,2}\/\d{1,2}\/\d{4}\s\d*\s\d{1,2}(-\w)*(\s[\d\s\d]{1,2})*\z})
 
         render json: {message: I18n.t("sms.invalid_message")}, status: 422
       end

@@ -68,12 +68,14 @@ module Api
         end
 
         def store_failed_message_data
+          attendance.update_column(:sms_sent, false)
           @defaulters.push(student_data)
         end
 
         def notify_admin
-          attendance.update_column(:sms_sent, false)
-          @admin ||= attendance.school.staffs.select(&:admin?).first
+          return true unless @defaulters.present?
+
+          @admin ||= @attendances.first.school.staffs.select(&:admin?).first
           send_sms(@admin[:mobile_number], message_to_admin)
         end
 
