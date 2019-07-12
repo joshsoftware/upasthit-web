@@ -8,8 +8,18 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-school1 = School.find_or_create_by(name: "Delhi Public School", school_code: "1000")
-school2 = School.find_or_create_by(name: "Agra Public School", school_code: "1001")
+school1 = School.find_or_create_by(name: "Delhi Public School", school_code: "1000",
+                                   contact_number: "98792873823", email: "dps@gmail.org")
+school2 = School.find_or_create_by(name: "Agra Public School", school_code: "1001",
+                                   contact_number: "98792873822", email: "aps@gmail.org")
+
+School.find_each do |school|
+  SchoolTiming.days.keys.each do |day|
+    SchoolTiming.create(start_time: "08:00:00", close_time: "14:00:00", school_id: school.id,
+     day: day, reminder_time: "10:00:00")
+  end
+end
+
 staff1 = Staff.find_or_create_by(mobile_number: "9876543210", designation: "Admin", school_id: school1.id,
                 registration_no: 1, pin: "1221", first_name: "Suhana", last_name: "Sharma") do |staff|
   staff.password = "12345678"
