@@ -10,7 +10,7 @@ RSpec.describe Staff, type: :model do
     expect(staff).to be_valid
   end
 
-  it "has english has default preferred language" do
+  it "has english as default preferred language" do
     expect(staff.preferred_language).to eq "en"
   end
 
