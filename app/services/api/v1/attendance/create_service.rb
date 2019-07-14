@@ -19,7 +19,7 @@ module Api
           return false unless valid?
 
           mark_attendance &&
-          send_sms(@absent_student_attendance_ids) &&
+          send_sms(absent_student_attendance_ids) &&
           set_result
         end
 
@@ -29,7 +29,7 @@ module Api
 
         def mark_attendance
           student_ids ||= @standard.students.pluck(:id)
-          attendances = student_ids.map do |student_id|
+          @attendances ||= student_ids.map do |student_id|
             ::Attendance.where(
               date:        date,
               school_id:   school_id,
@@ -39,11 +39,11 @@ module Api
               attendance.update_attribute(:present, !absent_student_ids.include?(student_id))
             end
           end
-          @absent_student_attendance_ids = attendances.map do |attendance|
-            attendance.id if absent_student_ids.include?(attendance.student_id) && attendance.date == date
-          end
-          @absent_student_attendance_ids.compact!
           mark_standard_attendance
+        end
+
+        def absent_student_attendance_ids
+          @absent_student_attendance_ids ||= @attendances.select {|attendance| absent_student_ids.include?(attendance.student.id) }.map(&:id)
         end
 
         def mark_standard_attendance
