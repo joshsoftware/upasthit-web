@@ -15,7 +15,7 @@ school2 = School.find_or_create_by(name: "Agra Public School", school_code: "100
 
 School.find_each do |school|
   SchoolTiming.days.keys.each do |day|
-    SchoolTiming.create(start_time: "08:00:00", close_time: "14:00:00", school_id: school.id,
+    SchoolTiming.find_or_create_by(start_time: "08:00:00", close_time: "14:00:00", school_id: school.id,
      day: day, reminder_time: "10:00:00")
   end
 end
