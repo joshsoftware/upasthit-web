@@ -1,12 +1,10 @@
 # frozen_string_literal: true
 
-namespace :shedule do
-  desc "shedule alerts"
+namespace :schedule do
+  desc "schedule admin alerts"
   task alerts: :environment do
-    Standard.find_each do |standard|
-      wait_time = school.start_time + 2.hours
-
-      AlertJob.set(wait_until: wait_time).perform_later(standard, Date.today)
+    School.each do |school|
+      AlertJob.perform_later(school.id, Date.today)
     end
   end
 end

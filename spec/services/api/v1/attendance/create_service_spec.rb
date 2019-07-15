@@ -34,13 +34,6 @@ RSpec.describe Api::V1::Attendance::CreateService do
       expect(absentee_attendance.count).to eq 1
       expect(absentee_attendance.pluck(:student_id)).to include(students.first.id)
     end
-
-    it "enques job to send sms to absent students parents" do
-      ActiveJob::Base.queue_adapter = :test
-      expect {
-        service.new(valid_params).create
-      }.to have_enqueued_job(SendSmsJob)
-    end
   end
 
   context "Fails when" do

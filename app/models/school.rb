@@ -27,4 +27,8 @@ class School < ApplicationRecord
       except: %i[created_at updated_at address close_time]
     )
   end
+
+  def admin
+    staffs.select(&:admin?).first
+  end
 end

@@ -3,9 +3,12 @@
 class AlertJob
   include Sidekiq::Worker
 
-  sidekiq_options retry: false
+  sidekiq_options retry: 3
 
-  def perform(standard, date)
-    Attendance::AdminAlertSms.call(standard.id) unless Attendance.where(date: date, standard_id: standard.id).exists?
+  def perform(school_id, date)
+    serv = Api::V1::Attendance::NotifyAdminService.new(school_id, date)
+    return true if serv.call
+
+    Rails.logger.error("NotifyParentsService: Failed #{serv.formatted_errors}")
   end
 end
