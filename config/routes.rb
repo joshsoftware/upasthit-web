@@ -17,6 +17,7 @@ Rails.application.routes.draw do
     resources :attendances, only: [:create] do
       collection do
         post :sms_callback
+        get  :sync
       end
     end
     resources :students, only: [:index]
