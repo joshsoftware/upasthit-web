@@ -6,7 +6,8 @@ FactoryBot.define do
     sequence(:roll_no) {|n| n }
     gender { FFaker::Gender.random }
     dob { FFaker::Time.date }
-    name { FFaker::Name.name }
+    first_name { FFaker::Name.first_name }
+    last_name { FFaker::Name.last_name }
     guardian_name { FFaker::Name.name }
     guardian_mobile_no { "91728971277" }
     preferred_language { "en" }

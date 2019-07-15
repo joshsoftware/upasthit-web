@@ -3,7 +3,6 @@
 FactoryBot.define do
   factory :standard do
     sequence(:standard, 10) {|n| n }
-    start_time { FFaker::Time.date }
     association :school
     section { "A" }
     factory :standard_with_students do

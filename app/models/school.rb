@@ -21,10 +21,12 @@ class School < ApplicationRecord
   has_many :standards, class_name: "Standard"
   has_many :standard_attendances, class_name: "StandardAttendance"
   has_many :staffs, class_name: "Staff"
+  has_many :timings, class_name: "SchoolTiming"
 
   def in_json
     as_json(
-      except: %i[created_at updated_at address close_time]
+      except:  %i[created_at updated_at address close_time],
+      include: [timings: {only: %i[start_time close_time reminder_time day]}]
     )
   end
 end

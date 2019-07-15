@@ -4,6 +4,7 @@ FactoryBot.define do
   factory :school do
     school_code { "1001" }
     name { FFaker::Education.school }
-    start_time { FFaker::Time.date }
+    email { FFaker::Internet.email }
+    contact_number { "91728971277" }
   end
 end
