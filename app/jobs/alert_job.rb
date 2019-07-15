@@ -9,6 +9,6 @@ class AlertJob
     serv = Api::V1::Attendance::NotifyAdminService.new(school_id, date)
     return true if serv.call
 
-    Rails.logger.error("NotifyParentsService: Failed #{serv.formatted_errors}")
+    Rails.logger.error("NotifyAdminService: Failed #{serv.formatted_errors}")
   end
 end
