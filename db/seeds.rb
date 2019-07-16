@@ -57,5 +57,14 @@ Student.find_or_create_by!(first_name: "Preethi", last_name: "Reddy", registrati
 Student.find_or_create_by!(first_name: "Kabir", last_name: "Singh", registration_no: "108", roll_no: "3", dob: Time.zone.parse("21-11-1996"),
                          guardian_name: "Ashok Singh", preferred_language: "en", guardian_mobile_no: "7798845221",
                          school_id: school2.id, standard_id: standard4.id, gender: "male")
-
+Attendance.find_or_create_by(present: true, date: DateTime.now - 1.month, student_id: Student.first.id,
+                            standard_id: Student.first.standard_id, school_id: Student.first.school_id)
+Attendance.find_or_create_by(present: true, date: DateTime.now - 2.month, student_id: Student.first.id,
+                            standard_id: Student.first.standard_id, school_id: Student.first.school_id)
+Attendance.find_or_create_by(present: true, date: DateTime.now - 1.month, student_id: Student.second.id,
+                            standard_id: Student.second.standard_id, school_id: Student.second.school_id)
+Attendance.find_or_create_by(present: true, date: DateTime.now - 5.days, student_id: Student.first.id,
+                            standard_id: Student.first.standard_id, school_id: Student.first.school_id)
+Attendance.find_or_create_by(present: true, date: DateTime.now - 2.days, student_id: Student.first.id,
+                            standard_id: Student.first.standard_id, school_id: Student.first.school_id)
 p "Seed completed sucessfully"
