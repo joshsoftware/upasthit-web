@@ -26,12 +26,12 @@ module Api
         def find_attendances
           attendances ||= ::Attendance.where("school_id = ? AND date > ?", school_id, date)
           @attendances = attendances.each_with_object({}) do |c, h|
-            (h[c.date] ||= []).push(
-              id:          c.id,
-              present:     c.present,
-              standard_id: c.standard_id,
-              student_id:  c.student_id,
-              sms_sent:    c.sms_sent
+            (h[c.standard_id] ||= []).push(
+              id:         c.id,
+              date:       c.date,
+              present:    c.present,
+              student_id: c.student_id,
+              sms_sent:   c.sms_sent
             )
           end
         end
