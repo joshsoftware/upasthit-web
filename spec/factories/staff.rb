@@ -7,7 +7,8 @@ FactoryBot.define do
     sequence(:registration_no) {|n| n }
     designation { "ClassTeacher" }
     pin { "1212" }
-    name { FFaker::Name.name }
+    first_name { FFaker::Name.first_name }
+    last_name { FFaker::Name.last_name }
     association :school
     factory :staff_with_standards do
       after(:create) do |staff|

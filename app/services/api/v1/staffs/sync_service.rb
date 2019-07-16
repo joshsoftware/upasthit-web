@@ -49,11 +49,25 @@ module Api
           school.staffs.all.includes(:standards)
         end
 
+        def attendances
+          attendances = Attendance.where("date BETWEEN ? AND ?", DateTime.now.beginning_of_month, DateTime.now.end_of_day).all
+          attendances.each_with_object({}) do |c, h|
+            (h[c.standard_id] ||= []).push(
+              id:         c.id,
+              date:       c.date,
+              present:    c.present,
+              student_id: c.student_id,
+              sms_sent:   c.sms_sent
+            )
+          end
+        end
+
         def set_result
           @result = {
-            school:   school.in_json,
-            staff:    school_staffs.map(&:in_json),
-            standard: standards.map(&:in_json)
+            school:      school.in_json,
+            staff:       school_staffs.map(&:in_json),
+            standard:    standards.map(&:in_json),
+            attendances: attendances
           }
         end
       end

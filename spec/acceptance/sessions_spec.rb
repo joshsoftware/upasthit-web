@@ -9,6 +9,12 @@ resource "Sessions" do
   let(:staff_1) { create(:staff_with_standards, school_id: school.id) }
   let(:staff_2) { create(:staff_with_standards, school_id: school.id) }
 
+  before do
+    SchoolTiming.days.keys.each do |day|
+      FactoryBot.create(:school_timing, school_id: school.id, day: day)
+    end
+  end
+
   get "v1/staffs/sync", document: :v1 do
     parameter :mobile_number, "Mobile number of staff", required: true
     let!(:mobile_number) { staff_1.mobile_number }

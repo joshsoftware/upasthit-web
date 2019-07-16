@@ -40,6 +40,7 @@ class Staff < ApplicationRecord
   validates :designation, inclusion: {in: Staff.designations}
 
   delegate :admin?, :class_teacher?, to: :designation_enquiry
+  validates :preferred_language, inclusion: {in: %w[en mr-IN hi-IN]}
 
   def designation_enquiry
     designation.to_s.underscore.inquiry
