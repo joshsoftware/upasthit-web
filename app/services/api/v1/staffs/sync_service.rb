@@ -50,7 +50,7 @@ module Api
         end
 
         def attendances
-          attendances ||= Attendance.where("date BETWEEN ? AND ?", DateTime.now.beginning_of_month, DateTime.now.end_of_day).all
+          attendances = Attendance.where("date BETWEEN ? AND ?", DateTime.now.beginning_of_month, DateTime.now.end_of_day).all
           attendances.each_with_object({}) do |c, h|
             (h[c.standard_id] ||= []).push(
               id:         c.id,
