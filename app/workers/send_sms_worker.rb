@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class SendSmsJob
+class SendSmsWorker
   include Sidekiq::Worker
   sidekiq_options retry: 3
 
@@ -19,7 +19,9 @@ class SendSmsJob
   def update_attendance(attendance_id)
     status = JSON.parse(@response.body)["status"]
     attendance = Attendance.find(attendance_id)
-    sms_sent = (status == "success")
+    sms_sent_status = (status == "success")
+    raise StandardError unless sms_sent_status == true
+
     attendance.update_column(:sms_sent, sms_sent)
   end
 end

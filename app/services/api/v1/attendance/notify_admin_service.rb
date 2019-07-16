@@ -40,7 +40,7 @@ module Api
         def send_sms(mobile_number, message)
           return unless defaulters.present?
 
-          SendSmsJob.perform_async(mobile_number, message, true)
+          SendSmsWorker.perform_async(mobile_number, message, true)
         end
       end
     end

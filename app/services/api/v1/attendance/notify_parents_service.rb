@@ -12,19 +12,17 @@ module Api
           @defaulters = []
           data = attendances.where(sms_sent: [false, nil]).map do |attendance|
             {
-              roll_no:                 attendance.student.roll_no,
-              guardian_mobile_number:  attendance.student.guardian_mobile_no,
-              alternate_mobile_number: attendance.student.guardian_alternate_mobile_no,
-              name_en:                 attendance.student.name_en,
-              name_mr_in:              attendance.student.name_mr_in,
-              attendance_id:           attendance.id,
-              preferred_language:      attendance.student.preferred_language
+              roll_no:            attendance.student.roll_no,
+              student_id:         attendance.student.id,
+              name_en:            attendance.student.name_en,
+              name_mr_in:         attendance.student.name_mr_in,
+              attendance_id:      attendance.id,
+              preferred_language: attendance.student.preferred_language
             }
           end
           data.each do |student_data|
             @student_data = student_data
-            send_sms(student_data[:guardian_mobile_number], message_to_parents)
-            send_sms(student_data[:guardian_alternate_mobile_no], message_to_parents)
+            send_sms(student_data[:student_id], message_to_parents)
           end
         end
 
@@ -47,17 +45,17 @@ module Api
         end
 
         def attendance
-          @attendance ||= ::Attendance.includes(:standard).find(student_data[:attendance_id])
+          @attendance = ::Attendance.includes(:standard).find(student_data[:attendance_id])
         end
 
         def school_id
           @school_id ||= attendance.school_id
         end
 
-        def send_sms(mobile_number, message)
+        def send_sms(student_id, message)
           return if attendance.sms_sent?
 
-          SendSmsJob.perform_async(mobile_number, message, false, attendance.id)
+          SendSmsOnParentPrimaryNumberWorker.perform_async(student_id, message, attendance.id)
         end
       end
     end
