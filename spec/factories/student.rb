@@ -13,5 +13,11 @@ FactoryBot.define do
     preferred_language { "en" }
     association :school
     association :standard
+    factory :student_with_attendances do
+      after(:create) do |student|
+        create(:attendance, school_id: student.school_id, student_id: student.id,
+                 standard_id: student.standard_id, date: DateTime.now)
+      end
+    end
   end
 end
