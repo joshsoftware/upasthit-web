@@ -23,7 +23,7 @@
   "requests": [
     {
       "request_method": "GET",
-      "request_path": "v1/attendances/sync?date=2018-12-16T13%3A32%3A36%2B05%3A30&school_id=1",
+      "request_path": "v1/attendances/sync?date=2018-12-16T14%3A25%3A26%2B05%3A30&school_id=1",
       "request_body": null,
       "request_headers": {
         "Content-Type": "application/json",
@@ -31,13 +31,13 @@
         "Cookie": ""
       },
       "request_query_parameters": {
-        "date": "2018-12-16T13:32:36+05:30",
+        "date": "2018-12-16T14:25:26+05:30",
         "school_id": "1"
       },
       "request_content_type": "application/json",
       "response_status": 200,
       "response_status_text": "OK",
-      "response_body": "{\n  \"attendances\": {\n    \"1\": [\n      {\n        \"id\": 1,\n        \"date\": \"2019-07-16T13:32:35.782+05:30\",\n        \"present\": false,\n        \"student_id\": 1,\n        \"sms_sent\": false\n      },\n      {\n        \"id\": 2,\n        \"date\": \"2019-07-16T13:32:35.831+05:30\",\n        \"present\": false,\n        \"student_id\": 2,\n        \"sms_sent\": false\n      },\n      {\n        \"id\": 3,\n        \"date\": \"2019-07-16T13:32:35.861+05:30\",\n        \"present\": false,\n        \"student_id\": 3,\n        \"sms_sent\": false\n      }\n    ],\n    \"2\": [\n      {\n        \"id\": 4,\n        \"date\": \"2019-07-16T13:32:35.882+05:30\",\n        \"present\": false,\n        \"student_id\": 4,\n        \"sms_sent\": false\n      },\n      {\n        \"id\": 5,\n        \"date\": \"2019-07-16T13:32:35.895+05:30\",\n        \"present\": false,\n        \"student_id\": 5,\n        \"sms_sent\": false\n      },\n      {\n        \"id\": 6,\n        \"date\": \"2019-07-16T13:32:35.906+05:30\",\n        \"present\": false,\n        \"student_id\": 6,\n        \"sms_sent\": false\n      }\n    ],\n    \"3\": [\n      {\n        \"id\": 7,\n        \"date\": \"2019-07-16T13:32:35.934+05:30\",\n        \"present\": false,\n        \"student_id\": 7,\n        \"sms_sent\": false\n      },\n      {\n        \"id\": 8,\n        \"date\": \"2019-07-16T13:32:35.948+05:30\",\n        \"present\": false,\n        \"student_id\": 8,\n        \"sms_sent\": false\n      },\n      {\n        \"id\": 9,\n        \"date\": \"2019-07-16T13:32:35.960+05:30\",\n        \"present\": false,\n        \"student_id\": 9,\n        \"sms_sent\": false\n      }\n    ],\n    \"4\": [\n      {\n        \"id\": 10,\n        \"date\": \"2019-07-16T13:32:35.980+05:30\",\n        \"present\": false,\n        \"student_id\": 10,\n        \"sms_sent\": false\n      },\n      {\n        \"id\": 11,\n        \"date\": \"2019-07-16T13:32:35.991+05:30\",\n        \"present\": false,\n        \"student_id\": 11,\n        \"sms_sent\": false\n      },\n      {\n        \"id\": 12,\n        \"date\": \"2019-07-16T13:32:36.008+05:30\",\n        \"present\": false,\n        \"student_id\": 12,\n        \"sms_sent\": false\n      }\n    ]\n  }\n}",
+      "response_body": "{\n  \"attendances\": {\n    \"1\": [\n      {\n        \"id\": 1,\n        \"date\": \"2019-07-16T14:25:26.216+05:30\",\n        \"present\": false,\n        \"student_id\": 1,\n        \"sms_sent\": false\n      },\n      {\n        \"id\": 2,\n        \"date\": \"2019-07-16T14:25:26.239+05:30\",\n        \"present\": false,\n        \"student_id\": 2,\n        \"sms_sent\": false\n      },\n      {\n        \"id\": 3,\n        \"date\": \"2019-07-16T14:25:26.250+05:30\",\n        \"present\": false,\n        \"student_id\": 3,\n        \"sms_sent\": false\n      }\n    ],\n    \"2\": [\n      {\n        \"id\": 4,\n        \"date\": \"2019-07-16T14:25:26.268+05:30\",\n        \"present\": false,\n        \"student_id\": 4,\n        \"sms_sent\": false\n      },\n      {\n        \"id\": 5,\n        \"date\": \"2019-07-16T14:25:26.278+05:30\",\n        \"present\": false,\n        \"student_id\": 5,\n        \"sms_sent\": false\n      },\n      {\n        \"id\": 6,\n        \"date\": \"2019-07-16T14:25:26.289+05:30\",\n        \"present\": false,\n        \"student_id\": 6,\n        \"sms_sent\": false\n      }\n    ],\n    \"3\": [\n      {\n        \"id\": 7,\n        \"date\": \"2019-07-16T14:25:26.313+05:30\",\n        \"present\": false,\n        \"student_id\": 7,\n        \"sms_sent\": false\n      },\n      {\n        \"id\": 8,\n        \"date\": \"2019-07-16T14:25:26.323+05:30\",\n        \"present\": false,\n        \"student_id\": 8,\n        \"sms_sent\": false\n      },\n      {\n        \"id\": 9,\n        \"date\": \"2019-07-16T14:25:26.333+05:30\",\n        \"present\": false,\n        \"student_id\": 9,\n        \"sms_sent\": false\n      }\n    ],\n    \"4\": [\n      {\n        \"id\": 10,\n        \"date\": \"2019-07-16T14:25:26.350+05:30\",\n        \"present\": false,\n        \"student_id\": 10,\n        \"sms_sent\": false\n      },\n      {\n        \"id\": 11,\n        \"date\": \"2019-07-16T14:25:26.372+05:30\",\n        \"present\": false,\n        \"student_id\": 11,\n        \"sms_sent\": false\n      },\n      {\n        \"id\": 12,\n        \"date\": \"2019-07-16T14:25:26.382+05:30\",\n        \"present\": false,\n        \"student_id\": 12,\n        \"sms_sent\": false\n      }\n    ]\n  }\n}",
       "response_headers": {
         "X-Frame-Options": "SAMEORIGIN",
         "X-XSS-Protection": "1; mode=block",
@@ -46,10 +46,10 @@
         "X-Permitted-Cross-Domain-Policies": "none",
         "Referrer-Policy": "strict-origin-when-cross-origin",
         "Content-Type": "application/json; charset=utf-8",
-        "ETag": "W/\"fc7cbf5cda878a26c967e59385d9cc03\"",
+        "ETag": "W/\"bc898dadecebba77545e95232a0ab691\"",
         "Cache-Control": "max-age=0, private, must-revalidate",
-        "X-Request-Id": "d0c191a3-87a0-46c6-912d-db62539217ae",
-        "X-Runtime": "0.014544",
+        "X-Request-Id": "da4b9c61-1f33-4b95-b8e4-8fd424477a62",
+        "X-Runtime": "0.010505",
         "Vary": "Origin",
         "Content-Length": "1199"
       },
