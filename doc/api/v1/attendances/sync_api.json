@@ -1,0 +1,60 @@
+{
+  "resource": "Attendances",
+  "resource_explanation": null,
+  "http_method": "GET",
+  "route": "v1/attendances/sync",
+  "description": "Sync API",
+  "explanation": null,
+  "parameters": [
+    {
+      "required": true,
+      "name": "date",
+      "description": "Start date (end date is current date)"
+    },
+    {
+      "required": true,
+      "name": "school_id",
+      "description": "School ID"
+    }
+  ],
+  "response_fields": [
+
+  ],
+  "requests": [
+    {
+      "request_method": "GET",
+      "request_path": "v1/attendances/sync?date=2018-12-16T12%3A50%3A21%2B05%3A30&school_id=1",
+      "request_body": null,
+      "request_headers": {
+        "Content-Type": "application/json",
+        "Host": "example.org",
+        "Cookie": ""
+      },
+      "request_query_parameters": {
+        "date": "2018-12-16T12:50:21+05:30",
+        "school_id": "1"
+      },
+      "request_content_type": "application/json",
+      "response_status": 200,
+      "response_status_text": "OK",
+      "response_body": "{\n  \"attendances\": {\n    \"1\": [\n      {\n        \"id\": 1,\n        \"date\": \"2019-07-16T12:50:20.881+05:30\",\n        \"present\": false,\n        \"student_id\": 1,\n        \"sms_sent\": false\n      },\n      {\n        \"id\": 2,\n        \"date\": \"2019-07-16T12:50:20.928+05:30\",\n        \"present\": false,\n        \"student_id\": 2,\n        \"sms_sent\": false\n      },\n      {\n        \"id\": 3,\n        \"date\": \"2019-07-16T12:50:20.954+05:30\",\n        \"present\": false,\n        \"student_id\": 3,\n        \"sms_sent\": false\n      }\n    ],\n    \"2\": [\n      {\n        \"id\": 4,\n        \"date\": \"2019-07-16T12:50:20.973+05:30\",\n        \"present\": false,\n        \"student_id\": 4,\n        \"sms_sent\": false\n      },\n      {\n        \"id\": 5,\n        \"date\": \"2019-07-16T12:50:20.985+05:30\",\n        \"present\": false,\n        \"student_id\": 5,\n        \"sms_sent\": false\n      },\n      {\n        \"id\": 6,\n        \"date\": \"2019-07-16T12:50:20.996+05:30\",\n        \"present\": false,\n        \"student_id\": 6,\n        \"sms_sent\": false\n      }\n    ],\n    \"3\": [\n      {\n        \"id\": 7,\n        \"date\": \"2019-07-16T12:50:21.022+05:30\",\n        \"present\": false,\n        \"student_id\": 7,\n        \"sms_sent\": false\n      },\n      {\n        \"id\": 8,\n        \"date\": \"2019-07-16T12:50:21.033+05:30\",\n        \"present\": false,\n        \"student_id\": 8,\n        \"sms_sent\": false\n      },\n      {\n        \"id\": 9,\n        \"date\": \"2019-07-16T12:50:21.044+05:30\",\n        \"present\": false,\n        \"student_id\": 9,\n        \"sms_sent\": false\n      }\n    ],\n    \"4\": [\n      {\n        \"id\": 10,\n        \"date\": \"2019-07-16T12:50:21.062+05:30\",\n        \"present\": false,\n        \"student_id\": 10,\n        \"sms_sent\": false\n      },\n      {\n        \"id\": 11,\n        \"date\": \"2019-07-16T12:50:21.073+05:30\",\n        \"present\": false,\n        \"student_id\": 11,\n        \"sms_sent\": false\n      },\n      {\n        \"id\": 12,\n        \"date\": \"2019-07-16T12:50:21.084+05:30\",\n        \"present\": false,\n        \"student_id\": 12,\n        \"sms_sent\": false\n      }\n    ]\n  }\n}",
+      "response_headers": {
+        "X-Frame-Options": "SAMEORIGIN",
+        "X-XSS-Protection": "1; mode=block",
+        "X-Content-Type-Options": "nosniff",
+        "X-Download-Options": "noopen",
+        "X-Permitted-Cross-Domain-Policies": "none",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "Content-Type": "application/json; charset=utf-8",
+        "ETag": "W/\"56c8e1d9b724d3cbcd9b132ff9d80ad9\"",
+        "Cache-Control": "max-age=0, private, must-revalidate",
+        "X-Request-Id": "11381b14-75ab-4d50-920c-5df2c0380b6d",
+        "X-Runtime": "0.010765",
+        "Vary": "Origin",
+        "Content-Length": "1199"
+      },
+      "response_content_type": "application/json; charset=utf-8",
+      "curl": null
+    }
+  ]
+}
