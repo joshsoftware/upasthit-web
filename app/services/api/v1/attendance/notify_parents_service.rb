@@ -14,8 +14,10 @@ module Api
             {
               roll_no:            attendance.student.roll_no,
               student_id:         attendance.student.id,
-              name_en:            attendance.student.name_en,
-              name_mr_in:         attendance.student.name_mr_in,
+              first_name_en:      attendance.student.first_name_en,
+              first_name_mr_in:   attendance.student.first_name_mr_in,
+              last_name_en:       attendance.student.last_name_en,
+              last_name_mr_in:    attendance.student.last_name_mr_in,
               attendance_id:      attendance.id,
               preferred_language: attendance.student.preferred_language
             }
@@ -36,8 +38,9 @@ module Api
 
         def message_to_parents
           I18n.locale = preferred_language.to_sym
-          name = ("name_" + preferred_language.underscore).to_sym
-          "#{student_data[name]}#{I18n.translate('sms.absent')}\n"
+          first_name = ("first_name_" + preferred_language.underscore).to_sym
+          last_name = ("last_name_" + preferred_language.underscore).to_sym
+          "#{student_data[first_name]} #{student_data[last_name]}#{I18n.translate('sms.absent')}\n"
         end
 
         def preferred_language
