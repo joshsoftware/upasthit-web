@@ -25,15 +25,10 @@ module Api
         private
 
         def find_attendances
-          attendances ||= ::Attendance.where("school_id = ? AND date > ?", school_id, date)
-          @attendances = attendances.each_with_object({}) do |c, h|
-            (h[c.standard_id] ||= []).push(
-              id:         c.id,
-              date:       c.date,
-              present:    c.present,
-              student_id: c.student_id,
-              sms_sent:   c.sms_sent
-            )
+          @attendances = {}
+          ::Attendance.where("school_id = ? AND date > ?", school_id, date)
+                      .group_by(&:standard_id).each do |standard_id, attendances|
+            @attendances[standard_id] = attendances.map(&:in_json)
           end
         end
 
