@@ -35,4 +35,11 @@ RSpec.describe SendSmsWorker, type: :worker do
       expect { SendSmsWorker.new.perform(student.guardian_mobile_no, "message", false, attendance_1.id) }.to_not raise_error StandardError
     end
   end
+
+  it "calls SendSmsService to send sms" do
+    allow_any_instance_of(SendSmsService).to receive(:sms_sent?).and_return(true)
+    allow_any_instance_of(SendSmsService).to receive(:call).and_return(true)
+    expect_any_instance_of(SendSmsService).to receive(:call).and_return true
+    SendSmsWorker.new.perform(student.guardian_mobile_no, "message", false, attendance_1.id)
+  end
 end
