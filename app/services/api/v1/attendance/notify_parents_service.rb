@@ -24,7 +24,7 @@ module Api
           end
           data.each do |student_data|
             @student_data = student_data
-            send_sms(student_data[:student_id], message_to_parents)
+            send_sms(message_to_parents)
           end
         end
 
@@ -55,10 +55,10 @@ module Api
           @school_id ||= attendance.school_id
         end
 
-        def send_sms(student_id, message)
+        def send_sms(message)
           return if attendance.sms_sent?
 
-          SendSmsOnParentPrimaryNumberWorker.perform_async(student_id, message, attendance.id)
+          SendSmsOnParentPrimaryNumberWorker.perform_async(attendance.id, message)
         end
       end
     end
