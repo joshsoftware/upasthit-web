@@ -25,11 +25,8 @@ module Api
         private
 
         def find_attendances
-          @attendances = {}
-          ::Attendance.where("school_id = ? AND date > ?", school_id, date)
-                      .group_by(&:standard_id).each do |standard_id, attendances|
-            @attendances[standard_id] = attendances.map(&:in_json)
-          end
+          @attendances = ::Attendance.where("school_id = ? AND date > ?", school_id, date).select(:id,
+                                                                                                  :standard_id, :date, :present, :student_id, :sms_sent).group_by(&:standard_id).as_json
         end
 
         def validate_date
