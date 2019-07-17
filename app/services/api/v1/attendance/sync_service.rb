@@ -5,7 +5,8 @@ module Api
     module Attendance
       class SyncService
         include ActiveModel::Validations
-        validates_presence_of :date, :school_id
+        validates_presence_of :school_id
+        validate :validate_school_id
         validate :validate_date
 
         def initialize(params)
@@ -36,18 +37,27 @@ module Api
           end
         end
 
+        def validate_date
+          return unless date > DateTime.now
+
+          errors.add(:base, "Date cannot be in future")
+          false
+        end
+
+        def validate_school_id
+          school = School.find_by_id(school_id)
+          return if school.present?
+
+          errors.add(:base, "Invalid School ID")
+          false
+        end
+
         def date
-          @date ||= @params[:date]
+          @date ||= Date.parse(@params[:date])
         end
 
         def school_id
           @school_id ||= @params[:school_id]
-        end
-
-        def validate_date
-          Date.parse(@date)
-        rescue StandardError
-          nil
         end
 
         def set_result

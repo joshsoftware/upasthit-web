@@ -43,6 +43,7 @@ en:
     unauthorized: 'You are not authorized to access this page.'
     not_trusted_sender: 'SMS Sender is not authorized'
     absent_date: "Please enter date"
+    date_invalid_format: "Invalid Date"
   attendance:
     created: 'Attendance Created Successfully.'
     failed: 'Unable to create attendance.'
