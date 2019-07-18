@@ -21,7 +21,12 @@ set :output, "/current/log/cron_log.log"
 # end
 
 # Learn more: http://github.com/javan/whenever
-School.all.each do |school|
+
+every :day, at: "12:00 AM" do
+  rake "update:crontab"
+end
+
+School.find_each do |school|
   every :day, at: school.todays_admin_reminder_time do
     rake "schedule:alerts[#{school.id}]", output: {error: "error.log", standard: "cron.log"}
   end
