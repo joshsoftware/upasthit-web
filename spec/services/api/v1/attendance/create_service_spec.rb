@@ -7,7 +7,7 @@ RSpec.describe Api::V1::Attendance::CreateService do
   let!(:staff) { create(:staff, school_id: school.id) }
   let!(:standard) { create(:standard, school_id: school.id) }
   let!(:students) { create_list(:student, 4, school_id: school.id, standard_id: standard.id) }
-  let!(:date) { "12/12/2019" }
+  let!(:date) { (DateTime.now - 1.month).strftime("%d/%m/%Y") }
   let!(:service) { Api::V1::Attendance::CreateService }
 
   context "On success" do

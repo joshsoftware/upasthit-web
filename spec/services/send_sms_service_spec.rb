@@ -7,7 +7,7 @@ RSpec.describe SendSmsService do
   let!(:admin) { create(:staff, school_id: school.id, designation: "Admin") }
   let!(:standard) { create(:standard, school_id: school.id) }
   let!(:student) { create(:student, school_id: school.id, standard_id: standard.id) }
-  let!(:date) { "12/12/2019" }
+  let!(:date) { (DateTime.now - 1.month).strftime("%d/%m/%Y") }
   let!(:service) { SendSmsService }
   let(:attendance_1) {
     create(:attendance, school_id: school.id, standard_id: standard.id,
