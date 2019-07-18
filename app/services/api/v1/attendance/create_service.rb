@@ -11,6 +11,8 @@ module Api
         validate :validate_standard_with_section
         validate :validate_date
 
+        attr_reader :params, :result
+
         def initialize(params={})
           @params = params || {}
         end
@@ -22,8 +24,6 @@ module Api
           send_sms(absent_student_attendance_ids) &&
           set_result
         end
-
-        attr_reader :params, :result
 
         private
 

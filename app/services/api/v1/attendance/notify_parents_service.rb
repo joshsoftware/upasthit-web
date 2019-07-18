@@ -4,6 +4,8 @@ module Api
   module V1
     module Attendance
       class NotifyParentsService
+        attr_reader :student_data
+
         def initialize(absentee_attendance_ids)
           @absentee_attendance_ids = absentee_attendance_ids
         end
@@ -27,8 +29,6 @@ module Api
             send_sms(message_to_parents)
           end
         end
-
-        attr_reader :student_data
 
         private
 

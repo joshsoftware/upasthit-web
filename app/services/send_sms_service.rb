@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class SendSmsService
+  attr_reader :sms_sent
+
   def initialize(mobile_number, message, is_admin, attendance_id={})
     @mobile_number = mobile_number
     @attendance_id = attendance_id
@@ -32,8 +34,6 @@ class SendSmsService
   def sms_sent?
     @sms_sent = JSON.parse(@response.body)["status"] == "success"
   end
-
-  attr_reader :sms_sent
 
   private
 

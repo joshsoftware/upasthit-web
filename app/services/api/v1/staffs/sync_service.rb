@@ -7,6 +7,8 @@ module Api
         include ActiveModel::Validations
         validates :mobile, format: {with: /\A[346789][0-9]{9}\z/}
 
+        attr_reader :result
+
         def initialize(params)
           @params = params
         end
@@ -17,8 +19,6 @@ module Api
           check_staff_present &&
           set_result
         end
-
-        attr_reader :result
 
         private
 
