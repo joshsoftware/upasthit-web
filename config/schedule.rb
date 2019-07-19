@@ -23,32 +23,9 @@ set :output, "/current/log/cron_log.log"
 # Learn more: http://github.com/javan/whenever
 
 School.find_each do |school|
-  every  :monday, at: school.admin_reminder_time("monday") do
-    rake "schedule:alerts[#{school.id}]", output: {error: "error.log", standard: "cron.log"}
-  end
-end
-School.find_each do |school|
-  every :tuesday, at: school.admin_reminder_time("tuesday") do
-    rake "schedule:alerts[#{school.id}]", output: {error: "error.log", standard: "cron.log"}
-  end
-end
-School.find_each do |school|
-  every :wednesday, at: school.admin_reminder_time("wednesday") do
-    rake "schedule:alerts[#{school.id}]", output: {error: "error.log", standard: "cron.log"}
-  end
-end
-School.find_each do |school|
-  every :thursday, at: school.admin_reminder_time("thursday") do
-    rake "schedule:alerts[#{school.id}]", output: {error: "error.log", standard: "cron.log"}
-  end
-end
-School.find_each do |school|
-  every :friday, at: school.admin_reminder_time("friday") do
-    rake "schedule:alerts[#{school.id}]", output: {error: "error.log", standard: "cron.log"}
-  end
-end
-School.find_each do |school|
-  every :saturday, at: school.admin_reminder_time("saturday") do
-    rake "schedule:alerts[#{school.id}]", output: {error: "error.log", standard: "cron.log"}
+  school.timings.find_each do |timing|
+    every timing.day, at: school.admin_reminder_time(timing.day) do
+      rake "schedule:alerts[#{school.id}]", output: {error: "error.log", standard: "cron.log"}
+    end
   end
 end
