@@ -42,34 +42,6 @@ RSpec.describe Api::V1::Attendance::NotifyParentsService do
           expect(attendance[:sms_sent]).to eq true
         end
       end
-
-      context "On failed delivery : " do
-        context "SMS is sent to absentees guardian alternate number, " do
-          context "On sucessful delivery" do
-            let(:attendance) { Attendance.find_by(student_id: absentee.id, date: Time.zone.parse(date)) }
-            before do
-              allow_any_instance_of(service).to receive(:send_sms).and_return(attendance.update_column(:sms_sent, true))
-            end
-            let!(:sms_service_called) { service.new(absent_student_attendance_id) }
-            it "sms_sent is set to true for the student" do
-              sms_service_called.call
-              expect(attendance[:sms_sent]).to eq true
-            end
-          end
-          context "On failed delivery : " do
-            let(:attendance) { Attendance.find_by(student_id: absentee.id, date: Time.zone.parse(date)) }
-            before do
-              allow_any_instance_of(service).to receive(:send_sms).and_return(attendance.update_column(:sms_sent, false))
-            end
-            let!(:sms_service_called) { service.new(absent_student_attendance_id) }
-
-            it "sms_sent is set to false" do
-              sms_service_called.call
-              expect(attendance[:sms_sent]).to eq false
-            end
-          end
-        end
-      end
     end
   end
 end
