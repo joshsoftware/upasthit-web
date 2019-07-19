@@ -22,12 +22,33 @@ set :output, "/current/log/cron_log.log"
 
 # Learn more: http://github.com/javan/whenever
 
-every :day, at: "12:00 AM" do
-  rake "update:crontab"
-end
-
 School.find_each do |school|
-  every :day, at: school.todays_admin_reminder_time do
+  every  :monday, at: school.admin_reminder_time("monday") do
+    rake "schedule:alerts[#{school.id}]", output: {error: "error.log", standard: "cron.log"}
+  end
+end
+School.find_each do |school|
+  every :tuesday, at: school.admin_reminder_time("tuesday") do
+    rake "schedule:alerts[#{school.id}]", output: {error: "error.log", standard: "cron.log"}
+  end
+end
+School.find_each do |school|
+  every :wednesday, at: school.admin_reminder_time("wednesday") do
+    rake "schedule:alerts[#{school.id}]", output: {error: "error.log", standard: "cron.log"}
+  end
+end
+School.find_each do |school|
+  every :thursday, at: school.admin_reminder_time("thursday") do
+    rake "schedule:alerts[#{school.id}]", output: {error: "error.log", standard: "cron.log"}
+  end
+end
+School.find_each do |school|
+  every :friday, at: school.admin_reminder_time("friday") do
+    rake "schedule:alerts[#{school.id}]", output: {error: "error.log", standard: "cron.log"}
+  end
+end
+School.find_each do |school|
+  every :saturday, at: school.admin_reminder_time("saturday") do
     rake "schedule:alerts[#{school.id}]", output: {error: "error.log", standard: "cron.log"}
   end
 end

@@ -34,9 +34,8 @@ class School < ApplicationRecord
     staffs.select(&:admin?).first
   end
 
-  def todays_admin_reminder_time
-    today = SchoolTiming.days.key((Time.now - 1.day).wday)
-    time  = timings.select {|timing| timing.send(today + "?") }.first.reminder_time
+  def admin_reminder_time(day)
+    time = timings.select {|timing| timing.send(day + "?") }.first.reminder_time
     (time + 30.minutes).strftime("%H:%M")
   end
 end
