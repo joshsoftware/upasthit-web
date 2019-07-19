@@ -4,7 +4,7 @@ require "rails_helper"
 
 RSpec.describe Api::V1::Staffs::SessionsController, type: :controller do
   let(:school) { create(:school) }
-  let(:staff) { create(:staff, school_id: school.id) }
+  let(:staff) { create(:staff_with_standards, school_id: school.id) }
 
   describe "GET : sync API" do
     context "On success" do
@@ -14,6 +14,7 @@ RSpec.describe Api::V1::Staffs::SessionsController, type: :controller do
         response_body = JSON.parse(response.body)
         expect(response_body["school"].present?).to eq true
         expect(response_body["staff"].count).to eq 1
+        expect(response_body["attendances"].count).to eq 2
       end
     end
 

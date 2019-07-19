@@ -1,6 +1,19 @@
 {
   "resources": [
     {
+      "name": "Attendances",
+      "explanation": null,
+      "examples": [
+        {
+          "description": "Sync API",
+          "link": "attendances/sync_api.json",
+          "groups": "v1",
+          "route": "v1/attendances/sync",
+          "method": "get"
+        }
+      ]
+    },
+    {
       "name": "Sessions",
       "explanation": null,
       "examples": [

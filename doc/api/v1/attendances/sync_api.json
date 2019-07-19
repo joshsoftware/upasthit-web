@@ -1,0 +1,61 @@
+{
+  "resource": "Attendances",
+  "resource_explanation": null,
+  "http_method": "GET",
+  "route": "v1/attendances/sync",
+  "description": "Sync API",
+  "explanation": null,
+  "parameters": [
+    {
+      "required": true,
+      "example": "01/01/2019",
+      "name": "date",
+      "description": "Start date (end date is current date)"
+    },
+    {
+      "required": true,
+      "name": "school_id",
+      "description": "School ID"
+    }
+  ],
+  "response_fields": [
+
+  ],
+  "requests": [
+    {
+      "request_method": "GET",
+      "request_path": "v1/attendances/sync?date=19%2F06%2F2019&school_id=1",
+      "request_body": null,
+      "request_headers": {
+        "Content-Type": "application/json",
+        "Host": "example.org",
+        "Cookie": ""
+      },
+      "request_query_parameters": {
+        "date": "19/06/2019",
+        "school_id": "1"
+      },
+      "request_content_type": "application/json",
+      "response_status": 200,
+      "response_status_text": "OK",
+      "response_body": "{\n  \"attendances\": {\n    \"1\": [\n      {\n        \"id\": 1,\n        \"date\": \"2019-07-19T14:07:14.728+05:30\",\n        \"present\": false,\n        \"standard_id\": 1,\n        \"student_id\": 1,\n        \"sms_sent\": false\n      },\n      {\n        \"id\": 2,\n        \"date\": \"2019-07-19T14:07:14.753+05:30\",\n        \"present\": false,\n        \"standard_id\": 1,\n        \"student_id\": 2,\n        \"sms_sent\": false\n      },\n      {\n        \"id\": 3,\n        \"date\": \"2019-07-19T14:07:14.765+05:30\",\n        \"present\": false,\n        \"standard_id\": 1,\n        \"student_id\": 3,\n        \"sms_sent\": false\n      }\n    ],\n    \"2\": [\n      {\n        \"id\": 4,\n        \"date\": \"2019-07-19T14:07:14.784+05:30\",\n        \"present\": false,\n        \"standard_id\": 2,\n        \"student_id\": 4,\n        \"sms_sent\": false\n      },\n      {\n        \"id\": 5,\n        \"date\": \"2019-07-19T14:07:14.795+05:30\",\n        \"present\": false,\n        \"standard_id\": 2,\n        \"student_id\": 5,\n        \"sms_sent\": false\n      },\n      {\n        \"id\": 6,\n        \"date\": \"2019-07-19T14:07:14.806+05:30\",\n        \"present\": false,\n        \"standard_id\": 2,\n        \"student_id\": 6,\n        \"sms_sent\": false\n      }\n    ],\n    \"3\": [\n      {\n        \"id\": 7,\n        \"date\": \"2019-07-19T14:07:14.831+05:30\",\n        \"present\": false,\n        \"standard_id\": 3,\n        \"student_id\": 7,\n        \"sms_sent\": false\n      },\n      {\n        \"id\": 8,\n        \"date\": \"2019-07-19T14:07:14.842+05:30\",\n        \"present\": false,\n        \"standard_id\": 3,\n        \"student_id\": 8,\n        \"sms_sent\": false\n      },\n      {\n        \"id\": 9,\n        \"date\": \"2019-07-19T14:07:14.852+05:30\",\n        \"present\": false,\n        \"standard_id\": 3,\n        \"student_id\": 9,\n        \"sms_sent\": false\n      }\n    ],\n    \"4\": [\n      {\n        \"id\": 10,\n        \"date\": \"2019-07-19T14:07:14.870+05:30\",\n        \"present\": false,\n        \"standard_id\": 4,\n        \"student_id\": 10,\n        \"sms_sent\": false\n      },\n      {\n        \"id\": 11,\n        \"date\": \"2019-07-19T14:07:14.881+05:30\",\n        \"present\": false,\n        \"standard_id\": 4,\n        \"student_id\": 11,\n        \"sms_sent\": false\n      },\n      {\n        \"id\": 12,\n        \"date\": \"2019-07-19T14:07:14.903+05:30\",\n        \"present\": false,\n        \"standard_id\": 4,\n        \"student_id\": 12,\n        \"sms_sent\": false\n      }\n    ]\n  }\n}",
+      "response_headers": {
+        "X-Frame-Options": "SAMEORIGIN",
+        "X-XSS-Protection": "1; mode=block",
+        "X-Content-Type-Options": "nosniff",
+        "X-Download-Options": "noopen",
+        "X-Permitted-Cross-Domain-Policies": "none",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "Content-Type": "application/json; charset=utf-8",
+        "ETag": "W/\"f4937a0033c07bf434e1d42d0b365d12\"",
+        "Cache-Control": "max-age=0, private, must-revalidate",
+        "X-Request-Id": "51fe6560-9700-4993-8f8c-fbc2625702a8",
+        "X-Runtime": "0.012188",
+        "Vary": "Origin",
+        "Content-Length": "1391"
+      },
+      "response_content_type": "application/json; charset=utf-8",
+      "curl": null
+    }
+  ]
+}

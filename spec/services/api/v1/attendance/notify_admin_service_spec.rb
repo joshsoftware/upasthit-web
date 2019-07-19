@@ -29,7 +29,7 @@ RSpec.describe Api::V1::Attendance::NotifyAdminService do
     defaulters = sms_service_called.instance_variable_get(:@defaulters)
     expect(defaulters.keys[0]).to eq standard.id
     expect(defaulters[standard.id].count).to eq 2
-    expect(defaulters[standard.id]).to eq [students.last.id, students.second.id]
+    expect(defaulters[standard.id]).to eq [students.last.roll_no, students.second.roll_no]
   end
 
   it "sends SMS to admin of school" do

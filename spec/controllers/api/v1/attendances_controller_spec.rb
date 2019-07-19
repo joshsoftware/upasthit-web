@@ -4,10 +4,11 @@ require "rails_helper"
 
 RSpec.describe Api::V1::AttendancesController, type: :controller do
   let!(:school) { create(:school) }
-  let!(:staff) { create(:staff, school_id: school.id) }
+  let!(:staff) { create(:staff_with_standards, school_id: school.id) }
+  let!(:date) { (DateTime.now - 1.month).strftime("%d/%m/%Y") }
+  let(:future_date) { (DateTime.now + 3.months).strftime("%d/%m/%Y") }
   let!(:standard) { create(:standard, school_id: school.id) }
   let!(:students) { create_list(:student, 4, school_id: school.id, standard_id: standard.id) }
-  let!(:date) { Time.zone.parse("12/12/2019") }
 
   describe "POST #create" do
     context "with valid params" do
@@ -29,7 +30,7 @@ RSpec.describe Api::V1::AttendancesController, type: :controller do
       end
 
       it "marks attendance for all students of the standard" do
-        total_attendance = Attendance.where(date: date, standard_id: standard.id, school_id: school.id)
+        total_attendance = Attendance.where(date: Time.parse(date), standard_id: standard.id, school_id: school.id)
         expect(total_attendance.count).to eq students.count
         absentee_attendance = total_attendance.where(present: false)
         expect(absentee_attendance.count).to eq 1
@@ -63,7 +64,7 @@ RSpec.describe Api::V1::AttendancesController, type: :controller do
       before do
         valid_params = {
           sender:   Figaro.env.AUTHORISED_SENDER,
-          comments: "12/12/2019 #{school.school_code} #{standard.standard}-#{standard.section} #{students.first.roll_no}"
+          comments: "#{date} #{school.school_code} #{standard.standard}-#{standard.section} #{students.first.roll_no}"
         }
         post :sms_callback, params: valid_params
       end
@@ -75,7 +76,7 @@ RSpec.describe Api::V1::AttendancesController, type: :controller do
       end
 
       it "marks attendance for all students of the standard" do
-        total_attendance = Attendance.where(date: date, standard_id: standard.id, school_id: school.id)
+        total_attendance = Attendance.where(date: Time.parse(date), standard_id: standard.id, school_id: school.id)
         expect(total_attendance.count).to eq students.count
         absentee_attendance = total_attendance.where(present: false)
         expect(absentee_attendance.count).to eq 1
@@ -87,7 +88,7 @@ RSpec.describe Api::V1::AttendancesController, type: :controller do
       let!(:invalid_params) {
         {
           sender:   "98297218272",
-          comments: "12/12/2019 #{school.school_code} #{standard.standard}#{standard.section} #{students.first.roll_no}"
+          comments: "#{date} #{school.school_code} #{standard.standard}#{standard.section} #{students.first.roll_no}"
         }
       }
 
@@ -108,11 +109,59 @@ RSpec.describe Api::V1::AttendancesController, type: :controller do
 
       it "fails and renders error when message has invalid values" do
         invalid_params[:sender] = Figaro.env.AUTHORISED_SENDER
-        invalid_params[:comments] = "12/12/2019 12113 #{standard.standard}-#{standard.section} #{students.first.roll_no}"
+        invalid_params[:comments] = "#{date} 12113 #{standard.standard}-#{standard.section} #{students.first.roll_no}"
         post :sms_callback, params: invalid_params
         is_expected.to respond_with 400
         response_body = JSON.parse(response.body)
         expect(response_body["errors"]["base"]).to eq ["Invalid School Code", "Invalid Standard Id"]
+      end
+    end
+  end
+
+  describe "GET : sync API" do
+    context "On success" do
+      it "should return json of attendances starting from date given till currrent date" do
+        get :sync, params: {school_id: school.id, date: date}
+        expect(response.status).to eq(200)
+        response_body = JSON.parse(response.body)
+        expect(response_body["attendances"].count).to eq 2
+      end
+    end
+
+    context "should fail if" do
+      it "date is not given in params" do
+        get :sync, params: {school_id: school.id}
+        expect(response.status).to eq(422)
+        response_body = JSON.parse(response.body)
+        expect(response_body["message"]).to eq "Please enter date"
+      end
+
+      it "date format is invalid" do
+        get :sync, params: {school_id: school.id, date: "12.01.2019"}
+        expect(response.status).to eq(422)
+        response_body = JSON.parse(response.body)
+        expect(response_body["message"]).to eq "Invalid Date"
+      end
+
+      it "date given is in future" do
+        get :sync, params: {date: future_date, school_id: school.id}
+        expect(response.status).to eq(400)
+        response_body = JSON.parse(response.body)
+        expect(response_body["errors"]["base"]).to eq ["Date cannot be in future"]
+      end
+
+      it "school_id is not given in params" do
+        get :sync, params: {date: date}
+        expect(response.status).to eq(400)
+        response_body = JSON.parse(response.body)
+        expect(response_body["errors"]["school_id"]).to eq ["can't be blank"]
+      end
+
+      it "school_id is not valid" do
+        get :sync, params: {date: date, school_id: 11_212}
+        expect(response.status).to eq(400)
+        response_body = JSON.parse(response.body)
+        expect(response_body["errors"]["base"]).to eq ["Invalid School ID"]
       end
     end
   end

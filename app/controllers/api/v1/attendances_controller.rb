@@ -4,6 +4,7 @@ module Api
   module V1
     class AttendancesController < V1::BaseController
       before_action :validate_authorized_sender, :validate_message, only: :sms_callback
+      before_action :validate_date_present, :validate_date_format, only: :sync
 
       def create
         if create_service(attendance_params).create
@@ -22,14 +23,23 @@ module Api
         end
       end
 
+      def sync
+        service = Attendance::SyncService.new(attendance_params)
+        if service.sync
+          render json: service.result
+        else
+          render json: {errors: service.errors.messages}, status: 400
+        end
+      end
+
       private
 
       def create_service(sms_callback_params={})
-        @create_service ||= Attendance::CreateService.new(sms_callback_params)
+        @create_service ||= Api::V1::Attendance::CreateService.new(sms_callback_params)
       end
 
       def attendance_params
-        params.permit(:standard, :school_code, :date, :section, absent_roll_nos: [])
+        params.permit(:standard, :school_code, :school_id, :date, :section, absent_roll_nos: [])
       end
 
       def validate_authorized_sender
@@ -54,6 +64,14 @@ module Api
           section:         data[2].split("-").second,
           absent_roll_nos: data[3..]
         }
+      end
+
+      def validate_date_present
+        render json: {message: I18n.t("error.absent_date")}, status: 422 unless attendance_params[:date].present?
+      end
+
+      def validate_date_format
+        render json: {message: I18n.t("error.date_invalid_format")}, status: 422 unless attendance_params[:date].match? %r{(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[012])/(19|20)\d\d}
       end
     end
   end

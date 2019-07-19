@@ -6,6 +6,7 @@ FactoryBot.define do
     association :school
     association :standard
     association :student
+    present { false }
     sms_sent { false }
   end
 end
