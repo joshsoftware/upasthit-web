@@ -23,7 +23,7 @@ RSpec.describe Api::V1::Attendance::CreateService do
 
     it "renders success message " do
       result = service.new(valid_params).create
-      expect(result[:message]).to eq "Done."
+      expect(result[:message]).to eq "Attendance marked sucessfully"
     end
 
     it "marks attendance of students of a standard" do
