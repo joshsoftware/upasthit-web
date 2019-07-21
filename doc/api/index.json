@@ -5,6 +5,13 @@
       "explanation": null,
       "examples": [
         {
+          "description": "Create Attendance API",
+          "link": "attendances/create_attendance_api.json",
+          "groups": "v1",
+          "route": "v1/attendances/",
+          "method": "post"
+        },
+        {
           "description": "Sync API",
           "link": "attendances/sync_api.json",
           "groups": "v1",
