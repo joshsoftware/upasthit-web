@@ -29,4 +29,13 @@ class School < ApplicationRecord
       include: [timings: {only: %i[start_time close_time reminder_time day]}]
     )
   end
+
+  def admin
+    staffs.select(&:admin?).first
+  end
+
+  def admin_reminder_time(day)
+    time = timings.select {|timing| timing.send(day + "?") }.first.reminder_time
+    (time + 30.minutes).strftime("%H:%M")
+  end
 end

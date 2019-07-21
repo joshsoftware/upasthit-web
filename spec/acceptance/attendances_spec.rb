@@ -10,6 +10,7 @@ resource "Attendances" do
   let!(:staff_2) { create(:staff_with_standards, school_id: school.id) }
   let!(:from_date) { (DateTime.now - 1.month).strftime("%d/%m/%Y") }
   before do
+    allow_any_instance_of(SchoolTiming).to receive(:update_cron_tab).and_return(true)
     SchoolTiming.days.keys.each do |day|
       FactoryBot.create(:school_timing, school_id: school.id, day: day)
     end

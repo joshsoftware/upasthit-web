@@ -10,7 +10,6 @@ RSpec.describe Api::V1::Staffs::SessionsController, type: :controller do
     context "On success" do
       it "should return json of school data" do
         get :sync, params: {mobile_number: staff.mobile_number}
-
         expect(response.status).to eq(200)
         response_body = JSON.parse(response.body)
         expect(response_body["school"].present?).to eq true

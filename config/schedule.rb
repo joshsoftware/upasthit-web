@@ -7,6 +7,7 @@
 
 # Example:
 #
+require "./" + File.dirname(__FILE__) + "/environment.rb"
 set :output, "/current/log/cron_log.log"
 #
 # every 2.hours do
@@ -20,6 +21,11 @@ set :output, "/current/log/cron_log.log"
 # end
 
 # Learn more: http://github.com/javan/whenever
-every :day, at: "12.05am" do
-  rake "shedule:alerts"
+
+School.find_each do |school|
+  school.timings.find_each do |timing|
+    every timing.day, at: school.admin_reminder_time(timing.day) do
+      rake "schedule:alerts[#{school.id}]", output: {error: "error.log", standard: "cron.log"}
+    end
+  end
 end

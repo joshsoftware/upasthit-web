@@ -7,6 +7,8 @@ module Api
         include ActiveModel::Validations
         validates :mobile, format: {with: /\A[346789][0-9]{9}\z/}
 
+        attr_reader :result
+
         def initialize(params)
           @params = params
         end
@@ -18,8 +20,6 @@ module Api
           find_attendances &&
           set_result
         end
-
-        attr_reader :result
 
         private
 
@@ -51,8 +51,9 @@ module Api
         end
 
         def find_attendances
-          @attendances = ::Attendance.where("date BETWEEN ? AND ?", DateTime.now.beginning_of_month, DateTime.now.end_of_day).select(:id,
-                                                                                                                                     :standard_id, :date, :present, :student_id, :sms_sent).group_by(&:standard_id).as_json
+          @attendances = ::Attendance.where("date BETWEEN ? AND ?", DateTime.now.beginning_of_month, DateTime.now.end_of_day)
+                                     .select(:id, :standard_id, :date, :present, :student_id, :sms_sent)
+                                     .group_by(&:standard_id).as_json
         end
 
         def set_result

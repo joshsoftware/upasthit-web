@@ -229,6 +229,9 @@ GEM
       rspec-expectations (~> 3.8.0)
       rspec-mocks (~> 3.8.0)
       rspec-support (~> 3.8.0)
+    rspec-sidekiq (3.0.3)
+      rspec-core (~> 3.0, >= 3.0.0)
+      sidekiq (>= 2.4.0)
     rspec-support (3.8.0)
     rspec_api_documentation (6.1.0)
       activesupport (>= 3.0.0)
@@ -351,6 +354,7 @@ DEPENDENCIES
   rails (~> 5.2.3)
   redis
   rspec-rails (~> 3.5)
+  rspec-sidekiq
   rspec_api_documentation
   rubocop (~> 0.72.0)
   sass-rails (~> 5.0)
