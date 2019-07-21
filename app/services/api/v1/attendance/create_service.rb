@@ -123,7 +123,8 @@ module Api
 
         def set_result
           @result = {
-            message: "Done."
+            message:        "Attendance marked sucessfully",
+            attendance_ids: @attendances.pluck(:id)
           }
         end
       end
