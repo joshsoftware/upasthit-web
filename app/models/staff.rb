@@ -23,6 +23,7 @@
 class Staff < ApplicationRecord
   include Tokenable
   include Authenticable
+  devise :trackable
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
 
@@ -44,6 +45,10 @@ class Staff < ApplicationRecord
 
   def designation_enquiry
     designation.to_s.underscore.inquiry
+  end
+
+  def full_name
+    first_name + " " + last_name
   end
 
   def standard_ids

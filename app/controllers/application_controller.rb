@@ -27,4 +27,12 @@ class ApplicationController < ActionController::Base
   def current_school
     @current_school ||= School.first
   end
+
+  def after_sign_in_path_for(_resource)
+    if current_staff.sign_in_count == 1
+      edit_staff_password_path
+    else
+      root_path
+    end
+  end
 end
