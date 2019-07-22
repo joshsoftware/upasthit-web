@@ -24,7 +24,7 @@ class StaffDatatable
     arr = []
     @staffs.map do |staff|
       arr << [
-        staff.name,
+        staff.full_name,
         staff.mobile_number,
         staff.designation
       ]

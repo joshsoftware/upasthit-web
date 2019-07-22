@@ -21,7 +21,7 @@
           = link_to '<h5>Switch to Marathi</h5>'.html_safe, locale: :'mr-IN'
       %li.nav-item
         %a.nav-link.profile-pic
-          #{current_staff.name}
+          #{current_staff.full_name}
           = image_tag 'face.jpg', class: 'rounded-circle'
       %li.nav-item
         %a.nav-link{ :href => destroy_staff_session_path, method: :delete }

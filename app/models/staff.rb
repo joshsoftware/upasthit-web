@@ -50,6 +50,10 @@ class Staff < ApplicationRecord
     super.map(&:to_json)
   end
 
+  def full_name
+    first_name + " " + last_name
+  end
+
   def in_json
     as_json(
       except:  %i[created_at updated_at auth_token school_id],

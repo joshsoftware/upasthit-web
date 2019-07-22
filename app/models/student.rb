@@ -31,6 +31,10 @@ class Student < ApplicationRecord
 
   validates :registration_no, uniqueness: true
   validates :preferred_language, inclusion: {in: %w[en mr-IN hi-IN]}
+
+  def full_name
+    first_name + " " + last_name
+  end
 end
 
 def attendance_status
