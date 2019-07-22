@@ -2,7 +2,7 @@
 
 class ApplicationController < ActionController::Base
   include Pagy::Backend
-
+  protect_from_forgery with: :null_session
   before_action :set_locale
 
   private

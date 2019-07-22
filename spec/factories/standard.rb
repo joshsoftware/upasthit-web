@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :standard do
-    sequence(:standard, 10) {|n| n }
+    sequence(:standard, (1..12).cycle) {|n| n }
     association :school
     section { "A" }
     factory :standard_with_students do

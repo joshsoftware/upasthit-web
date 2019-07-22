@@ -1,0 +1,75 @@
+{
+  "resource": "Attendances",
+  "resource_explanation": null,
+  "http_method": "POST",
+  "route": "v1/attendances/",
+  "description": "Create Attendance API",
+  "explanation": null,
+  "parameters": [
+    {
+      "required": true,
+      "name": "standard",
+      "description": "Standard name"
+    },
+    {
+      "required": true,
+      "name": "section",
+      "description": "Section name"
+    },
+    {
+      "required": true,
+      "name": "school_code",
+      "description": "School code"
+    },
+    {
+      "required": true,
+      "example": "01/01/2019",
+      "name": "date",
+      "description": "Date"
+    },
+    {
+      "required": true,
+      "type": "array",
+      "name": "absent_roll_nos",
+      "description": "Roll numbers of absenteeds"
+    }
+  ],
+  "response_fields": [
+
+  ],
+  "requests": [
+    {
+      "request_method": "POST",
+      "request_path": "v1/attendances/",
+      "request_body": "{\"standard\":\"10\",\"section\":\"A\",\"school_code\":\"1001\",\"date\":\"22/07/2019\",\"absent_roll_nos\":[29,30]}",
+      "request_headers": {
+        "Content-Type": "application/json",
+        "Host": "example.org",
+        "Cookie": ""
+      },
+      "request_query_parameters": {
+      },
+      "request_content_type": "application/json",
+      "response_status": 200,
+      "response_status_text": "OK",
+      "response_body": "{\n  \"message\": \"Attendance marked sucessfully\",\n  \"attendance_ids\": [\n    31,\n    32,\n    33\n  ]\n}",
+      "response_headers": {
+        "X-Frame-Options": "SAMEORIGIN",
+        "X-XSS-Protection": "1; mode=block",
+        "X-Content-Type-Options": "nosniff",
+        "X-Download-Options": "noopen",
+        "X-Permitted-Cross-Domain-Policies": "none",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "Content-Type": "application/json; charset=utf-8",
+        "ETag": "W/\"ff13fadaa450300005f8ffe2e2d6d3c9\"",
+        "Cache-Control": "max-age=0, private, must-revalidate",
+        "X-Request-Id": "17ff8e38-4266-4198-9ffb-0067ce08e8d2",
+        "X-Runtime": "0.053827",
+        "Vary": "Origin",
+        "Content-Length": "71"
+      },
+      "response_content_type": "application/json; charset=utf-8",
+      "curl": null
+    }
+  ]
+}

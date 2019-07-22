@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :attendance do
-    date { "12/12/2019" }
+    date { (DateTime.now - 1.month).strftime("%d/%m/%Y") }
     association :school
     association :standard
     association :student

@@ -6,10 +6,11 @@ require "rspec_api_documentation/dsl"
 resource "Sessions" do
   header "Content-Type", "application/json"
   let(:school) { create(:school) }
-  let!(:staff_1) { create(:staff_with_standards, school_id: school.id) }
-  let!(:staff_2) { create(:staff_with_standards, school_id: school.id) }
+  let(:staff_1) { create(:staff_with_standards, school_id: school.id) }
+  let(:staff_2) { create(:staff_with_standards, school_id: school.id) }
 
   before do
+    allow_any_instance_of(SchoolTiming).to receive(:update_cron_tab).and_return(true)
     SchoolTiming.days.keys.each do |day|
       FactoryBot.create(:school_timing, school_id: school.id, day: day)
     end

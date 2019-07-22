@@ -3,7 +3,7 @@
 FactoryBot.define do
   factory :student do
     sequence(:registration_no) {|n| n }
-    sequence(:roll_no) {|n| n }
+    sequence(:roll_no, (1..50).cycle) {|n| n }
     gender { FFaker::Gender.random }
     dob { FFaker::Time.date }
     first_name { FFaker::Name.first_name }

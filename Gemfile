@@ -66,7 +66,6 @@ gem "select2-rails"
 gem "smarter_csv", github: "tilo/smarter_csv"
 gem "versionist"
 gem "whenever"
-
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem "ffaker"
@@ -88,6 +87,7 @@ group :test do
   gem "database_cleaner", "~> 1.6.1"
   gem "factory_bot_rails"
   gem "rspec-rails", "~> 3.5"
+  gem "rspec-sidekiq"
   gem "shoulda"
   gem "shoulda-matchers", "~> 3.1"
 end
