@@ -8,6 +8,6 @@ class SessionsController < Devise::SessionsController
   private
 
   def configure_sign_in_params
-    devise_parameter_sanitizer.permit(:sign_in, keys: %i[mobile_number password])
+    devise_parameter_sanitizer.permit(:sign_in, keys: %i[user_name password])
   end
 end
