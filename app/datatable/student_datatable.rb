@@ -30,7 +30,7 @@ class StudentDatatable
       arr << [
         student.registration_no,
         student.roll_no,
-        student.name,
+        student.full_name,
         student.guardian_name,
         student.guardian_mobile_no,
         student.id.to_s

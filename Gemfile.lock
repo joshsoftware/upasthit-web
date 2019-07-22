@@ -73,6 +73,8 @@ GEM
       actionpack (>= 5.0)
       activemodel (>= 5.0)
     builder (3.2.3)
+    byebug (11.0.1)
+    cancancan (3.0.1)
     chronic (0.10.2)
     coderay (1.1.2)
     coffee-rails (4.2.2)
@@ -276,6 +278,9 @@ GEM
       rack (>= 1.5.0)
       rack-protection (>= 1.5.0)
       redis (>= 3.3.5, < 5)
+    simple_form (4.1.0)
+      actionpack (>= 5.0)
+      activemodel (>= 5.0)
     simplecov (0.17.0)
       docile (~> 1.1)
       json (>= 1.8, < 3)
@@ -326,6 +331,8 @@ DEPENDENCIES
   bootsnap (>= 1.1.0)
   bootstrap
   bootstrap_form (>= 4.2.0)
+  byebug
+  cancancan
   coffee-rails (~> 4.2)
   database_cleaner (~> 1.6.1)
   devise
@@ -358,6 +365,7 @@ DEPENDENCIES
   shoulda
   shoulda-matchers (~> 3.1)
   sidekiq
+  simple_form
   simplecov
   smarter_csv!
   tzinfo-data

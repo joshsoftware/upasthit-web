@@ -43,11 +43,13 @@ gem "rack-cors", require: "rack/cors"
 gem "bootstrap_form", ">= 4.2.0"
 
 # Haml
+gem "byebug"
 gem "haml"
-
 # Devise
+gem "cancancan"
 gem "devise"
 gem "jquery-datatables"
+gem "simple_form"
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
