@@ -13,25 +13,25 @@ school1 = School.find_or_create_by(name: "Delhi Public School", school_code: "10
 school2 = School.find_or_create_by(name: "Agra Public School", school_code: "1001",
                                    contact_number: "98792873822", email: "aps@gmail.org")
 
-School.find_each do |school|
-  SchoolTiming.days.keys.each do |day|
-    SchoolTiming.find_or_create_by(start_time: "08:00:00", close_time: "14:00:00", school_id: school.id,
-     day: day, reminder_time: "10:00:00")
-  end
-end
+# School.find_each do |school|
+#   SchoolTiming.days.keys.each do |day|
+#     SchoolTiming.find_or_create_by(start_time: "08:00:00", close_time: "14:00:00", school_id: school.id,
+#      day: day, reminder_time: "10:00:00")
+#   end
+# end
 
 staff1 = Staff.find_or_create_by(mobile_number: "9876543210", designation: "Admin", school_id: school1.id,
-                registration_no: 1, pin: "1221", first_name: "Suhana", last_name: "Sharma") do |staff|
+                 pin: "1221", first_name: "Suhana", last_name: "Sharma") do |staff|
   staff.password = "12345678"
   staff.password_confirmation = "12345678"
 end
 staff2 = Staff.find_or_create_by(mobile_number: "9998823112", designation: "ClassTeacher", school_id: school1.id,
-                registration_no: 2, pin: "1441", first_name: "Aman", last_name: "Singh") do |staff|
+                pin: "1441", first_name: "Aman", last_name: "Singh") do |staff|
   staff.password = "12345678"
   staff.password_confirmation = "12345678"
 end
 staff3 = Staff.find_or_create_by(mobile_number: "9998823122", designation: "ClassTeacher", school_id: school2.id,
-                registration_no: 3, pin: "1551", first_name: "Priya", last_name: "Chopra") do |staff|
+                pin: "1551", first_name: "Priya", last_name: "Chopra") do |staff|
   staff.password = "12345678"
   staff.password_confirmation = "12345678"
 end

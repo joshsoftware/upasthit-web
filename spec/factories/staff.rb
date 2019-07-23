@@ -4,7 +4,6 @@ FactoryBot.define do
   factory :staff do
     sequence(:mobile_number) {|n| "77988#{n.divmod(10).first}#{n.divmod(10).second}221" }
     password { FFaker::Internet.password }
-    sequence(:registration_no) {|n| n }
     designation { "ClassTeacher" }
     pin { "1212" }
     first_name { FFaker::Name.first_name }
