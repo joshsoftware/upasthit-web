@@ -30,7 +30,7 @@ gem "coffee-rails", "~> 4.2"
 # gem 'mini_magick', '~> 4.8'
 
 # Bootstrap and co
-gem "bootstrap"
+gem "bootstrap", "~> 4.3.1"
 gem "font-awesome-rails"
 gem "globalize"
 gem "globalize-accessors"
@@ -40,17 +40,17 @@ gem "mini_racer"
 gem "popper_js"
 gem "rack-cors", require: "rack/cors"
 # Bootstrap form
+gem "bootstrap-datepicker-rails"
 gem "bootstrap_form", ">= 4.2.0"
-
 # Haml
 gem "byebug"
 gem "haml"
 # Devise
+gem "audited", "~> 4.9"
 gem "cancancan"
 gem "devise"
 gem "jquery-datatables"
 gem "simple_form"
-
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 gem "figaro"
@@ -60,12 +60,15 @@ gem "sidekiq"
 gem "activerecord-import"
 gem "apitome"
 gem "bootsnap", ">= 1.1.0", require: false
+gem "bootstrap-multiselect-rails"
+gem "discard", "~> 1.0"
 gem "mina"
 gem "pagy"
 gem "select2-rails"
 gem "smarter_csv", github: "tilo/smarter_csv"
 gem "versionist"
 gem "whenever"
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem "ffaker"
