@@ -2,28 +2,45 @@
   %li.nav-item
     %a.nav-link.active{"data-toggle" => "tab", :href => "#home"}= t 'global.class'
   %li.nav-item
-    %a.nav-link{"data-toggle" => "tab", :href => "#menu1"}= t 'global.upload'
+    %a.nav-link{"data-toggle" => "tab", :href => "#menu1", class: "fa fa-upload btn icon-space"}= t 'global.upload' 
 
 .tab-content
   #home.tab-pane.container.active
     .card
       .card-body
-        %h4.card-title= t 'global.class'
+        %h4
+          = t 'global.class'
+          = link_to "Create", new_standard_path, class: 'btn-right btn-sm btn-default btn-primary'
         .card-description
-        %table.table.bordered
+        %table.table.bordered#standard_table
           %thead
             %th= t 'global.class'
+            %th= t 'global.student_count'
+            %th= t 'global.class_teacher'
+            %th Action
           %tbody
             - @records.each do |record|
               %tr
                 %td= record.standard.to_s + ' ' + record.section.to_s
+                %td= record.students.size
+                %td= record.staff&.full_name
+                %td.text-center
+                  = link_to edit_standard_path(record), class: 'btn btn-sm edit-btn btn-space' do
+                    .i.fa.fa-edit
         = pagy_bootstrap_responsive_nav(@pagy).html_safe
+
   #menu1.tab-pane.container.fade
     .card
       .card-body
         %h4 Upload class information
-        .row
-          = form_for 'standard', url: standards_path do |f|
-            = f.file_field "file", {onchange: 'this.form.submit();'}
-        .row
-          = link_to 'Download Sample', '/standard-inventory.csv', action: 'download'
+        %br
+        .col-md-6
+          .row
+            = form_for 'standard', url: import_standards_path do |f|
+              = f.file_field "file", {onchange: 'this.form.submit();'}
+          %br
+          .row
+            = link_to 'Download Sample', '/standard-inventory.csv', action: 'download'
+
+:javascript
+  $("#standard_table").dataTable()

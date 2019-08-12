@@ -5,7 +5,7 @@ class StaffDatatable
 
   def initialize(view)
     @view = view
-    @staffs = Staff.all
+    @staffs = Staff.where(school: current_staff.school).kept.includes(:standards)
     @total_count = @staffs.count
   end
 
@@ -26,7 +26,9 @@ class StaffDatatable
       arr << [
         staff.full_name,
         staff.mobile_number,
-        staff.designation
+        staff.designation,
+        staff.standards.map(&:name).join(", "),
+        staff.id.to_s
       ]
     end
     arr

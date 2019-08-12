@@ -20,8 +20,14 @@ school2 = School.find_or_create_by(name: "Agra Public School", school_code: "100
 #   end
 # end
 
+Staff.find_or_create_by!(mobile_number: "7798845221", designation: "SuperAdmin", first_name: "Bhuvna", last_name: "Prabhu",
+                        user_name: "SuperAdmin", pin: "0000") do |staff|
+  staff.password = "josh123"
+  staff.password_confirmation = "josh123"
+end
+
 staff1 = Staff.find_or_create_by(mobile_number: "9876543210", designation: "Admin", school_id: school1.id,
-                 pin: "1221", first_name: "Suhana", last_name: "Sharma") do |staff|
+                 pin: "1221", first_name: "Suhana", last_name: "Sharma", user_name: "AdminUser") do |staff|
   staff.password = "12345678"
   staff.password_confirmation = "12345678"
 end
@@ -39,14 +45,14 @@ standard1 = Standard.find_or_create_by!(standard: "2", section: "A", school_id: 
 standard2 = Standard.find_or_create_by!(standard: "2", section: "B", school_id: school1.id)
 standard3 = Standard.find_or_create_by!(standard: "3", section: "A", school_id: school1.id)
 
-standard1.staffs << staff1
-standard2.staffs << staff2
-standard3.staffs << staff1
+standard1.staff = staff1
+standard2.staff = staff2
+standard3.staff = staff1
 
 standard4 = Standard.find_or_create_by!(standard: "4", section: "A", school_id: school2.id)
 
-standard4.staffs << staff3
-standard4.staffs << staff3
+standard4.staff = staff3
+standard4.staff = staff3
 
 Student.find_or_create_by(first_name: "Amit", last_name: "Kumar", registration_no: "100", roll_no: "1", dob: Time.zone.parse("01-11-1996"),
                          guardian_name: "Ashok Kumar", preferred_language: "en", guardian_mobile_no: "7798845221",

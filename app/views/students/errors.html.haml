@@ -22,7 +22,7 @@
           %thead
             %th Reg No.
             %th Roll No.
-            %th Name
+            %th First Name
             %th Gaurdian Name
             %th Guardian Mobile
           %tbody
@@ -30,17 +30,19 @@
               %tr
                 %td= record.registration_no
                 %td= record.roll_no
-                %td= record.name
+                %td= record.first_name
                 %td= record.guardian_name
-                %td= record.guardian_mobile_no.to_s + ' / ' + record.guardian_alternate_mobile_no
+                / %td= record.guardian_mobile_no + ' / ' + record.guardian_alternate_mobile_no
           = pagy_bootstrap_responsive_nav(@pagy).html_safe
   #menu1.tab-pane.container.active
     .card
       .card-body
         %h4 Upload student information
-        .row
-          = form_for 'student', url: students_path do |f|
-            = f.file_field "file", {onchange: 'this.form.submit();'}
+        %br
+        .col-md-6
+          .row
+            = form_for 'student', url: import_students_path do |f|
+              = f.file_field "file", {onchange: 'this.form.submit();'}
         %table.table.table-striped
           %tbody
             - @errors.each do |error|

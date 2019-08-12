@@ -6,9 +6,9 @@ class StudentDatatable
   def initialize(view)
     @view = view
     @students = if @view.params["standard_id"].present?
-                  Student.where(standard_id: @view.params["standard_id"])
+                  Student.where(standard_id: @view.params["standard_id"], discarded_at: nil)
                 else
-                  Student.all
+                  Student.kept
                 end
     @total_count = @students.count
   end

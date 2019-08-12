@@ -7,3 +7,6 @@ $(document).ready ->
     dropdownAutoWidth: 'true',
     width: '100%'
   })
+$('#standard_table').on 'click', '.delete-button', (e) ->
+  $student_id = e.target.id
+  $(".bd-example-modal-sm").modal('show');

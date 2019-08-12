@@ -1,13 +1,13 @@
-Reg No,Roll No,Standard,Section,Name - English,Name - Marathi,Gender,Date of Birth,Address,Guardian Name,Guardian Mobile,Alternate Mobile
-1001,1,1,A,Anil,अनिल,M,8/12/15,Pune,Meena Kumari,8827817212,8827827212
-1002,2,1,A,Yogesh,योगेश,M,07/01/16,Pune,Ram kumar,8007129881,8668308567
-1003,3,1,B,Akshay,अक्षय,M,09/05/2015,Pune,Sham Kumar,8007129881,8668308567
-1004,4,1,B,Abhay,अभय,M,07/02/15,Pune,Gyan Kumar,8007129881,8668308567
-1005,5,1,B,Shushma,शुष्मा,F,8/12/15,Pune,Dyan Kumar,8007129881,8668308567
-1006,6,2,A,Nirma,निरमा,M,07/01/16,Pune,Maan Kumar,8007129881,8668308567
-1007,7,2,A,Jaya,जया,F,8/02/15,Pune,Viman Kumar,8007129881,8668308567
-1008,8,2,A,Mata,डोळे,M,08/07/15,Pune,Geeta Kumari,8007129881,8668308567
-1009,9,2,A,Payal,पायल,F,18/10/15,Pune,Kamlesh Kumar,8007129881,8668308567
-1010,10,2,B,Kareena,करीना,F,07/05/15,Pune,Jadu Kumar,8007129881,8668308567
-1011,11,2,B,Kabir,कबीर,M,28/12/15,Pune,Jadu Kumari,8007129881,8668308567
-1012,12,2,B,Meena,मीना,F,01/01/16,Pune,Lalu Jadu,8007129881,8668308567
+Reg No,Roll No,Standard,Section,First Name - English,Last Name – English,First Name - Marathi,Last Name – Marathi,Gender,Date of Birth(dd/mm/yyyy),Address,Guardian Name,Mobile Number 1,Mobile Number 2,Preferred Language,Driver Name,Driver Number,Vehicle Number
+1001,1,1,A,Anil,,अनिल,,M,8/12/2015,Pune,Meena Kumari,8827817212,8827827212,English,,,
+1002,2,1,A,Yogesh,,योगेश,,M,01/01/1996,Pune,Ram kumar,8007129881,8668308567,English,,,
+1003,3,1,B,Akshay,,अक्षय,,M,01/01/1996,Pune,Sham Kumar,8007129881,8668308567,English,,,
+1004,4,1,B,Abhay,,अभय,,M,01/01/1996,Pune,Gyan Kumar,8007129881,8668308567,English,,,
+1005,5,1,B,Shushma,,शुष्मा,,F,01/01/1996,Pune,Dyan Kumar,8007129881,8668308567,English,,,
+1006,6,2,A,Nirma,,निरमा,,M,01/01/1996,Pune,Maan Kumar,8007129881,8668308567,English,,,
+1007,7,2,A,Jaya,,जया,,F,01/01/1996,Pune,Viman Kumar,8007129881,8668308567,English,,,
+1008,8,2,A,Mata,,डोळे,,M,01/01/1995,Pune,Geeta Kumari,8007129881,8668308567,English,,,
+1009,9,2,A,Payal,,पायल,,F,01/01/1995,Pune,Kamlesh Kumar,8007129881,8668308567,English,,,
+1010,10,2,B,Kareena,,करीना,,F,01/01/1992,Pune,Jadu Kumar,8007129881,8668308567,English,,,
+1011,11,2,B,Kabir,,कबीर,,M,02/02/1997,Pune,Jadu Kumari,8007129881,8668308567,English,,,
+1012,12,2,B,Meena,,मीना,,F,01/01/1993,Pune,Lalu Jadu,8007129881,8668308567,English,,,

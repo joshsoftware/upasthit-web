@@ -1,0 +1,83 @@
+.card.card-center
+  .card-header
+    .row
+      %h5 Staff Details
+      .offset-md-9
+        = link_to edit_staff_path(@staff), class: 'btn-sm edit-btn btn-space' do
+          .i.fa.fa-edit
+        %button.btn.btn-sm.btn-default.fa.fa-trash.delete-button.btn-danger{"data-target"=>".bd-example-modal-sm", "data-toggle"=>"modal", type: "button", "data-id"=> @staff.id}
+  .card-body
+    .row
+      .offset-md-2
+      .col-md-4.form-group
+        .row
+          .col-md-6
+            .label Name :
+          .col-md-6
+            = @staff.full_name.titleize
+      .col-md-4.form-group
+        .row
+          .col-md-6
+            .label Mobile Number :
+          .col-md-6
+            = @staff.mobile_number
+    .row
+      .offset-md-2
+      .col-md-4.form-group
+        .row
+          .col-md-6
+            .label Designation :
+          .col-md-6
+            = @staff.designation.titleize
+      .col-md-4.form-group
+        .row
+          .col-md-6
+            .label Pin :
+          .col-md-6
+            = @staff.pin
+    .row
+      .offset-md-2
+      .col-md-4.form-group
+        .row
+          .col-md-6
+            .label Preferred Language :
+          .col-md-6
+            = LOCALES[:"#{@staff.preferred_language}"]
+      .col-md-4.form-group
+        .row
+          .col-md-6
+            .label Standards :
+          .col-md-6
+            - if @staff.standards.present?
+              = @staff.standards.map(&:name).join(", ") 
+            - else
+              None
+.modal.bd-example-modal-sm{"aria-hidden" => "true", "aria-labelledby" => "mySmallModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-dialog.modal-sm
+    .modal-content
+      .modal-header
+        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+          %span{"aria-hidden" => "true"} ×
+      .modal-body
+        %h6.align-body Are You Sure?
+      .modal-footer
+        %button.btn.btn-success{:type => "button", onClick: "delete_staff()"} Yes
+        %button.btn.btn-danger{"data-dismiss" => "modal", :type => "button"} No
+:javascript
+  var staff_id= ""
+  $('.bd-example-modal-sm').on('show.bs.modal',function(event){
+    var button = $(event.relatedTarget.dataset)
+    staff_id = button[0].id
+    console.log(staff_id)
+  })
+  function delete_staff(){
+    debugger    
+    $.ajax({
+      url: '/'+locale+'/staffs/'+staff_id,
+      type: 'DELETE',
+      dataType: 'json',
+    }).done(function(result){
+      $('#modal-window').modal('toggle');
+      location.reload();
+    })
+  }

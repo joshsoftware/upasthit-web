@@ -37,6 +37,9 @@ en:
     name: 'Name'
     mobile: 'Mobile'
     designation: 'Designation'
+    created: "Staff Created Successfully"
+    updated: "Staff updated Successfully"
+    deleted: "Staff deleted Successfully"
   error:
     absent_mobile_no: 'Please enter a mobile number'
     invalid_mobile_no: 'This mobile number is not registered, Please contact your School Admin.'
@@ -68,4 +71,10 @@ en:
     name: "Name"
     guardian_name: "Gaurdian Name"
     guardian_mobile: "Guardian Mobile"
-   
+    created: "Student created successfully"
+    updated: "Student updated successfully"
+    deleted: "Staff deleted Successfully"
+  standard:
+    created: "Standard created successfully"
+    updated: "Standard updated successfully"
+ 

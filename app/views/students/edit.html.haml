@@ -1,0 +1,69 @@
+.card.card-background-color
+  .card-header
+    %h4 Edit Student
+  .card-body
+    = simple_form_for(@student, html: {class: 'form-inline'}, url: student_path) do |f|
+      = f.error_notification
+      .row      
+        .form-group.col-md-6
+          = f.input :registration_no , label: "Registration Number"       
+        .form-group.col-md-4
+          = f.input :roll_no, label: "Roll Number", as: :string
+      .row      
+        .form-group.col-md-6
+          = f.input :first_name
+        .form-group.col-md-4
+          = f.input :last_name
+      .row      
+        .form-group.col-md-6
+          = f.input :guardian_name
+        .form-group.col-md-4
+          =f.input :guardian_mobile_no, label: "Guardian Primary Mobile Number"
+      .row      
+        .form-group.col-md-6
+          = f.input :guardian_alternate_mobile_no, label: "Guardian Alternate Mobile Number"
+        .form-group.col-md-4
+          = f.input :standard_id, :label => 'Standard',:collection => @standards.collect {|u| [u.name, u.id]}, input_html: { class: 'standard_select'}
+      .row      
+        .form-group.col-md-6
+          = f.input :dob, label: "Date of Birth", as: :string, input_html: { value: @student.dob.strftime("%d/%m/%Y"), class: "datepicker" }
+        .form-group.col-md-4
+          = f.input :preferred_language, :label => "Preferred Language",selected: @student.preferred_language, collection: LOCALES.invert, input_html: { class: 'language_select'}
+      .row      
+        .form-group.col-md-6
+          = f.input :address
+        .form-group.col-md-4
+          = f.input :driver_name
+      .row      
+        .form-group.col-md-6
+          = f.input :driver_number
+        .form-group.col-md-4
+          = f.input :vehicle_number
+      .row      
+        .form-group.col-md-6
+          = f.input :gender,label: "Gender", collection: ['Male','Female'], input_html:{class: "gender_select"}, include_hidden: false
+      .form-group
+        .float-right
+          = f.button :submit, class: 'btn btn-success btn-space'
+          = link_to 'Cancel', :back, class: 'btn btn-danger btn-add btn-space'
+
+:javascript
+  $(document).ready(function() {
+    $('.standard_select').find('option').eq(0).remove();
+    $('.standard_select').multiselect({
+      buttonWidth: '290px',
+      maxHeight: 200
+    });
+    $('.gender_select').find('option').eq(0).remove();
+    $('.language_select').multiselect({
+      buttonWidth: '290px',
+      maxHeight: 200
+    });
+    $('.gender_select').multiselect({
+      buttonWidth: '290px',
+      maxHeight: 200
+    });
+    $('.datepicker').datepicker({
+      format: 'dd/mm/yyyy'
+    });
+  })

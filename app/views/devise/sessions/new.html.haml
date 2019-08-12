@@ -1,8 +1,8 @@
 .container-fluid
   .content-wrapper.full-page-wrapper.d-flex.align-items-center
-    .card.col-lg-4.offset-lg-4
+    .card.col-lg-4.offset-lg-4.card-background-color
       .card-block
-        %h3.card-title.text-primary.text-left.mb-5.mt-4 Login
+        %h3.card-title.standard-text-color.text-left.mb-5.mt-4 Welcome to School-in
         = render 'shared/flash_messages'
 
         = bootstrap_form_for resource, as: resource_name, url: session_path(resource_name) do |f|

@@ -2,27 +2,45 @@
   %li.nav-item
     %a.nav-link.active{"data-toggle" => "tab", :href => "#home"}= t 'global.staff'
   %li.nav-item
-    %a.nav-link{"data-toggle" => "tab", :href => "#menu1"}= t 'global.upload'
-
+    %a.nav-link{"data-toggle" => "tab", :href => "#menu1", class: "fa fa-upload btn icon-space"}= t 'global.upload'
 .tab-content
   #home.tab-pane.container.active
     .card
       .card-body
-        %h4.card-title=t 'global.staff'
+        %h4
+          = t 'global.staff'
+          = link_to "Create", new_staff_path, class: 'btn-sm btn-default btn-primary btn-right'
         .card-description
         %table.table.bordered#staffdt
           %thead
             %th=t 'staff.name'
             %th=t 'staff.mobile'
             %th=t 'staff.designation'
+            %th=t 'staff.standards'
+            %th Action
           %tbody
         = pagy_bootstrap_responsive_nav(@pagy).html_safe
   #menu1.tab-pane.container.fade
     .card
       .card-body
         %h4 Upload staff information
-        .row
-          = form_for 'staff', url: staffs_path do |f|
-            = f.file_field "file", {onchange: 'this.form.submit();'}
-        .row
-          = link_to 'Download Sample', '/staff-inventory.csv', action: 'download'
+        %br
+        .col-md-6
+          .row
+            = form_for 'staff', url: import_staffs_path do |f|
+              = f.file_field "file", {onchange: 'this.form.submit();'}
+          %br
+          .row
+            = link_to 'Download Sample', '/staff-inventory.csv', action: 'download'
+
+.modal.bd-example-modal-sm{"aria-hidden" => "true", "aria-labelledby" => "mySmallModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-dialog.modal-sm
+    .modal-content
+      .modal-header
+        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+          %span{"aria-hidden" => "true"} ×
+      .modal-body
+        %h6.align-body Are You Sure?
+      .modal-footer
+        %button.btn.btn-success.delete-staff{:type => "button"} Yes
+        %button.btn.btn-danger{"data-dismiss" => "modal", :type => "button"} No

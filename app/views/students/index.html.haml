@@ -2,29 +2,26 @@
   %li.nav-item
     %a.nav-link.active{"data-toggle" => "tab", :href => "#home"}= t 'global.students'
   %li.nav-item
-    %a.nav-link{"data-toggle" => "tab", :href => "#menu1"}= t 'global.upload'
-
+    %a.nav-link{"data-toggle" => "tab", :href => "#menu1", class: "fa fa-upload btn icon-space"}= t 'global.upload'
 .tab-content
   #home.tab-pane.container.active
     .card
       .card-body
-        .row
-          .col-md-4
-            %h4.card-title= t 'global.students'
-          .col-md-2
-            %h5= t 'global.standard'
-          .col-md-6
-            = select_tag 'standard', options_for_select(@standards.collect{ |s| [s.name, s.id] }), class: 'standard-select', include_blank: 'select class'
+        %h4
+          = t 'global.students'
+          = link_to "Create", new_student_path, class: 'btn-right btn-sm btn-default btn-primary btn-space'
+        .float-right.filter_data
+          = select_tag 'standard', options_for_select(@standards.collect{ |s| [s.name, s.id] }, @standards&.first&.id), class: 'standard-select filter_data', include_blank: 'select standard'
         .card-description
-
+        %br
         %table.table.table-striped#dttb
           %thead
-            %th= t 'students.reg_no'
-            %th= t 'students.roll_no'
-            %th= t 'students.name'
-            %th= t 'students.guardian_name'
-            %th= t 'students.guardian_mobile'
-            %th Delete
+            %th= t 'global.reg_no'
+            %th= t 'global.roll_no'
+            %th= t 'global.name'
+            %th= t 'global.guardian_name'
+            %th= t 'global.guardian_mobile'
+            %th Action
 
           %tbody
           = pagy_bootstrap_responsive_nav(@pagy).html_safe
@@ -32,11 +29,14 @@
     .card
       .card-body
         %h4 Upload student information
-        .row
-          = form_for 'student', url: students_path do |f|
-            = f.file_field "file", {onchange: 'this.form.submit();'}
-        .row
-          = link_to 'Download Sample', '/student-inventory.csv', action: 'download'
+        %br
+        .col-md-6
+          .row
+            = form_for 'student', url: import_students_path do |f|
+              = f.file_field "file", {onchange: 'this.form.submit();'}
+          %br
+          .row
+            = link_to 'Download Sample', '/student-inventory.csv', action: 'download'
 
 .modal.bd-example-modal-sm{"aria-hidden" => "true", "aria-labelledby" => "mySmallModalLabel", :role => "dialog", :tabindex => "-1"}
   .modal-dialog.modal-sm
@@ -45,8 +45,8 @@
         %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
           %span{"aria-hidden" => "true"} ×
       .modal-body
-        %h4.align-body Are You Sure?
+        %h6.align-body Are You Sure?
       .modal-footer
-        %button.btn.btn-primary.delete-student{:type => "button"} Yes
-        %button.btn.btn-secondary{"data-dismiss" => "modal", :type => "button"} No
+        %button.btn.btn-success.delete-student{:type => "button"} Yes
+        %button.btn.btn-danger{"data-dismiss" => "modal", :type => "button"} No
 

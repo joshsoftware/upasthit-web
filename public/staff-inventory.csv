@@ -1,13 +1,13 @@
-"Reg No","Mobile","Name","Designation"
-1006,6198223916,"Priyanka","Teacher"
-1007,6198223917,"Akshay","Teacher"
-1008,6198223918,"Parmod","Teacher"
-1009,6198223919,"Ganesh","Teacher"
-1010,6198223920,"Pooja","Teacher"
-1011,6198223921,"Pragati","Teacher"
-1012,6198223922,"Sachin","Teacher"
-1013,6198223923,"Ashuosh","Teacher"
-1014,6198223924,"Seema","Teacher"
-1015,6198223925,"Daina","Teacher"
-1016,6198223926,"Nita","Teacher"
-1017,6198223927,"Pinky","Teacher"
+Reg No,Mobile,First Name,Last Name,Designation,Pin,Preferred Language,Standard,Section
+1006,6198223916,Priyanka,,ClassTeacher,1001,English,1,A
+1007,6198223917,Akshay,,ClassTeacher,1001,Hindi,2,B
+1008,6198223918,Parmod,,ClassTeacher,1001,English,1,B
+1009,6198223919,Ganesh,,ClassTeacher,1001,English,1,C
+1010,6198223920,Pooja,,ClassTeacher,1001,English,,
+1011,6198223921,Pragati,,ClassTeacher,1001,English,,
+1012,6198223922,Sachin,,ClassTeacher,1001,English,,
+1013,6198223923,Ashuosh,,ClassTeacher,1001,English,,
+1014,6198223924,Seema,,ClassTeacher,1001,English,,
+1015,6198223925,Daina,,ClassTeacher,1001,English,,
+1016,6198223926,Nita,,ClassTeacher,1001,English,,
+1017,6198223927,Pinky,,ClassTeacher,1001,English,,

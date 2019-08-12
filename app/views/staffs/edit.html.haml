@@ -1,0 +1,45 @@
+.card.card-background-color
+  .card-header
+    %h4 Edit staff
+  .card-body
+    = simple_form_for(@staff, html: {class: 'form-inline'},url: staff_path) do |f|
+      = f.error_notification
+      .row      
+        .form-group.col-md-6
+
+          = f.input :mobile_number
+        .form-group.col-md-4
+          = f.input :pin
+
+      .row      
+        .form-group.col-md-6
+          = f.input :first_name
+        .form-group.col-md-4
+          = f.input :last_name
+      .row      
+        .form-group.align-multiselect
+          = f.input :standard_ids, :label => 'Standard',selected: @staff.standard_ids , :collection => @standards.collect {|u| [u.name, u.id]}, input_html: { class: 'standard_select', multiple: true} 
+        .form-group.col-md-4
+          = f.input :designation, input_html: {value: "ClassTeacher"}, disabled: true
+          
+      .row      
+        .form-group.align-multiselect
+          = f.input :preferred_language, :label => "Preferred Language",selected: @staff.preferred_language, collection: LOCALES.invert, input_html: { class: 'language_select'}, include_hidden: false
+            
+      .form-group
+        .float-right
+          = f.button :submit, class: 'btn btn-success btn-space'
+          = link_to 'Cancel', :back, class: 'btn btn-danger btn-add btn-space'
+
+:javascript
+  $(document).ready(function() {
+    $('.standard_select').multiselect({
+      includeSelectAllOption: true,
+      buttonWidth: '290px',
+      maxHeight: 200
+    });
+    $('.language_select').multiselect({
+      buttonWidth: '290px',
+      maxHeight: 200
+    });
+  })

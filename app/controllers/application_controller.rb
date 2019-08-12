@@ -2,7 +2,7 @@
 
 class ApplicationController < ActionController::Base
   include Pagy::Backend
-  protect_from_forgery with: :null_session
+  protect_from_forgery prepend: true
   before_action :set_locale
 
   private
@@ -25,7 +25,7 @@ class ApplicationController < ActionController::Base
   end
 
   def current_school
-    @current_school ||= School.first
+    @current_school = current_staff.school
   end
 
   def current_ability
@@ -34,9 +34,11 @@ class ApplicationController < ActionController::Base
 
   def after_sign_in_path_for(_resource)
     if current_staff.sign_in_count == 1
-      edit_staff_password_path
-    else
+      staff_edit_password_path(resource)
+    elsif current_staff.admin?
       root_path
+    elsif current_staff.super_admin?
+      schools_path
     end
   end
 end

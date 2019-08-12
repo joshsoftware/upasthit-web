@@ -1,33 +1,26 @@
-%nav.navbar.bg-dark-gradient.col-lg-12.col-12.p-0.fixed-top.navbar-inverse.d-flex.flex-row
-  %a.navbar-brand{:href => root_path}
-    %h3= t 'global.attendance'
-  - if staff_signed_in?
-    %ul.navbar-nav.ml-lg-5.d-flex.align-items-center.flex-row
-      %li.nav-item
-        %a.nav-link{ :href => standards_path }
-          %h5= t 'global.standard'
-      %li.nav-item
-        %a.nav-link{ :href => staffs_path }
-          %h5= t 'global.staff'
-      %li.nav-item
-        %a.nav-link{ :href => students_path }
-          %h5= t 'global.students'
-    %ul.navbar-nav.ml-lg-auto.d-flex.align-items-center.flex-row
-      - if current_page? locale: :"mr-IN"
+%nav.navbar.navbar-expand-sm.navbar-dark.standard-bg-color
+  .container-fluid
+    %a.navbar-brand{:href=> root_path} Schoolin
+    - if staff_signed_in?
+      %ul.navbar-nav.ml-lg-auto.d-flex.align-items-center.flex-row        
+        - if current_staff.school.present? 
+          %li.nav-item
+            %a.nav-link{ :href => standards_path } Attendance
+          %li.nav-item
+            %a.nav-link{ :href => schools_path } School Info
+          %li.nav-item
+            %a.nav-link{ :href => standards_path } Standard
+          %li.nav-item
+            %a.nav-link{ :href => staffs_path } Staff
+          %li.nav-item
+            %a.nav-link{ :href => students_path } Student Data
+          %li.nav-item
+            %a.nav-link{ :href => students_path } Settings
+          %li.nav-item
+            %a.nav-link{ :href => destroy_staff_session_path, method: :delete } Logout
+
+    - unless staff_signed_in?
+      %ul.navbar-nav.ml-lg-auto.d-flex.align-items-center.flex-row
         %li.nav-item
-          = link_to '<h5>Switch to English</h5>'.html_safe, locale: :en
-      - else
-        %li.nav-item
-          = link_to '<h5>Switch to Marathi</h5>'.html_safe, locale: :'mr-IN'
-      %li.nav-item
-        %a.nav-link.profile-pic
-          #{current_staff.full_name}
-          = image_tag 'face.jpg', class: 'rounded-circle'
-      %li.nav-item
-        %a.nav-link{ :href => destroy_staff_session_path, method: :delete }
-          %h5= t 'global.logout'
-  - unless staff_signed_in?
-    %ul.navbar-nav.ml-lg-auto.d-flex.align-items-center.flex-row
-      %li.nav-item
-        %a.nav-link{ :href => new_staff_session_path }
-          %h5= t 'global.login'
+          %a.nav-link{ :href => new_staff_session_path }
+            %h5= t 'global.login'

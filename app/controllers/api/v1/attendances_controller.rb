@@ -39,7 +39,7 @@ module Api
       end
 
       def attendance_params
-        params.permit(:standard, :school_code, :school_id, :date, :section, absent_roll_nos: [])
+        params.permit(:standard, :school_code, :school_id, :date, :section, :auth_token, absent_roll_nos: [])
       end
 
       def validate_authorized_sender

@@ -21,6 +21,8 @@
 #
 
 class Staff < ApplicationRecord
+  audited
+  include Discard::Model
   include Tokenable
   include Authenticable
   devise :trackable
@@ -28,18 +30,20 @@ class Staff < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
 
   def self.designations
-    %w[Admin ClassTeacher]
+    %w[Admin ClassTeacher SuperAdmin]
   end
 
   devise :database_authenticatable, :recoverable, :rememberable
-  belongs_to :school, class_name: "School", foreign_key: "school_id"
-  has_and_belongs_to_many :standards, join_table: :staffs_standards
+  belongs_to :school, optional: true
+  has_many :standards
 
+  validates_presence_of :school_id, unless: :super_admin?
   validates :pin, length: {is: 4}
-  validates :mobile_number, uniqueness: true, presence: true
+  validates_presence_of :mobile_number
+  validates_uniqueness_of :mobile_number, conditions: -> { where(discarded_at: nil) }
   validates :designation, inclusion: {in: Staff.designations}
 
-  delegate :admin?, :class_teacher?, to: :designation_enquiry
+  delegate :admin?, :class_teacher?, :super_admin?, to: :designation_enquiry
   validates :preferred_language, inclusion: {in: %w[en mr-IN hi-IN]}
 
   def designation_enquiry

@@ -32,14 +32,14 @@ module Import
       @standard_data = @data.map do |data|
         data[:sections].split(",").map do |section|
           Standard.new(standard: data[:standard], section: section,
-                      school_id: school_id, start_time: data[:start_time])
+                      school_id: school_id)
         end
       end
-      @standard_data.flatten
+      @standard_data.flatten!
     end
 
     def import_records
-      result = Standard.bulk_import!(@standard_data, recursive: true, validate_uniqueness: true)
+      result = Standard.bulk_import!(@standard_data, validate_uniqueness: true)
       @result = {records_added: result.ids.count}
     rescue ActiveRecord::RecordInvalid, ActiveRecord::RecordNotUnique
       errors.add(:base, "1": "Duplicate Standard record found")
@@ -48,9 +48,8 @@ module Import
 
     def options
       {
-        header_transformations: [key_mapping: key_mapping],
-        header_validations:     [required_headers: required_headers],
-        hash_validations:       [required_fields: required_fields]
+        header_validations: [required_headers: required_headers],
+        hash_validations:   [required_fields: required_fields]
       }
     end
 
@@ -59,13 +58,7 @@ module Import
     end
 
     def required_fields
-      %i[standard sections start_time]
-    end
-
-    def key_mapping
-      {
-        "start_time_(24_hour_format)": :start_time
-      }
+      %i[standard sections]
     end
   end
 end

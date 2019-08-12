@@ -1,0 +1,28 @@
+.card.card-background-color
+  .card-header
+    %h4 Edit standard
+  .card-body
+    = simple_form_for(@standard, html: {class: 'form-inline'},url: standard_path(@standard)) do |f|
+      = f.error_notification
+      .row      
+        .form-group.col-md-6
+
+          = f.input :standard
+        .form-group.col-md-4
+          = f.input :section
+      .row      
+        .form-group.col-md-6
+          = f.input :staff_id, :label => 'Class Teacher',:collection => @staffs.collect {|u| [u.full_name, u.id]}.insert(0, ['select teacher', '']),  input_html: { class: 'staff_select',include_blank: true}, include_hidden: false
+      .form-group
+        .float-right
+          = f.button :submit, class: 'btn btn-success btn-space'
+          = link_to 'Cancel', :back, class: 'btn btn-danger btn-add btn-space'
+
+:javascript
+  $(document).ready(function() {
+    $('.staff_select').find('option').eq(0).remove();
+    $('.staff_select').multiselect({
+      buttonWidth: '290px',
+      maxHeight: 200
+    });
+  })

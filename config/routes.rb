@@ -7,9 +7,29 @@ Rails.application.routes.draw do
       sessions: "sessions"
     }
 
-    resources :students, only: %i[index create destroy]
-    resources :standards, only: %i[index create]
-    resources :staffs, only: %i[index create]
+    resources :schools do
+      collection do
+        get "/login", to: "schools#login"
+      end
+    end
+    resources :attendances
+    resources :students do
+      collection do
+        post "/import", to: "students#import"
+      end
+    end
+    resources :standards do
+      collection do
+        post "/import", to: "standards#import"
+      end
+    end
+    resources :staffs do
+      get "/edit_password", to: "staffs#edit_password"
+      put "/update_password", to: "staffs#update_password"
+      collection do
+        post "/import", to: "staffs#import"
+      end
+    end
   end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   api_version(module: "Api::V1", path: {value: "v1"}, default: true) do

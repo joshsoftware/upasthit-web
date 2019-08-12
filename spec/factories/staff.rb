@@ -11,7 +11,7 @@ FactoryBot.define do
     association :school
     factory :staff_with_standards do
       after(:create) do |staff|
-        create_list(:standard_with_students, 2, school_id: staff.school_id, staffs: [staff])
+        create_list(:standard_with_students, 2, school_id: staff.school_id, staff: staff)
       end
     end
   end

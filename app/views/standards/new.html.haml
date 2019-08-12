@@ -1,0 +1,22 @@
+.card.card-background-color
+  .card-header
+    %h4 Create standard
+  .card-body
+    = simple_form_for(@standard, html: {class: 'form-inline'},url: standards_path) do |f|
+      = f.error_notification
+      .row      
+        .form-group.col-md-6
+
+          = f.input :standard
+        .form-group.col-md-4
+          = f.input :section
+            
+      .form-group
+        .float-right
+          = f.button :submit, class: 'btn btn-success btn-space'
+          = link_to 'Cancel', :back, class: 'btn btn-danger btn-add btn-space'
+
+:javascript
+  $(document).ready(function() {
+
+  })

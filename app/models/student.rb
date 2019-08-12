@@ -20,6 +20,8 @@
 #
 
 class Student < ApplicationRecord
+  include Discard::Model
+  audited
   translates :first_name, :last_name
   globalize_accessors locales: %i[en mr-IN hi-IN], attributes: %i[first_name last_name]
   has_many :attendances, class_name: "Attendance"
@@ -29,11 +31,19 @@ class Student < ApplicationRecord
   validates :registration_no, :roll_no, :gender, :dob, :guardian_name,
             :guardian_mobile_no, :preferred_language, presence: true
 
-  validates :registration_no, uniqueness: true
+  validates_uniqueness_of :registration_no, conditions: -> { where(discarded_at: nil) }
   validates :preferred_language, inclusion: {in: %w[en mr-IN hi-IN]}
 
   def full_name
-    first_name + " " + last_name
+    first_name.to_s + " " + last_name.to_s
+  end
+
+  after_discard do
+    attendances.discard_all
+  end
+
+  after_undiscard do
+    attendances.undiscard_all
   end
 end
 

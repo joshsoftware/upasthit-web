@@ -33,7 +33,8 @@ module Import
         if data[:mobile_number] !~ /^[6-9]\d{9}$/
           errors.add(:base, "#{index}": "Mobile no. format not correct, line no: #{index + 1}")
         else
-          Staff.new(data.merge(school_id: school_id, password: "12345678"))
+          standard_id = Standard.find_by(standard: data[:standard], section: data[:section]).id
+          Staff.new(data.merge(school_id: school_id, password: "12345678", standard_ids: [standard_id]))
         end
       end
       errors.blank?
@@ -56,17 +57,19 @@ module Import
     end
 
     def required_headers
-      %i[registration_no mobile_number name designation]
+      %i[registration_no mobile_number first_name designation]
     end
 
     def required_fields
-      %i[registration_no mobile_number name designation]
+      %i[registration_no mobile_number first_name designation]
     end
 
     def key_mapping
       {
-        reg_no: :registration_no,
-        mobile: :mobile_number
+        reg_no:     :registration_no,
+        mobile:     :mobile_number,
+        first_name: :first_name,
+        last_name:  :last_name
       }
     end
   end

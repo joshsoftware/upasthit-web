@@ -14,23 +14,163 @@
 @import "bootstrap";
 @import "datatables";
 @import "rails_bootstrap_forms";
+@import "bootstrap-multiselect";
 @import "font-awesome";
+@import "bootstrap-datepicker";
 @import "style";
 @import "select2";
 
+body{
+  font-family: "Arial Black", Gadget, sans-serif;
+}
+.standard-bg-color{
+  background-color: #4D7BC4;
+}
+.standard-text-color{
+  color: #4D7BC4;
+}
+.container{
+  max-width: 90%;
+}
+.navbar ul.navbar-nav li{
+  font-size: 14px;
+}
 .bg-dark-gradient {
   background: #686a6b;
   background: linear-gradient(90deg, #3d3f42, #758188);
 }
-
+.edit-btn{
+  background-color: #ffa500;
+  color: white;
+}
 .white{
   color: #ffff;
 }
+.card{
+  border-color: white;
+}
 
+.card-center{
+  width: 83%;
+  margin:0 auto;
+}
+
+.card-background-color{
+  background-color: #eef0f9;
+}
 .align-body{
   color: black;
   padding: auto;
 }
 .tab-pane.container{
   margin-top: 30px;
+}
+.card-header{
+  height: 45px;
+  vertical-align: top;
+  font-weight: bold;
+}
+.simple_form label {
+  width: 140px;
+  text-align: right;
+  margin-left: 7px;
+  margin-right: 13px;
+  margin-top: 32px;
+  margin-bottom: 50px;
+}
+.content-wrapper{
+  background-color: white;
+}
+.btn-space {
+  margin-right: 5px;
+}
+.form-inline label {
+  text-align: right;
+  justify-content: flex-end;
+}
+.form-inline .form-control {
+  width: 270px;
+  margin-top: auto;
+}
+.float-right {
+    margin-left: 667px;
+    margin-top: 24px;
+}
+.select2-container .select2-selection--single{
+  height: 41px;
+  width: 270px;
+  border: 0px;
+  background-color: #0908081A;
+  
+}
+.navbar-default {
+    background-color: #2E4053;
+}
+.btn-group > .btn:first-child{
+  background-color: #0908081A ;
+  width: 268px !important;
+  position: inherit;
+}
+.select2-container--default {
+  padding-left: 30px;
+  width: 270px;
+}
+.select2-container--open .select2-dropdown{
+  left: 30px;
+}
+.form-inline .multiselect-container label.checkbox, .form-inline .multiselect-container label.radio{
+  text-align: left;
+  width: 330px;
+  padding-right: 10px;
+  justify-content:  left;
+  right: 44px;
+}
+.show > .dropdown-menu {
+  right: 18px;
+}
+.form-inline .multiselect-container li a label.checkbox input[type="checkbox"], .form-inline .multiselect-container li a label.radio input[type="radio"]{
+  margin-right: 10px;
+}
+.align-multiselect{
+  padding-left: 13px;
+}
+div.dataTables_wrapper div.dataTables_filter input{
+  border-color: #0908081A ;
+}
+.filter_data{
+  height: 33px !important; 
+  padding-left: 146px !important;
+}
+.select2-container--open .select2-dropdown--below{
+  min-width: unset !important;
+  width: 274px !important;
+  position: inherit !important;
+}
+.btn-right{
+  float: right;
+}
+.small-card-center{
+  width: 41.5em;
+  margin:0 auto;
+}
+th {
+  text-align: center;
+  font-size: 13px;
+  font-weight: bold;
+}
+td {
+  text-align: center;
+}
+
+.btn-show{
+  background-color:  #8d9db6;
+  color: white;
+}
+.label{
+  text-align: right;
+  justify-content: flex-end;
+  font-weight: bold;
+}
+.fa-upload:before{
+  padding-right: 5px;
 }
