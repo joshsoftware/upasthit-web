@@ -5,6 +5,7 @@ module Api
     module Staffs
       class SessionsController < BaseController
         before_action :validate_mobile_number, only: :sync
+        include AuthenticationConcern
 
         def sync
           service = SyncService.new(staff_params)
@@ -22,7 +23,7 @@ module Api
         end
 
         def staff_params
-          params.permit(:id, :mobile_number)
+          {mobile_number: request.headers[Figaro.env.X_USER_MOB_NUM]}
         end
       end
     end

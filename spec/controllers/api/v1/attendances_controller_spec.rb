@@ -10,9 +10,11 @@ RSpec.describe Api::V1::AttendancesController, type: :controller do
   let!(:standard) { create(:standard, school_id: school.id) }
   let!(:students) { create_list(:student, 4, school_id: school.id, standard_id: standard.id) }
 
+
   describe "POST #create" do
     context "with valid params" do
       before do
+        add_headers
         valid_params = {
           standard:        Standard.last.standard,
           school_code:     school.school_code,
@@ -40,6 +42,7 @@ RSpec.describe Api::V1::AttendancesController, type: :controller do
 
     context "with invalid params" do
       before do
+        add_headers
         invalid_params = {
           standard:        1000,
           school_code:     school.school_code,
@@ -119,6 +122,9 @@ RSpec.describe Api::V1::AttendancesController, type: :controller do
   end
 
   describe "GET : sync API" do
+    before do
+      add_headers
+    end
     context "On success" do
       it "should return json of attendances starting from date given till currrent date" do
         get :sync, params: {school_id: school.id, date: date}
@@ -158,6 +164,7 @@ RSpec.describe Api::V1::AttendancesController, type: :controller do
       end
 
       it "school_id is not valid" do
+        add_headers
         get :sync, params: {date: date, school_id: 11_212}
         expect(response.status).to eq(400)
         response_body = JSON.parse(response.body)
@@ -165,4 +172,9 @@ RSpec.describe Api::V1::AttendancesController, type: :controller do
       end
     end
   end
+
+  def add_headers
+    request.headers[Figaro.env.X_USER_PIN] = staff.pin
+    request.headers[Figaro.env.X_USER_MOB_NUM] = staff.mobile_number
+  end  
 end

@@ -3,6 +3,8 @@
 module Api
   module V1
     class AttendancesController < V1::BaseController
+
+      include AuthenticationConcern
       before_action :validate_authorized_sender, :validate_message, only: :sms_callback
       before_action :validate_date_present, :validate_date_format, only: :sync
 
