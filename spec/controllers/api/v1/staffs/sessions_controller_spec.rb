@@ -10,7 +10,7 @@ RSpec.describe Api::V1::Staffs::SessionsController, type: :controller do
     context "On success" do
       it "should return json of school data" do
         add_headers
-        get :sync, params: {mobile_number: staff.mobile_number}
+        get :sync
         expect(response.status).to eq(200)
         response_body = JSON.parse(response.body)
         expect(response_body["school"].present?).to eq true
@@ -20,22 +20,21 @@ RSpec.describe Api::V1::Staffs::SessionsController, type: :controller do
 
       it "should return json if headers are present" do
         add_headers
-        get :sync, params: {mobile_number: staff.mobile_number}
+        get :sync
         expect(response.status).to eq(200)
       end
     end
 
     context "should fail if" do
       it "staff does not exist" do
-        add_headers
-        get :sync, params: {mobile_number: "9798845220"}
-        expect(response.status).to eq(400)
-        response_body = JSON.parse(response.body)
-        expect(response_body["errors"]["base"]).to eq [I18n.t("error.invalid_mobile_no")]
+        request.headers[Figaro.env.X_USER_PIN] = "1234"
+        request.headers[Figaro.env.X_USER_MOB_NUM] = "9798845220"
+        get :sync
+        expect(response.status).to eq(401)
       end
 
       it "headers are not present" do
-        get :sync, params: {mobile_number: "9798845220"}
+        get :sync
         expect(response.status).to eq(401)
       end
 

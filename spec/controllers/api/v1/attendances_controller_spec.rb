@@ -4,6 +4,7 @@ require "rails_helper"
 
 RSpec.describe Api::V1::AttendancesController, type: :controller do
   let!(:school) { create(:school) }
+  let!(:school2) { create(:school)}
   let!(:staff) { create(:staff_with_standards, school_id: school.id) }
   let!(:date) { (DateTime.now - 1.month).strftime("%d/%m/%Y") }
   let(:future_date) { (DateTime.now + 3.months).strftime("%d/%m/%Y") }
@@ -122,11 +123,9 @@ RSpec.describe Api::V1::AttendancesController, type: :controller do
   end
 
   describe "GET : sync API" do
-    before do
-      add_headers
-    end
     context "On success" do
       it "should return json of attendances starting from date given till currrent date" do
+        add_headers
         get :sync, params: {school_id: school.id, date: date}
         expect(response.status).to eq(200)
         response_body = JSON.parse(response.body)
@@ -136,6 +135,7 @@ RSpec.describe Api::V1::AttendancesController, type: :controller do
 
     context "should fail if" do
       it "date is not given in params" do
+        add_headers
         get :sync, params: {school_id: school.id}
         expect(response.status).to eq(422)
         response_body = JSON.parse(response.body)
@@ -143,6 +143,7 @@ RSpec.describe Api::V1::AttendancesController, type: :controller do
       end
 
       it "date format is invalid" do
+        add_headers
         get :sync, params: {school_id: school.id, date: "12.01.2019"}
         expect(response.status).to eq(422)
         response_body = JSON.parse(response.body)
@@ -150,6 +151,7 @@ RSpec.describe Api::V1::AttendancesController, type: :controller do
       end
 
       it "date given is in future" do
+        add_headers
         get :sync, params: {date: future_date, school_id: school.id}
         expect(response.status).to eq(400)
         response_body = JSON.parse(response.body)
@@ -157,18 +159,27 @@ RSpec.describe Api::V1::AttendancesController, type: :controller do
       end
 
       it "school_id is not given in params" do
+        add_headers
         get :sync, params: {date: date}
-        expect(response.status).to eq(400)
+        expect(response.status).to eq(401)
         response_body = JSON.parse(response.body)
-        expect(response_body["errors"]["school_id"]).to eq ["can't be blank"]
+        expect(response_body["message"]).to eq "Either school id is not provided or invalid"
       end
 
       it "school_id is not valid" do
         add_headers
         get :sync, params: {date: date, school_id: 11_212}
-        expect(response.status).to eq(400)
+        expect(response.status).to eq(401)
         response_body = JSON.parse(response.body)
-        expect(response_body["errors"]["base"]).to eq ["Invalid School ID"]
+        expect(response_body["message"]).to eq "Either school id is not provided or invalid"
+      end
+
+      it "different staff accessing the school data" do
+        add_headers
+        get :sync, params: {date: date, school_id: school2.id}
+        expect(response.status).to eq(401)
+        response_body = JSON.parse(response.body)
+        expect(response_body["message"]).to eq 'This staff dont have access to school data'
       end
     end
   end

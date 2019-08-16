@@ -8,6 +8,10 @@ resource "Sessions" do
   let(:school) { create(:school) }
   let(:staff_1) { create(:staff_with_standards, school_id: school.id) }
   let(:staff_2) { create(:staff_with_standards, school_id: school.id) }
+  authentication :apiKey, :mobile_number, name: "#{Figaro.env.X_USER_MOB_NUM}", description: 'Some description'
+  authentication :apiKey, :pin, description: 'Pin', name: "#{Figaro.env.X_USER_PIN}"
+  let(:mobile_number) { staff_1.mobile_number }
+  let(:pin) { staff_1.pin }
 
   before do
     allow_any_instance_of(SchoolTiming).to receive(:update_cron_tab).and_return(true)
