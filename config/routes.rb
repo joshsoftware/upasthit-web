@@ -16,7 +16,7 @@ Rails.application.routes.draw do
     resources :standards, only: [:index]
     resources :attendances, only: [:create] do
       collection do
-        post :sms_callback
+        match '/sms_callback' => 'attendances#sms_callback', via: [:get, :post]
         get  :sync
       end
     end
