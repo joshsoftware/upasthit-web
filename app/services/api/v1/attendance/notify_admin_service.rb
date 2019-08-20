@@ -6,7 +6,7 @@ module Api
       class NotifyAdminService
         def initialize(school_id, date)
           @school_id = school_id
-          @date = Time.zone.parse(date)
+          @date = Time.zone.parse(date.to_s)
         end
 
         def call

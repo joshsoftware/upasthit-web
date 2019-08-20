@@ -11,19 +11,21 @@ class SendSmsService
   end
 
   def call
-    perform &&
-    sms_sent?
-    update_attendance unless admin?
+    perform #&&
+    #sms_sent?
+    #update_attendance unless admin?
   end
 
   def perform
     @response = Net::HTTP.post_form(
-      URI.parse(Figaro.env.TEXT_LOCAL_URL),
-      apiKey:      Figaro.env.MSG_API_KEY,
-      sender:      "TXTLCL",
+      URI.parse(Figaro.env.SMS_URL),
+      username:    Figaro.env.SMS_USERNAME,
+      pass:        Figaro.env.SMS_PASSWORD,
+      senderid:    Figaro.env.SMS_SENDERID,
+      dest_mobileno: @mobile_number,
       message:     @message.squish,
-      numbers:     @mobile_number,
-      receipt_url: ""
+      response: Figaro.env.SMS_RESPONSE,
+      Msgtype: Figaro.env.SMS_MSGTYPE
     )
   end
 
@@ -32,7 +34,7 @@ class SendSmsService
   end
 
   def sms_sent?
-    @sms_sent = JSON.parse(@response.body)["status"] == "success"
+    true #@sms_sent = JSON.parse(@response.body)["status"] == "success"
   end
 
   private
