@@ -6,6 +6,7 @@ module Api
 
       include AuthenticationConcern
       before_action :validate_authorized_sender, :validate_message, only: :sms_callback
+      before_action :validate_api_auth_token, only: :sms_callback_pinnacle
       before_action :validate_staff_of_school, :validate_date_present, :validate_date_format, only: :sync
 
       def create
@@ -23,6 +24,17 @@ module Api
         else
           render json: {errors: create_service.errors.messages}, status: 400
         end
+      end
+
+      def sms_callback_pinnacle
+        #same service can be used but make data compatible to it.
+        # sms_callback_params = parse_message
+        # if create_service(sms_callback_params).create
+        #   render json: create_service.result
+        # else
+        #   render json: {errors: create_service.errors.messages}, status: 400
+        # end
+        render json: {message: "Callback executed successfully for pinnacle"}
       end
 
       def sync
@@ -86,6 +98,10 @@ module Api
 
       def valid_school_id?
         School.find_by_id(params[:school_id]).present? ? true : false
+      end
+
+      def validate_api_auth_token
+        render json: {message: I18n.t("error.invalid_token")}, status: 401 unless Figaro.env.API_AUTH_TOKEN_VALUE === request.headers[Figaro.env.API_AUTH_TOKEN]
       end
     end
   end

@@ -9,6 +9,10 @@ X_USER_JWT_TOKEN:  X-User-Jwt-Token
 X_USER_MOB_NUM: X-User-Mob-Num
 X_USER_PIN: X-User-Pin
 
+#API Authentication
+API_AUTH_TOKEN: Api-Auth-Token
+API_AUTH_TOKEN_VALUE: "be9d3a483fdcd46b1ac2ab604ec038e70bac42f0"
+
 MSG_API_KEY: "wt8PM1zpo+k-RgwdZTuU5JThwpf9akXpq9aIoNibZW"
 TEXT_LOCAL_URL: 'http://api.textlocal.in/send/'
 AUTHORISED_SENDER: "919923671649"

@@ -4,7 +4,7 @@ module AuthenticationConcern
   extend ActiveSupport::Concern
 
   included do
-    before_action :authenticate_staff, except: :sms_callback
+    before_action :authenticate_staff, except: [:sms_callback, :sms_callback_pinnacle]
   end
 
   def pin_mob_from_header
