@@ -122,6 +122,26 @@ RSpec.describe Api::V1::AttendancesController, type: :controller do
     end
   end
 
+  describe "POST #sms_callback_pinnacle" do
+    context "with valid header" do
+      before do
+        request.headers[Figaro.env.PINNACLE_AUTH_TOKEN] = Figaro.env.PINNACLE_AUTH_TOKEN_VALUE
+        post :sms_callback_pinnacle
+      end
+
+      it { is_expected.to respond_with 200 }
+    end
+
+    context "with invalid header" do
+      before do
+        request.headers[Figaro.env.PINNACLE_AUTH_TOKEN] = "cdafdfadfdfdfaf"
+        post :sms_callback_pinnacle
+      end
+
+      it { is_expected.to respond_with 401 }
+    end
+  end
+
   describe "GET : sync API" do
     context "On success" do
       it "should return json of attendances starting from date given till currrent date" do
