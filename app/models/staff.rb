@@ -33,6 +33,7 @@ class Staff < ApplicationRecord
   devise :database_authenticatable, :recoverable, :rememberable
   belongs_to :school, class_name: "School", foreign_key: "school_id"
   has_many :standards, through: :st
+  has_many :sms_logs, as: :sender
   has_and_belongs_to_many :standards, join_table: :staffs_standards
 
   validates :pin, length: {is: 4}

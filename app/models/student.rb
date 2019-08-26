@@ -23,6 +23,7 @@ class Student < ApplicationRecord
   translates :first_name, :last_name
   globalize_accessors locales: %i[en mr-IN hi-IN], attributes: %i[first_name last_name]
   has_many :attendances, class_name: "Attendance"
+  has_many :sms_logs, as: :receiver
   belongs_to :standard, class_name: "Standard", foreign_key: "standard_id"
   belongs_to :school, class_name: "School", foreign_key: "school_id"
 
