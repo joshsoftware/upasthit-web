@@ -8,7 +8,7 @@ module AuthenticationConcern
   end
 
   def pin_mob_from_header
-    [request.headers[Figaro.env.X_USER_MOB_NUM], request.headers[Figaro.env.X_USER_PIN] ]
+    [request.headers[Figaro.env.X_USER_MOB_NUM], request.headers[Figaro.env.X_USER_PIN]]
   end
 
   def render_unauthorized

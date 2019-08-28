@@ -4,13 +4,12 @@ require "rails_helper"
 
 RSpec.describe Api::V1::AttendancesController, type: :controller do
   let!(:school) { create(:school) }
-  let!(:school2) { create(:school)}
+  let!(:school2) { create(:school) }
   let!(:staff) { create(:staff_with_standards, school_id: school.id) }
   let!(:date) { (DateTime.now - 1.month).strftime("%d/%m/%Y") }
   let(:future_date) { (DateTime.now + 3.months).strftime("%d/%m/%Y") }
   let!(:standard) { create(:standard, school_id: school.id) }
   let!(:students) { create_list(:student, 4, school_id: school.id, standard_id: standard.id) }
-
 
   describe "POST #create" do
     context "with valid params" do
@@ -199,13 +198,13 @@ RSpec.describe Api::V1::AttendancesController, type: :controller do
         get :sync, params: {date: date, school_id: school2.id}
         expect(response.status).to eq(401)
         response_body = JSON.parse(response.body)
-        expect(response_body["message"]).to eq 'This staff dont have access to school data'
+        expect(response_body["message"]).to eq "This staff dont have access to school data"
       end
     end
   end
 
   def add_headers
-    request.headers[Figaro.env.X_USER_PIN] = staff.pin
     request.headers[Figaro.env.X_USER_MOB_NUM] = staff.mobile_number
-  end  
+    request.headers[Figaro.env.X_USER_PIN] = staff.pin
+  end
 end

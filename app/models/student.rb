@@ -20,18 +20,16 @@
 #
 
 class Student < ApplicationRecord
-  translates :first_name, :last_name
+  translates :last_name, :first_name
   globalize_accessors locales: %i[en mr-IN hi-IN], attributes: %i[first_name last_name]
   has_many :attendances, class_name: "Attendance"
   has_many :sms_logs, as: :receiver
   belongs_to :standard, class_name: "Standard", foreign_key: "standard_id"
   belongs_to :school, class_name: "School", foreign_key: "school_id"
 
-  validates :registration_no, :roll_no, :gender, :dob, :guardian_name,
-            :guardian_mobile_no, :preferred_language, presence: true
-
-  validates :registration_no, uniqueness: true
+  validates :roll_no, :gender, :dob, :guardian_name, :guardian_mobile_no, :preferred_language, :registration_no, presence: true
   validates :preferred_language, inclusion: {in: %w[en mr-IN hi-IN]}
+  validates :registration_no, uniqueness: true
 
   def full_name
     first_name + " " + last_name

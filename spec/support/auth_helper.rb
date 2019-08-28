@@ -1,6 +1,7 @@
+# frozen_string_literal: true
+
 module AuthHelpers
   def sign_in(staff: nil)
-    byebug
     @staff = staff || FactoryBot.create(:staff)
     @staff.set_auth_token
     toggle_session(@staff.auth_token)
@@ -11,9 +12,9 @@ module AuthHelpers
     toggle_session
   end
 
-  def toggle_session(auth_token = nil, jwt_token = nil)
+  def toggle_session(auth_token=nil, jwt_token=nil)
     if respond_to?(:header)
-      header 'Content-Type', 'application/json'
+      header "Content-Type", "application/json"
       header Figaro.env.X_USER_AUTH_TOKEN, auth_token
       header Figaro.env.X_USER_JWT_TOKEN, jwt_token
     else
