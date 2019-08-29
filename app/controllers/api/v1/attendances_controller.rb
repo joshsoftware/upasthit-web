@@ -83,7 +83,7 @@ module Api
 
       def validate_staff_of_school
         if valid_school_id?
-          Staff.find_by(mobile_number: pin_mob_from_header[0], pin: pin_mob_from_header[1], school_id: params[:school_id]).present? ? (return true) : (render json: {message: I18n.t("error.staff_cant_access_school")}, status: 401)
+          staff_present? ? (return true) : (render json: {message: I18n.t("error.staff_cant_access_school")}, status: 401)
         else
           render json: {message: I18n.t("error.invalid_school")}, status: 401
         end
@@ -95,6 +95,10 @@ module Api
 
       def validate_api_auth_token
         render json: {message: I18n.t("error.invalid_token")}, status: 401 unless Figaro.env.PINNACLE_AUTH_TOKEN_VALUE == request.headers[Figaro.env.PINNACLE_AUTH_TOKEN]
+      end
+
+      def staff_present?
+        Staff.find_by(mobile_number: pin_mob_from_header[0], pin: pin_mob_from_header[1], school_id: params[:school_id]).present?
       end
     end
   end
