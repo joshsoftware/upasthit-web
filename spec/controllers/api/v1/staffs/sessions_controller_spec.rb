@@ -39,10 +39,10 @@ RSpec.describe Api::V1::Staffs::SessionsController, type: :controller do
       end
 
       it "headers are not valid" do
-        request.headers[Figaro.env.X_USER_PIN] = 12345
-        request.headers[Figaro.env.X_USER_MOB_NUM] = 9798845220
+        request.headers[Figaro.env.X_USER_PIN] = "12345"
+        request.headers[Figaro.env.X_USER_MOB_NUM] = "9798845220"
         get :sync, params: {mobile_number: staff.mobile_number}
-        expect(response.status).to eq(401)        
+        expect(response.status).to eq(401)
       end
     end
   end
@@ -51,5 +51,4 @@ RSpec.describe Api::V1::Staffs::SessionsController, type: :controller do
     request.headers[Figaro.env.X_USER_PIN] = staff.pin
     request.headers[Figaro.env.X_USER_MOB_NUM] = staff.mobile_number
   end
-
 end

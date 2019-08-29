@@ -66,10 +66,11 @@ gem "versionist"
 gem "whenever"
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
+  gem "byebug"
   gem "ffaker"
   gem "pry"
   gem "rspec_api_documentation"
-  gem "rubocop", "~> 0.72.0", require: false
+  gem "rubocop", "~> 0.74.0", require: false
   gem "simplecov", require: false
 end
 
