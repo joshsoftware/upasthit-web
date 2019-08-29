@@ -44,6 +44,10 @@ en:
     not_trusted_sender: 'SMS Sender is not authorized'
     absent_date: "Please enter date"
     date_invalid_format: "Invalid Date"
+    staff_cant_access_school: 'This staff dont have access to school data'
+    absent_school_id: "School id is not present"
+    invalid_school: "Either school id is not provided or invalid"
+    invalid_token: "Invalid token"
   attendance:
     created: 'Attendance Created Successfully.'
     failed: 'Unable to create attendance.'

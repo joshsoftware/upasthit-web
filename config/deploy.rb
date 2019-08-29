@@ -17,6 +17,8 @@ set :repository, 'git@github.com:joshsoftware/upasthit-web.git'
 set :branch, 'master'
 set :user, 'ubuntu'
 set :forward_agent, true
+set :shared_files, fetch(:shared_files, []).push('config/application.yml')
+#'config/database.yml', 'config/audit_database.yml', 'config/south_database.yml', 'config/secrets.yml', 'config/smtp_settings.yml', 'config/sidekiq.yml'
 
 # Optional settings:
 #   set :user, 'foobar'          # Username in the server to SSH to.
@@ -44,6 +46,7 @@ end
 # All paths in `shared_dirs` and `shared_paths` will be created on their own.
 task :setup do
   # command %{rbenv install 2.3.0 --skip-existing}
+  command %[touch "#{fetch(:shared_path)}/config/application.yml"]
 end
 
 desc "Deploys the current version to the server."

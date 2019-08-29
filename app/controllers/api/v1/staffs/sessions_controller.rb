@@ -4,7 +4,7 @@ module Api
   module V1
     module Staffs
       class SessionsController < BaseController
-        before_action :validate_mobile_number, only: :sync
+        include AuthenticationConcern
 
         def sync
           service = SyncService.new(staff_params)
@@ -17,12 +17,8 @@ module Api
 
         private
 
-        def validate_mobile_number
-          render json: {message: I18n.t("error.absent_mobile_no")}, status: 422 unless staff_params[:mobile_number].present?
-        end
-
         def staff_params
-          params.permit(:id, :mobile_number)
+          {mobile_number: request.headers[Figaro.env.X_USER_MOB_NUM]}
         end
       end
     end
