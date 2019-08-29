@@ -73,6 +73,7 @@ GEM
       actionpack (>= 5.0)
       activemodel (>= 5.0)
     builder (3.2.3)
+    byebug (11.0.1)
     chronic (0.10.2)
     coderay (1.1.2)
     coffee-rails (4.2.2)
@@ -237,7 +238,7 @@ GEM
       activesupport (>= 3.0.0)
       mustache (~> 1.0, >= 0.99.4)
       rspec (~> 3.0)
-    rubocop (0.72.0)
+    rubocop (0.74.0)
       jaro_winkler (~> 1.5.1)
       parallel (~> 1.10)
       parser (>= 2.6)
@@ -329,6 +330,7 @@ DEPENDENCIES
   bootsnap (>= 1.1.0)
   bootstrap
   bootstrap_form (>= 4.2.0)
+  byebug
   coffee-rails (~> 4.2)
   database_cleaner (~> 1.6.1)
   devise
@@ -356,7 +358,7 @@ DEPENDENCIES
   rspec-rails (~> 3.5)
   rspec-sidekiq
   rspec_api_documentation
-  rubocop (~> 0.72.0)
+  rubocop (~> 0.74.0)
   sass-rails (~> 5.0)
   select2-rails
   shoulda
@@ -374,4 +376,4 @@ RUBY VERSION
    ruby 2.6.2p47
 
 BUNDLED WITH
-   1.17.2
+   1.17.3
