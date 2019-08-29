@@ -26,8 +26,12 @@ module Api
       end
 
       def sms_callback_pinnacle
-        # once callback is implemented then we will add code here and update specs also
-        render json: {message: "Callback executed successfully for pinnacle"}
+        sms_callback_params = parse_pinnacle_message
+        if create_service(sms_callback_params).create
+          render json: create_service.result
+        else
+          render json: {errors: create_service.errors.messages}, status: 400
+        end
       end
 
       def sync
@@ -70,6 +74,17 @@ module Api
           standard:        data[2].split("-").first,
           section:         data[2].split("-").second,
           absent_roll_nos: data[3..]
+        }
+      end
+
+      def parse_pinnacle_message
+        data = params[:message].split(/[',', ' ']/).map {|k| k.gsub("\n", "") }
+        {
+          date:            data[1],
+          school_code:     data[2],
+          standard:        data[3].split("-").first,
+          section:         data[3].split("-").second,
+          absent_roll_nos: data[4..]
         }
       end
 

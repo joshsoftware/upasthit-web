@@ -9,6 +9,7 @@ X_USER_JWT_TOKEN:  X-User-Jwt-Token
 X_USER_MOB_NUM: X-User-Mob-Num
 X_USER_PIN: X-User-Pin
 
+
 #API Authentication
 API_AUTH_TOKEN: Api-Auth-Token
 API_AUTH_TOKEN_VALUE: "add key here"
@@ -16,6 +17,13 @@ API_AUTH_TOKEN_VALUE: "add key here"
 MSG_API_KEY: "wt8PM1zpo+k-RgwdZTuU5JThwpf9akXpq9aIoNibZW"
 TEXT_LOCAL_URL: 'http://api.textlocal.in/send/'
 AUTHORISED_SENDER: "919923671649"
+
+SMS_URL: 'http://www.smsjust.com/sms/user/urlsms.php?'
+SMS_USERNAME: 'joshsoftware'
+SMS_PASSWORD: 'R$e!j2B9'
+SMS_SENDERID: 'DEMOOO'
+SMS_RESPONSE: 'Y'
+SMS_MSGTYPE: 'txt'
 
 development:
   DATABASE: 'absentee_development'
