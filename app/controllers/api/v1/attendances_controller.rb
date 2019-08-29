@@ -3,7 +3,6 @@
 module Api
   module V1
     class AttendancesController < V1::BaseController
-
       include AuthenticationConcern
       before_action :validate_authorized_sender, :validate_message, only: :sms_callback
       before_action :validate_api_auth_token, only: :sms_callback_pinnacle
@@ -27,12 +26,12 @@ module Api
       end
 
       def sms_callback_pinnacle
-        #once callback is implemented then we will add code here and update specs also
+        # once callback is implemented then we will add code here and update specs also
         render json: {message: "Callback executed successfully for pinnacle"}
       end
 
       def sync
-        service = Attendance::SyncService.new(attendance_params)
+        service = Api::V1::Attendance::SyncService.new(attendance_params)
         if service.sync
           render json: service.result
         else
@@ -84,9 +83,9 @@ module Api
 
       def validate_staff_of_school
         if valid_school_id?
-          Staff.find_by(mobile_number: pin_mob_from_header[0], pin: pin_mob_from_header[1], school_id: params[:school_id]).present? ? (return true) : (render json: { message: I18n.t("error.staff_cant_access_school")}, status: 401)
+          staff_present? ? (return true) : (render json: {message: I18n.t("error.staff_cant_access_school")}, status: 401)
         else
-          render json: { message: I18n.t("error.invalid_school")}, status: 401
+          render json: {message: I18n.t("error.invalid_school")}, status: 401
         end
       end
 
@@ -95,7 +94,11 @@ module Api
       end
 
       def validate_api_auth_token
-        render json: {message: I18n.t("error.invalid_token")}, status: 401 unless Figaro.env.PINNACLE_AUTH_TOKEN_VALUE === request.headers[Figaro.env.PINNACLE_AUTH_TOKEN]
+        render json: {message: I18n.t("error.invalid_token")}, status: 401 unless Figaro.env.PINNACLE_AUTH_TOKEN_VALUE == request.headers[Figaro.env.PINNACLE_AUTH_TOKEN]
+      end
+
+      def staff_present?
+        Staff.find_by(mobile_number: pin_mob_from_header[0], pin: pin_mob_from_header[1], school_id: params[:school_id]).present?
       end
     end
   end

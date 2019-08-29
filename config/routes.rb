@@ -16,9 +16,9 @@ Rails.application.routes.draw do
     resources :standards, only: [:index]
     resources :attendances, only: [:create] do
       collection do
-        match '/sms_callback' => 'attendances#sms_callback', via: [:get, :post]
-        match '/sms_callback_pinnacle' => 'attendances#sms_callback_pinnacle', via: [:get, :post]
-        get  :sync
+        match "/sms_callback" => "attendances#sms_callback", :via => %i[get post]
+        match "/sms_callback_pinnacle" => "attendances#sms_callback_pinnacle", :via => %i[get post]
+        get :sync
       end
     end
     resources :students, only: [:index]

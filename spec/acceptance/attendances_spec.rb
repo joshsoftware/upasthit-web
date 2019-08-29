@@ -6,18 +6,16 @@ require "rspec_api_documentation/dsl"
 resource "Attendances" do
   header "Content-Type", "application/json"
   let(:school) { create(:school) }
-  let(:staff) {create(:staff, school_id: school.id)}
+  let(:staff) { create(:staff, school_id: school.id) }
   let!(:staff_1) { create(:staff_with_standards, school_id: school.id) }
   let!(:staff_2) { create(:staff_with_standards, school_id: school.id) }
   let!(:from_date) { (DateTime.now - 1.month).strftime("%d/%m/%Y") }
   let!(:todays_date) { DateTime.now.strftime("%d/%m/%Y") }
   let!(:standard_1) { create(:standard_with_students, school_id: school.id) }
-  
-  authentication :apiKey, :mobile_number, name: "#{Figaro.env.X_USER_MOB_NUM}", description: 'Mobile Number'
-  authentication :apiKey, :pin, description: 'Pin', name: "#{Figaro.env.X_USER_PIN}"
+  authentication :apiKey, :mobile_number, name: Figaro.env.X_USER_MOB_NUM.to_s, description: "Mobile Number"
+  authentication :apiKey, :pin, description: "Pin", name: Figaro.env.X_USER_PIN.to_s
   let(:mobile_number) { staff.mobile_number }
   let(:pin) { staff.pin }
-
 
   before do
     allow_any_instance_of(SchoolTiming).to receive(:update_cron_tab).and_return(true)
