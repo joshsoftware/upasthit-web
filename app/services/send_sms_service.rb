@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-
+require 'net/http'
 class SendSmsService
   attr_reader :sms_sent
 
