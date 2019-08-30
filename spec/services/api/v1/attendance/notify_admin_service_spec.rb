@@ -19,7 +19,7 @@ RSpec.describe Api::V1::Attendance::NotifyAdminService do
   }
 
   before do
-    allow_any_instance_of(service).to receive(:send_sms).with(admin.mobile_number, anything).and_return("SMS sent to Admin")
+    allow_any_instance_of(service).to receive(:send_sms).with(admin, anything).and_return("SMS sent to Admin")
   end
 
   let(:sms_service_called) { service.new(school.id, date) }
@@ -33,7 +33,7 @@ RSpec.describe Api::V1::Attendance::NotifyAdminService do
   end
 
   it "sends SMS to admin of school" do
-    expect_any_instance_of(service).to receive(:send_sms).with(admin.mobile_number, anything).and_return "SMS sent to Admin"
+    expect_any_instance_of(service).to receive(:send_sms).with(admin, anything).and_return "SMS sent to Admin"
     sms_service_called.call
   end
 end

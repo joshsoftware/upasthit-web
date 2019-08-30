@@ -124,8 +124,11 @@ RSpec.describe Api::V1::AttendancesController, type: :controller do
   describe "POST #sms_callback_pinnacle" do
     context "with valid header" do
       before do
+        valid_params = {
+          message: "JOSH #{date} #{school.school_code} #{standard.standard}-#{standard.section} #{students.first.roll_no}"
+        }
         request.headers[Figaro.env.PINNACLE_AUTH_TOKEN] = Figaro.env.PINNACLE_AUTH_TOKEN_VALUE
-        post :sms_callback_pinnacle
+        post :sms_callback_pinnacle, params: valid_params
       end
 
       it { is_expected.to respond_with 200 }
@@ -133,8 +136,11 @@ RSpec.describe Api::V1::AttendancesController, type: :controller do
 
     context "with invalid header" do
       before do
+        valid_params = {
+          message: "JOSH #{date} #{school.school_code} #{standard.standard}-#{standard.section} #{students.first.roll_no}"
+        }
         request.headers[Figaro.env.PINNACLE_AUTH_TOKEN] = "cdafdfadfdfdfaf"
-        post :sms_callback_pinnacle
+        post :sms_callback_pinnacle, params: valid_params
       end
 
       it { is_expected.to respond_with 401 }

@@ -14,7 +14,7 @@ RSpec.describe SendSmsOnParentAlternateNumberWorker, type: :worker do
                                student_id: student.id, date: date)
   }
 
-  it { is_expected.to be_retryable 3 }
+  it { is_expected.to be_retryable 1 }
 
   it "enqueues job with arguments" do
     SendSmsOnParentAlternateNumberWorker.perform_async attendance_1.id, "message"

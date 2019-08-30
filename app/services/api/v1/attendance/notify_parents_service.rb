@@ -56,7 +56,8 @@ module Api
         end
 
         def send_sms(message)
-          return if attendance.sms_sent?
+          return if attendance.sms_sent
+          
           SendSmsOnParentPrimaryNumberWorker.perform_async(attendance.id, message)
         end
       end

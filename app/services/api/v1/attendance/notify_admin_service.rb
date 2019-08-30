@@ -6,12 +6,12 @@ module Api
       class NotifyAdminService
         def initialize(school_id, date)
           @school_id = school_id
-          @date = Time.zone.parse(date.to_s)
+          @date = date
         end
 
         def call
           @attendances = ::Attendance.includes(:student).where(sms_sent: [false, nil], date: @date, school_id: @school_id)
-          send_sms(admin.mobile_number, message_to_admin)
+          send_sms(admin, message_to_admin)
         end
 
         private
@@ -37,10 +37,10 @@ module Api
           standard.standard + " - " + standard.section
         end
 
-        def send_sms(mobile_number, message)
+        def send_sms(admin, message)
           return unless defaulters.present?
-
-          SendSmsWorker.perform_async(mobile_number, message, true)
+          
+          SendSmsWorker.perform_async(admin.mobile_number, message, true, {receiver_id: admin.id, receiver_type: "Admin"})
         end
       end
     end

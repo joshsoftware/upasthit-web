@@ -2,12 +2,12 @@
 
 class SendSmsOnParentPrimaryNumberWorker
   include Sidekiq::Worker
-  sidekiq_options retry: 3
-  sidekiq_retries_exhausted do |msg|
-    attendance_id = msg["args"].first
-    message = msg["args"].second
-    send_sms_on_alternate_number(attendance_id, message)
-  end
+  sidekiq_options retry: 1
+  # sidekiq_retries_exhausted do |msg|
+  #   attendance_id = msg["args"].first
+  #   message = msg["args"].second
+  #   send_sms_on_alternate_number(attendance_id, message)
+  # end
 
   def perform(attendance_id, message)
     attendance = Attendance.find(attendance_id)
@@ -15,7 +15,7 @@ class SendSmsOnParentPrimaryNumberWorker
     message = message
     attendance_id = attendance_id
     mobile_number = student.guardian_mobile_no
-    SendSmsWorker.new.perform(mobile_number, message, false, attendance_id)
+    SendSmsWorker.new.perform(mobile_number, message, false, {receiver_id: student.id, receiver_type: "Parent", number_type: "primary_no"}, attendance_id)
   end
 
   def self.send_sms_on_alternate_number(attendance_id, message)
