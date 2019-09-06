@@ -14,7 +14,7 @@ RSpec.describe SendSmsOnParentPrimaryNumberWorker, type: :worker do
                                student_id: student.id, date: date)
   }
 
-  it { is_expected.to be_retryable 3 }
+  it { is_expected.to be_retryable 1 }
 
   it "enqueues itself with arguments when called" do
     SendSmsOnParentPrimaryNumberWorker.perform_async attendance_1.id, "message"
@@ -56,4 +56,20 @@ RSpec.describe SendSmsOnParentPrimaryNumberWorker, type: :worker do
       expect { SendSmsOnParentPrimaryNumberWorker.perform_async(attendance_1.id, "message") }.to_not raise_error StandardError
     end
   end
+
+  it "Raises StandardError if sms is not sent" do
+    CURRENT_MESSAGING_SERVICE = TEXT_LOCAL
+    allow_any_instance_of(SendSmsServiceTextLocal).to receive(:sms_sent?).and_return(false)
+    Sidekiq::Testing.inline! do
+      expect { SendSmsOnParentPrimaryNumberWorker.perform_async(attendance_1.id, "message") }.to raise_error StandardError
+    end
+  end
+
+  it "Does not raise StandardError if sms is sent" do
+    CURRENT_MESSAGING_SERVICE = TEXT_LOCAL
+    allow_any_instance_of(SendSmsServiceTextLocal).to receive(:sms_sent?).and_return(true)
+    Sidekiq::Testing.inline! do
+      expect { SendSmsOnParentPrimaryNumberWorker.perform_async(attendance_1.id, "message") }.to_not raise_error StandardError
+    end
+  end  
 end

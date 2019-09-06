@@ -1,5 +1,6 @@
 # frozen_string_literal: true
-require 'sidekiq/web'
+
+require "sidekiq/web"
 
 Rails.application.routes.draw do
   root "dashboard#index"
@@ -40,5 +41,5 @@ Rails.application.routes.draw do
   # Optionally default to the last API version
   # mount Apitome::Engine => "/api/docs",
   #       :constraints    => ApitomeVersion.new(API_LAST_VERSION)
-  mount Sidekiq::Web => '/sidekiq'
+  mount Sidekiq::Web => "/sidekiq"
 end

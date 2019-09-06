@@ -9,18 +9,11 @@ RSpec.describe SmsLog, type: :model do
   it { is_expected.to have_db_column(:sender_id).of_type(:integer) }
   it { is_expected.to have_db_column(:sender_type).of_type(:string) }
   it { is_expected.to have_db_column(:sender_mobile).of_type(:string) }
-  it { is_expected.to have_db_column(:is_delivered).of_type(:boolean) }
   it { is_expected.to have_db_column(:content).of_type(:string) }
-  it { is_expected.to have_db_column(:is_delivered).of_type(:boolean) }
   it { is_expected.to have_db_column(:message_token).of_type(:string) }
+  it { is_expected.to have_db_column(:number_type).of_type(:integer) }
   it { is_expected.to belong_to(:sender) }
   it { is_expected.to belong_to(:receiver) }
-
-  it "should update the is_delivered to true" do
-    sms_log = SmsLog.create
-    sms_log.delivered
-    expect(sms_log.is_delivered).to eq true
-  end
 
   it "should create the sms log" do
     previous_count = SmsLog.count

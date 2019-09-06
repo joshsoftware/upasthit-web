@@ -21,7 +21,6 @@ module Backend
     # the framework and any gems in your application.
     config.active_job.queue_adapter = :sidekiq
     config.time_zone = "Kolkata"
-
     config.generators do |g|
       g.factory_bot false
       g.test_framework :rspec

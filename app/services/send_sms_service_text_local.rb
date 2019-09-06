@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require "net/http"
-class SendSmsService
+class SendSmsServiceTextLocal
   attr_reader :sms_sent
 
   def initialize(mobile_number, message, is_admin, receiver_info={}, attendance_id={})
@@ -13,21 +13,20 @@ class SendSmsService
   end
 
   def call
-    perform
-    raise StandardError unless sms_sent?
+    perform &&
+    (raise StandardError unless sms_sent?)
+    update_attendance unless admin?
   end
 
   def perform
     @response = Net::HTTP.post_form(
-                                     URI.parse(Figaro.env.SMS_URL),
-                                     username:      Figaro.env.SMS_USERNAME,
-                                     pass:          Figaro.env.SMS_PASSWORD,
-                                     senderid:      Figaro.env.SMS_SENDERID,
-                                     dest_mobileno: @mobile_number,
-                                     message:       @message.squish,
-                                     response:      Figaro.env.SMS_RESPONSE,
-                                     Msgtype:       Figaro.env.SMS_MSGTYPE
-                                   )
+      URI.parse(Figaro.env.TEXT_LOCAL_URL),
+      apiKey:      Figaro.env.MSG_API_KEY,
+      sender:      "TXTLCL",
+      message:     @message.squish,
+      numbers:     @mobile_number,
+      receipt_url: ""
+    )
     SmsLog.generate(sms_log_hash)
   end
 
@@ -36,7 +35,7 @@ class SendSmsService
     {
       receiver_mobile: @mobile_number,
       content:         @message.squish,
-      message_token:   @response.body,
+      message_token:   "",
       receiver_id:     @receiver_info[:receiver_id],
       sender_type:     "Server",
       receiver_type:   @receiver_info[:receiver_type],
@@ -50,7 +49,7 @@ class SendSmsService
   end
 
   def sms_sent?
-    @sms_sent = @response.code == "200"
+    @sms_sent = JSON.parse(@response.body)["status"] == "success"
   end
 
   private

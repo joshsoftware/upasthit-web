@@ -4,12 +4,12 @@ class SendSmsWorker
   include Sidekiq::Worker
   sidekiq_options retry: 3
 
-  def perform(mobile_number, message, is_admin, attendance_id={})
-    serv = SendSmsService.new(mobile_number, message, is_admin, attendance_id)
-    if serv.call
-      raise StandardError unless serv.sms_sent?
-    else
-      Rails.logger.error("SendSmsService: Failed #{serv.formatted_errors}")
-    end
+  def perform(mobile_number, message, is_admin, receiver_info={}, attendance_id={})
+    serv = if CURRENT_MESSAGING_SERVICE == PINNACLE
+             SendSmsService.new(mobile_number, message, is_admin, receiver_info, attendance_id)
+           else
+             SendSmsServiceTextLocal.new(mobile_number, message, is_admin, receiver_info, attendance_id)
+           end
+    serv.call && Rails.logger.error("SendSmsService: Failed - LOG - PARAMS - Attendance id - #{attendance_id}")
   end
 end

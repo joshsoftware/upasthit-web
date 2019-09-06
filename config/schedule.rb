@@ -9,18 +9,6 @@
 #
 require "./" + File.dirname(__FILE__) + "/environment.rb"
 set :output, "/current/log/cron_log.log"
-#
-# every 2.hours do
-#   command "/usr/bin/some_great_command"
-#   runner "MyModel.some_method"
-#   rake "some:great:rake:task"
-# end
-#
-# every 4.days do
-#   runner "AnotherModel.prune_old_records"
-# end
-
-# Learn more: http://github.com/javan/whenever
 
 School.find_each do |school|
   school.timings.find_each do |timing|
@@ -28,4 +16,8 @@ School.find_each do |school|
       rake "schedule:alerts[#{school.id}]", output: {error: "error.log", standard: "cron.log"}
     end
   end
+end
+
+every 5.minutes do
+  rake "polling:sms", output: {error: "error.log", standard: "cron.log"}
 end
