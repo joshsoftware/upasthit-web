@@ -6,11 +6,12 @@ module Api
       class NotifyAdminService
         def initialize(school_id, date)
           @school_id = school_id
-          @date = date
+          @date = Time.zone.parse(date.to_s)
+          @day = @date.beginning_of_day..@date.end_of_day
         end
 
         def call
-          @attendances = ::Attendance.includes(:student).where(sms_sent: [false, nil], date: @date, school_id: @school_id)
+          @attendances = ::Attendance.includes(:student).where(sms_sent: [false, nil], date: @day, school_id: @school_id)
           send_sms(admin, message_to_admin)
         end
 

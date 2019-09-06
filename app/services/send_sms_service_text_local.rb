@@ -9,11 +9,12 @@ class SendSmsServiceTextLocal
     @attendance_id = attendance_id
     @message = message
     @is_admin = is_admin
+    @receiver_info = receiver_info
   end
 
   def call
     perform &&
-    sms_sent?
+    (raise StandardError unless sms_sent?)
     update_attendance unless admin?
   end
 
@@ -26,6 +27,21 @@ class SendSmsServiceTextLocal
       numbers:     @mobile_number,
       receipt_url: ""
     )
+    SmsLog.generate(sms_log_hash)
+  end
+
+  def sms_log_hash
+    @receiver_info = @receiver_info.map {|k, v| [k.to_sym, v] }.to_h
+    {
+      receiver_mobile: @mobile_number,
+      content:         @message.squish,
+      message_token:   "",
+      receiver_id:     @receiver_info[:receiver_id],
+      sender_type:     "Server",
+      receiver_type:   @receiver_info[:receiver_type],
+      number_type:     @receiver_info[:number_type],
+      other_info:      {attendance_id: @attendance_id}
+    }
   end
 
   def update_attendance

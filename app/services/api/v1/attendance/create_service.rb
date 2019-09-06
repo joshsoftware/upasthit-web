@@ -71,7 +71,7 @@ module Api
         end
 
         def date
-          Date.parse(params[:date]).to_s
+          Time.zone.parse(params[:date])
         end
 
         def standard

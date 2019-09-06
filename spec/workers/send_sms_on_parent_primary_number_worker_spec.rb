@@ -22,14 +22,14 @@ RSpec.describe SendSmsOnParentPrimaryNumberWorker, type: :worker do
     expect(SendSmsOnParentPrimaryNumberWorker).to have_enqueued_sidekiq_job(attendance_1.id, "message")
   end
 
-  # it "should call send_sms_on_alternate_number method when retries exhausted" do
-  #   args = {"args" => [attendance_1.id, "message"]}
-  #   SendSmsOnParentPrimaryNumberWorker.within_sidekiq_retries_exhausted_block(args) {
-  #     expect(SendSmsOnParentPrimaryNumberWorker).to receive(:send_sms_on_alternate_number).with(
-  #       args["args"][0], args["args"][1]
-  #     )
-  #   }
-  # end
+  it "should call send_sms_on_alternate_number method when retries exhausted" do
+    args = {"args" => [attendance_1.id, "message"]}
+    SendSmsOnParentPrimaryNumberWorker.within_sidekiq_retries_exhausted_block(args) {
+      expect(SendSmsOnParentPrimaryNumberWorker).to receive(:send_sms_on_alternate_number).with(
+        args["args"][0], args["args"][1]
+      )
+    }
+  end
 
   it "should enqueue SendSmsOnParentAlternateNumber worker when retries exhausted" do
     ActiveJob::Base.queue_adapter = :test
@@ -50,10 +50,26 @@ RSpec.describe SendSmsOnParentPrimaryNumberWorker, type: :worker do
     end
   end
 
-  # it "Does not raise StandardError if sms is sent" do
-  #   allow_any_instance_of(SendSmsService).to receive(:sms_sent?).and_return(true)
-  #   Sidekiq::Testing.inline! do
-  #     expect { SendSmsOnParentPrimaryNumberWorker.perform_async(attendance_1.id, "message") }.to_not raise_error StandardError
-  #   end
-  # end
+  it "Does not raise StandardError if sms is sent" do
+    allow_any_instance_of(SendSmsService).to receive(:sms_sent?).and_return(true)
+    Sidekiq::Testing.inline! do
+      expect { SendSmsOnParentPrimaryNumberWorker.perform_async(attendance_1.id, "message") }.to_not raise_error StandardError
+    end
+  end
+
+  it "Raises StandardError if sms is not sent" do
+    CURRENT_MESSAGING_SERVICE = TEXT_LOCAL
+    allow_any_instance_of(SendSmsServiceTextLocal).to receive(:sms_sent?).and_return(false)
+    Sidekiq::Testing.inline! do
+      expect { SendSmsOnParentPrimaryNumberWorker.perform_async(attendance_1.id, "message") }.to raise_error StandardError
+    end
+  end
+
+  it "Does not raise StandardError if sms is sent" do
+    CURRENT_MESSAGING_SERVICE = TEXT_LOCAL
+    allow_any_instance_of(SendSmsServiceTextLocal).to receive(:sms_sent?).and_return(true)
+    Sidekiq::Testing.inline! do
+      expect { SendSmsOnParentPrimaryNumberWorker.perform_async(attendance_1.id, "message") }.to_not raise_error StandardError
+    end
+  end  
 end

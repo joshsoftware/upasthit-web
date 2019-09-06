@@ -3,11 +3,13 @@
 class SendSmsOnParentPrimaryNumberWorker
   include Sidekiq::Worker
   sidekiq_options retry: 1
-  # sidekiq_retries_exhausted do |msg|
-  #   attendance_id = msg["args"].first
-  #   message = msg["args"].second
-  #   send_sms_on_alternate_number(attendance_id, message)
-  # end
+  sidekiq_retries_exhausted do |msg|
+    if CURRENT_MESSAGING_SERVICE = TEXT_LOCAL
+      attendance_id = msg["args"].first
+      message = msg["args"].second
+      send_sms_on_alternate_number(attendance_id, message)
+    end
+  end
 
   def perform(attendance_id, message)
     attendance = Attendance.find(attendance_id)

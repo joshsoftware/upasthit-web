@@ -45,6 +45,6 @@ class SmsLog < ApplicationRecord
                   sender_type: sender_type,
                   receiver_type: receiver_type,
                   other_info: sms_log_hash[:other_info],
-                 )
+              )
   end
 end

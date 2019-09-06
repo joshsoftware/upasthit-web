@@ -14,6 +14,7 @@ class SendSmsService
 
   def call
     perform
+    raise StandardError unless sms_sent?
   end
 
   def perform
@@ -26,7 +27,7 @@ class SendSmsService
                                      message:       @message.squish,
                                      response:      Figaro.env.SMS_RESPONSE,
                                      Msgtype:       Figaro.env.SMS_MSGTYPE
-                                    )
+                                   )
     SmsLog.generate(sms_log_hash)
   end
 
